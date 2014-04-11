@@ -16,6 +16,7 @@
 #include "sssf\gsm\ai\BotRecycler.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
+#include "sssf\gsm\sprite\TopDownSprite.h"
 
 
 class SpriteManager
@@ -30,7 +31,7 @@ private:
 	list<Bot*> bots;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
-	AnimatedSprite player;
+	TopDownSprite player;
 
 	//These sprites will be the health bar and lives displays
 	AnimatedSprite healthbar;
@@ -51,7 +52,7 @@ public:
 
 	// INLINED ACCESSOR METHODS
 	int						getNumberOfSprites()	{ return bots.size();		}
-	AnimatedSprite*			getPlayer()				{ return &player;			}
+	TopDownSprite*			getPlayer()				{ return &player;			}
 	AnimatedSprite*         getHealthBar()          { return &healthbar;        }
 	AnimatedSprite*         getLives()              { return &lives;            }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}

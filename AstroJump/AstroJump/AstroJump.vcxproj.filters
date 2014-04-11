@@ -30,13 +30,16 @@
     <ClInclude Include="AstroJumpKeyEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AstroJumpMouseEventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AstroJumpButtonEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AstroJumpCollisionListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AstroJump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AstroJumpTextGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,13 +56,13 @@
     <ClCompile Include="AstroJumpKeyEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AstroJumpMouseEventHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AstroJumpButtonEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AstroJumpCollisionListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AstroJumpTextGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

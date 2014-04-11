@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir)src\;$(SolutionDir)SimpleSideScrollerFramework\src\;$(SolutionDir)PoseurSpriteTypesImporter\src\;$(SolutionDir)tinyxml\src\;$(SolutionDir)TMXMapImporter\src\;$(SolutionDir)XMLFileImporter\src\;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(SolutionDir)SimpleSideScrollerFramework\src\;$(SolutionDir)PoseurSpriteTypesImporter\src\;$(SolutionDir)tinyxml\src\;$(SolutionDir)TMXMapImporter\src\;$(SolutionDir)XMLFileImporter\src\;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Common\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -58,6 +58,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>PoseurSpriteTypesImporter.lib;SimpleSideScrollerFramework.lib;tinyxml.lib;TMXMapImporter.lib;XMLFileImporter.lib;Box2D.lib;FreeGLUT.lib;GLUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,11 +82,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AstroJump.h" />
     <ClInclude Include="AstroJumpButtonEventHandler.h" />
     <ClInclude Include="AstroJumpCollisionListener.h" />
     <ClInclude Include="AstroJumpDataLoader.h" />
     <ClInclude Include="AstroJumpKeyEventHandler.h" />
-    <ClInclude Include="AstroJumpMouseEventHandler.h" />
+    <ClInclude Include="AstroJumpTextGenerator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -95,7 +97,7 @@
     <ClCompile Include="AstroJumpCollisionListener.cpp" />
     <ClCompile Include="AstroJumpDataLoader.cpp" />
     <ClCompile Include="AstroJumpKeyEventHandler.cpp" />
-    <ClCompile Include="AstroJumpMouseEventHandler.cpp" />
+    <ClCompile Include="AstroJumpTextGenerator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
