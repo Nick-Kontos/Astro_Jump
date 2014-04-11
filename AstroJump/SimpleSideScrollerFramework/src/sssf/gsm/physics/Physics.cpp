@@ -24,6 +24,7 @@
 #include "sssf\gsm\world\WorldLayer.h"
 #include <vector>
 #include <list>
+#include "Box2D\Box2D.h"
 
 /*
 	The constructor initializes the data structures and loads
