@@ -18,6 +18,7 @@
 #include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gsm\world\Tile.h"
+#include "Box2D/box2D.h"
 
 const float EPSILON = 0.00001f;
 const float DEFAULT_GRAVITY = 0.3f;
@@ -82,6 +83,7 @@ public:
 	void togglePhysics() { activated = !activated; }
 	void update(Game *game);
 	bool willSpriteCollideOnTile(CollidableObject *co, AABB *tileAABB);
+	void buildWorld();
 
 	// HELPER METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE AS YOU SEE FIT
 private:

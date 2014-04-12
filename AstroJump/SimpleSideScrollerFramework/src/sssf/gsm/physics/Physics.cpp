@@ -926,3 +926,15 @@ void Physics::determineYAxisCollisionEdge(AABB *aabb1, AABB *aabb2, unsigned &co
 		co2Edge = BOTTOM_EDGE;
 	}
 }
+void Physics::buildWorld()
+{
+	// Define the gravity vector.
+	b2Vec2 gravity(0.0f, -10.0f);
+
+	// Construct a world object, which will hold and simulate the rigid bodies.
+	b2World world(gravity);
+
+	// Define the ground body.
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0.0f, -10.0f);
+}
