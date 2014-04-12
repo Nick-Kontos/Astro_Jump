@@ -6,6 +6,8 @@ class PhysicalProperties
 protected:
 	float buoyancy;
 	float mass;
+	float density=1.0f;
+	float friction=0.3f;
 	bool  collidable;
 	float coefficientOfRestitution;
 	float x;
@@ -21,6 +23,8 @@ public:
 	~PhysicalProperties()	{}
 
 	// INLINED METHODS
+	float getFriction()						{ return friction; }
+	float getDensity()						{ return density; }
 	float getBuoyancy()						{ return buoyancy;				}
 	float getMass()							{ return mass;					}
 	float getCoefficientOfRestitution()		{ return coefficientOfRestitution;	}
@@ -45,6 +49,14 @@ public:
 	int round(float realNum)
 	{
 		return (int)floor(realNum + 0.5f);
+	}
+	void setFriction(float f)
+	{
+		friction = f;
+	}
+	void setDensity(float d)
+	{
+		density = d;
 	}
 
 	void setPosition(float initX, float initY)

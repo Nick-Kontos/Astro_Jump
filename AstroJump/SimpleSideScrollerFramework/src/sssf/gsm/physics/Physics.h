@@ -20,11 +20,11 @@
 #include "sssf\gsm\world\Tile.h"
 #include "Box2D/box2D.h"
 
-const float EPSILON = 0.00001f;
-const float DEFAULT_GRAVITY = 0.3f;
-const float BUFFER_BETWEEN_OBJECTS = 0.2f;
-const float NUDGE_VELOCITY = 0.3f;
-const float ENERGY_LOSS = 0.95f;
+const float DEFAULT_GRAVITY = -10.0f;
+const float timeStep = 1.0f / 60.0f;
+int velocityIt = 6;
+int positionIt = 2;
+b2World *world;
 
 class Physics
 {
@@ -80,43 +80,9 @@ public:
 	void addTileCollision(CollidableObject *dynamicObject, Tile *tile, float tileX, float tileY, float tileWidth, float tileHeight);
 	void addSpriteCollision(CollidableObject *sprite1, CollidableObject *sprite2);
 	void removeCollidableObject(CollidableObject *collidableObjectToRemove);
-	void togglePhysics() { activated = !activated; }
 	void update(Game *game);
 	bool willSpriteCollideOnTile(CollidableObject *co, AABB *tileAABB);
-	void buildWorld();
 
-	// HELPER METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE AS YOU SEE FIT
-private:
-	float calculateTimeUntilCollision(	CollidableObject *co1, 
-										CollidableObject *co2, 
-										unsigned int &co1Edge,
-										unsigned int &co2Edge,
-										float bufferBetweenObjects);
-	float calculateTimeToImpact(	float lower, float lowerV,
-									float upper, float upperV,
-									float bufferBetweenObjects);
-	float calculateTimeToStartOfCollision(	float lowerLower, float lowerUpper, float lowerV,
-											float upperLower, float upperUpper, float upperV);
-	void detectSpritesCollision(CollidableObject *co1, CollidableObject *co2);
-	void determineXAxisCollisionEdge(AABB *aabb1, AABB *aabb2, unsigned &co1Edge, unsigned int &co2Edge);
-	void determineYAxisCollisionEdge(AABB *aabb1, AABB *aabb2, unsigned &co1Edge, unsigned int &co2Edge);
-	void getAllTileCollisionsForAGivenSprite(	World *world,
-												CollidableObject *sprite,
-												float percentageOfFrameRemaining);
-	void getAllBotCollsionsForSprite(SpriteManager *spriteManager, CollidableObject *sprite, float percentageOfFrameRemaining);
-	float getSide(CollidableObject *co, unsigned int ordering);
-	void moveAllSpritesToEndOfFrame();
-	void moveAllSpritesUpByTimeStep(float time);
-	void moveAllSpritesUpToBufferedTimeOfCollision(Collision *collision);
-	void performCollisionResponse(Collision *collision);
-	void prepSpriteForCollisionTesting(World *world, CollidableObject *sprite);
-	void retrieveSpriteCollisions();
-	void removeActiveCOCollisions(CollidableObject *co);
-	void removeCollidableObject(unsigned int ordering, CollidableObject *co);
-	void reorderSweptShape(CollidableObject *co, unsigned int ordering, bool increasingDirection);
-	void reorderCollidableObject(CollidableObject *co);
-	void updateSweptShapeIndices();
-	void updateSweptShapeIndices(vector<CollidableObject*> *sweptShapes, unsigned int ordering);
 };
 
 /*
