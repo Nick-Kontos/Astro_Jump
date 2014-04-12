@@ -62,6 +62,7 @@ void Physics::addCollidableObject(CollidableObject *collidableObjectToAdd)
 	int x = collidableObjectToAdd->getPhysicalProperties()->getX();
 	int y = collidableObjectToAdd->getPhysicalProperties()->getY();
 	bodyDef.position.Set(x, y);
+	bodyDef.userData = &collidableObjectToAdd;
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2PolygonShape box;
 	int width = collidableObjectToAdd->getBoundingVolume()->getWidth()/2;
@@ -83,78 +84,7 @@ void Physics::addCollidableObject(CollidableObject *collidableObjectToAdd)
 */
 void Physics::removeCollidableObject(CollidableObject *collidableObjectToRemove)
 {
-	map<CollidableObject*,set<Tile*>>::iterator tileSetToRemoveIt = spriteToTileCollisionsThisFrame.find(collidableObjectToRemove);
-	spriteToTileCollisionsThisFrame.erase(tileSetToRemoveIt);
-	removeCollidableObject(LEFT_EDGE,	collidableObjectToRemove);
-	removeCollidableObject(RIGHT_EDGE,	collidableObjectToRemove);
-}
-
-/*
-	Called when a collision is detected between a world tile
-	and a sprite, this records that collision so that it
-	can be resolved later if needed.
-*/
-void Physics::addTileCollision(CollidableObject *dynamicObject, Tile *tile, float tileX, float tileY, float tileWidth, float tileHeight)
-{
-	// IF WE'VE ALREADY HANDLED A COLLISION BETWEEN THESE TWO OBJECTS THIS
-	// FRAME THEN IGNORE IT
-	set<Tile*> doTiles = spriteToTileCollisionsThisFrame[dynamicObject];
-	if (doTiles.find(tile) != doTiles.end())
-		return;
-
-	// GET A DUMMY COLLIABLE OBJECT TO USE FOR THE TILE
-	CollidableObject *tileInfoForCollision = recycledCollidableObjectsList.back();
-
-	// FILL IT WITH DATA
-	AABB *bv = tileInfoForCollision->getBoundingVolume();
-	bv->setCenterX(tileX + (tileWidth/2));
-	bv->setCenterY(tileY + (tileHeight/2));
-	bv->setWidth(tileWidth);
-	bv->setHeight(tileHeight);
-
-	// FIRST WE'RE GOING TO DO A MORE NARROW CHECK TO SEE IF THE dynamicObject
-	// REALLY DOES COLLIDE WITH THE TILE. TO DO SO WE'LL CALCULATE THE TIME
-	// OF COLLISION. IF IT HAPPENS AFTER THIS FRAME IS OVER (> 1), THEN WE
-	// WILL IGNORE IT
-	unsigned int co1Edge, co2Edge;
-	float timeUntilCollision = calculateTimeUntilCollision(dynamicObject, tileInfoForCollision, co1Edge, co2Edge, 0.0f);
-	if (timeUntilCollision > 1.0f)
-		return;
-
-	// IF IT MADE IT HERE, A COLLISION IS HAPPENING
-	// AND REMOVE IT FROM THE RECYCLING CENTER
-	recycledCollidableObjectsList.pop_back();
-
-	// NOW LET'S MAKE A COLLISION FOR THE TILE-SPRITE
-	Collision *collisionToAdd = recycledCollisions.back();
-	collisionToAdd->setCO1(dynamicObject);
-	collisionToAdd->setCO2(tileInfoForCollision);
-	collisionToAdd->setCO1Edge(co1Edge);
-	collisionToAdd->setCO2Edge(co2Edge);
-	collisionToAdd->setCollisionWithTile(true);
-	collisionToAdd->setTimeOfCollision(timeUntilCollision);
-	collisionToAdd->setTile(tile);
-	recycledCollisions.pop_back();
-	activeCollisions.push_back(collisionToAdd);
-}
-
-void Physics::addSpriteCollision(CollidableObject *sprite1, CollidableObject *sprite2)
-{
-	unsigned int co1Edge, co2Edge;
-	float timeUntilCollision = calculateTimeUntilCollision(sprite1, sprite2, co1Edge, co2Edge, 0.0f);
-	if (timeUntilCollision > 1.0f)
-		return;
-
-	// NOW LET'S MAKE A COLLISION FOR THE TILE-SPRITE
-	Collision *collisionToAdd = recycledCollisions.back();
-	collisionToAdd->setCO1(sprite1);
-	collisionToAdd->setCO2(sprite2);
-	collisionToAdd->setCO1Edge(co1Edge);
-	collisionToAdd->setCO2Edge(co2Edge);
-	collisionToAdd->setCollisionWithTile(false);
-	collisionToAdd->setTimeOfCollision(timeUntilCollision);
-	recycledCollisions.pop_back();
-	activeCollisions.push_back(collisionToAdd);
+	b2Body b = collidableObjectToRemove->getBody();
 }
 
 /*
