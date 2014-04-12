@@ -12,7 +12,6 @@
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\physics\Collision.h"
-#include "sssf\gsm\physics\CollidableObject.h"
 #include "sssf\game\Game.h"
 #include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\gsm\physics\Physics.h"
@@ -55,7 +54,7 @@ Physics::~Physics()
 	Informs the physics system of additional dynamic, collidable object
 	to keep track of
 */
-void Physics::addCollidableObject(CollidableObject *collidableObjectToAdd)
+void Physics::addSprite(AnimatedSprite *sprite)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;

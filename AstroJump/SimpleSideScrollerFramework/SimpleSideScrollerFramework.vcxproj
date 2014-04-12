@@ -24,7 +24,6 @@
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomFloatingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomJumpingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\AABB.cpp" />
-    <ClCompile Include="src\sssf\gsm\physics\CollidableObject.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\Physics.cpp" />
     <ClCompile Include="src\sssf\gsm\sprite\AnimatedSprite.cpp" />
     <ClCompile Include="src\sssf\gsm\sprite\AnimatedSpriteType.cpp" />
@@ -64,10 +63,8 @@
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomFloatingBot.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomJumpingBot.h" />
     <ClInclude Include="src\sssf\gsm\physics\AABB.h" />
-    <ClInclude Include="src\sssf\gsm\physics\CollidableObject.h" />
     <ClInclude Include="src\sssf\gsm\physics\Collision.h" />
     <ClInclude Include="src\sssf\gsm\physics\CollisionListener.h" />
-    <ClInclude Include="src\sssf\gsm\physics\PhysicalProperties.h" />
     <ClInclude Include="src\sssf\gsm\physics\Physics.h" />
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSprite.h" />
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSpriteType.h" />

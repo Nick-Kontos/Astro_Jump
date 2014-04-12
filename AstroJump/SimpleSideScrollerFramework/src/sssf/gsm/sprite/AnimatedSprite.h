@@ -11,17 +11,18 @@
 
 #pragma once
 #include "sssf_VS\stdafx.h"
-#include "sssf\gsm\physics\CollidableObject.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gui\Viewport.h"
+#include "Box2D\Box2D.h"
 
-class AnimatedSprite : public CollidableObject
+class AnimatedSprite
 {
 protected:
 	// SPRITE TYPE FOR THIS SPRITE. THE SPRITE TYPE IS THE ID
 	// OF AN AnimatedSpriteType OBJECT AS STORED IN THE SpriteManager
 	AnimatedSpriteType *spriteType;
+
+	b2Body* body;
 
 	// TRANSPARENCY/OPACITY
 	int alpha;
@@ -39,26 +40,65 @@ protected:
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
 
+	float spawnX;
+	float spawnY;
+	float spawnVy;
+	float spawnVx;
+
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
 	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
-
+	b2Body*				getBody()			{ return body; }
+	float				getSpawnX()			{ return spawnX; }
+	float				getSpawnY()			{ return spawnY; }
+	float				getSpawnVx()			{ return spawnVx; }
+	float				getSpawnVy()			{ return spawnVy; }
+	float				getX()
+	{
+		b2Vec2 b = body->GetPosition();
+		return b.x;
+	}
+	float				getY()
+	{
+		b2Vec2 b = body->GetPosition();
+		return b.y;
+	}
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
 	{	alpha = initAlpha;						}
 	void setSpriteType(AnimatedSpriteType *initSpriteType)
 	{	spriteType = initSpriteType;			}
+	void setBody(b2Body* b)
+	{
+		body = b;
+	}
+	void setSpawnX(float x)
+	{
+		spawnX = x;
+	}
+	void setSpawnY(float y)
+	{
+		spawnY = y;
+	}
+	void setSpawnVx(float Vx)
+	{
+		spawnVx = Vx;
+	}
+	void setSpawnVy(float Vy)
+	{
+		spawnVy = Vy;
+	}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
-	AnimatedSprite();
+	AnimatedSprite(float x, float y);
 	~AnimatedSprite();
 	void changeFrame();
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
 	void updateSprite();
-	void affixTightAABBBoundingVolume();
-	void correctToTightBoundingVolume();
+	void addImpulse(float f);
+	void addVelocity(float f);
 };
