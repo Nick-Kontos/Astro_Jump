@@ -63,7 +63,7 @@ void AstroJumpDataLoader::loadGame(Game *game, wstring gameInitFile)
 
 	// MAKE A CUSTOM GameOS OBJECT (WindowsOS) FOR SOME WINDOWS
 	// PLATFORM STUFF, INCLUDING A Window OF COURSE
-	WindowsOS *BugsOS = new WindowsOS(hInstance,
+	WindowsOS *AstroJumpOS = new WindowsOS(hInstance,
 		nCmdShow,
 		useFullscreen,
 		titleProp,
@@ -75,20 +75,20 @@ void AstroJumpDataLoader::loadGame(Game *game, wstring gameInitFile)
 	wstringstream(textFontSizeProp) >> textFontSize;
 
 	// RENDERING WILL BE DONE USING DirectX
-	DirectXGraphics *BugsGraphics = new DirectXGraphics(game);
-	BugsGraphics->init(screenWidth, screenHeight);
-	BugsGraphics->initGraphics(BugsOS, useFullscreen);
-	BugsGraphics->initTextFont(textFontSize);
+	DirectXGraphics *AstroJumpGraphics = new DirectXGraphics(game);
+	AstroJumpGraphics->init(screenWidth, screenHeight);
+	AstroJumpGraphics->initGraphics(AstroJumpOS, useFullscreen);
+	AstroJumpGraphics->initTextFont(textFontSize);
 
 	// AND NOW LOAD THE COLORS THE GRAPHICS WILL USE
 	// AS A COLOR KEY AND FOR RENDERING TEXT
-	initColors(BugsGraphics, properties);
+	initColors(AstroJumpGraphics, properties);
 
 	// WE'LL USE WINDOWS PLATFORM METHODS FOR GETTING INPUT
-	WindowsInput *BugsInput = new WindowsInput();
+	WindowsInput *AstroJumpInput = new WindowsInput();
 
 	// AND WINDOWS FOR THE TIMER AS WELL
-	WindowsTimer *BugsTimer = new WindowsTimer();
+	WindowsTimer *AstroJumpTimer = new WindowsTimer();
 
 	// NOW INITIALIZE THE Game WITH ALL THE
 	// PLATFORM AND GAME SPECIFIC DATA WE JUST CREATED
@@ -96,11 +96,11 @@ void AstroJumpDataLoader::loadGame(Game *game, wstring gameInitFile)
 
 	// LOAD OUR CUSTOM TEXT GENERATOR, WHICH DRAWS
 	// TEXT ON THE SCREEN EACH FRAME
-	AstroJumpTextGenerator *bugsTextGenerator = new AstroJumpTextGenerator();
-	bugsTextGenerator->initText(game);
+	AstroJumpTextGenerator *AstroTextGenerator = new AstroJumpTextGenerator();
+	AstroTextGenerator->initText(game);
 	GameText *text = game->getText();
 	text->initDebugFile(W_DEBUG_FILE);
-	text->setTextGenerator((TextGenerator*)bugsTextGenerator);
+	text->setTextGenerator((TextGenerator*)AstroTextGenerator);
 
 	// INIT THE VIEWPORT TOO
 	initViewport(game->getGUI(), properties);
@@ -176,8 +176,9 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// @TODO - LATER WE'LL LOAD ALL LEVEL DATA FROM A FILE
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(W_GRAVITY);
-	TopDownSprite *player = spriteManager->getPlayer();
-	physics->addCollidableObject(player);
+	TopDownSprite *player = spriteManager->getPlayer(); // CHECK CREATION OF PLAYER
+	//NOT SURE...........................................................................
+	physics->addSprite(player);
 	player->setRotationInRadians(0.0f);
 
 	// NOTE THAT RED BOX MAN IS SPRITE ID 1
@@ -185,15 +186,17 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-	PhysicalProperties *playerProps = player->getPhysicalProperties();
-	playerProps->setX(PLAYER_INIT_X);
-	playerProps->setY(PLAYER_INIT_Y);
-	playerProps->setVelocity(0.0f, 0.0f);
-	playerProps->setAccelerationX(0);
-	playerProps->setAccelerationY(0);
-	player->setOnTileThisFrame(false);
-	player->setOnTileLastFrame(false);
-	player->affixTightAABBBoundingVolume();
+
+	// WHAT IS OUR SUBSTITUTE?
+	//PhysicalProperties *playerProps = player->getPhysicalProperties();
+	//playerProps->setX(PLAYER_INIT_X);
+	//playerProps->setY(PLAYER_INIT_Y);
+	//playerProps->setVelocity(0.0f, 0.0f);
+	//playerProps->setAccelerationX(0);
+	//playerProps->setAccelerationY(0);
+	//player->setOnTileThisFrame(false);
+	//player->setOnTileLastFrame(false);
+	//player->affixTightAABBBoundingVolume();
 
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
 	// A LINE NEAR THE TOP
@@ -242,6 +245,9 @@ void AstroJumpDataLoader::hardCodedLoadGUIExample(Game *game)
 	initSplashScreen(game, gui, guiTextureManager);
 	initMainMenu(gui, guiTextureManager);
 	initInGameGUI(gui, guiTextureManager);
+	// initVictoryScreen(gui, guiTextureManager);
+	// initDefeatScreen(gui, guiTextureManager);
+	// initLevelSelectScreen(gui, guiTextureManager);
 }
 
 /*
@@ -326,8 +332,8 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	Button *buttonToAdd = new Button();
 
 	// - GET THE BUTTON COMMAND AND IMAGE IDs
-	int normalTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_PATH);
-	int mouseOverTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+	int normalTextureID = guiTextureManager->loadTexture(W_SELECT_LEVEL_PATH);
+	int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
 
 	// - INIT THE EXIT BUTTON
 	buttonToAdd->initButton(normalTextureID,
@@ -339,7 +345,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 		200,
 		100,
 		false,
-		W_EXIT_COMMAND);
+		W_SELECT_LEVEL_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
@@ -349,8 +355,8 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 
 	// - GET THE BUTTON COMMAND AND IMAGE IDs
 
-	normalTextureID = guiTextureManager->loadTexture(W_START_IMAGE_PATH);
-	mouseOverTextureID = guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
+	normalTextureID = guiTextureManager->loadTexture(W_QUIT_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
 
 	// - INIT THE START BUTTON
 	buttonToAdd->initButton(normalTextureID,
@@ -362,7 +368,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 		200,
 		100,
 		false,
-		W_START_COMMAND);
+		W_QUIT_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
@@ -379,8 +385,8 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 	// NOW ADD THE IN-GAME GUI
 	ScreenGUI *inGameGUI = new ScreenGUI();
 
-	unsigned int normalTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_PATH);
-	unsigned int mouseOverTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_MO_PATH);
+	unsigned int normalTextureID = guiTextureManager->loadTexture(W_QUIT_PATH);
+	unsigned int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_QUIT_IMAGE_MO_PATH);
 
 	// INIT THE QUIT BUTTON
 	Button *buttonToAdd = new Button();
