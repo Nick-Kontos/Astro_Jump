@@ -11,7 +11,6 @@
 #pragma once
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\ai\Bot.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
@@ -29,22 +28,23 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 {
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
-	PhysicalProperties *pp = sprite->getPhysicalProperties();
+	
 
 	// IS THE SPRITE VIEWABLE?
 	if (viewport->areWorldCoordinatesInViewport(	
-									pp->getX(),
-									pp->getY(),
+									sprite->getX(),
+									sprite->getY(),
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight()))
 	{
 		// SINCE IT'S VIEWABLE, ADD IT TO THE RENDER LIST
 		RenderItem itemToAdd;
 		itemToAdd.id = sprite->getFrameIndex();
+		
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-									pp->round(pp->getX()-viewport->getViewportX()),
-									pp->round(pp->getY()-viewport->getViewportY()),
-									pp->round(pp->getZ()),
+									(int)floor((sprite->getX() - viewport->getViewportX()) + 0.5f),
+									(int)floor((sprite->getY() - viewport->getViewportY()) + 0.5f),
+									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight());
@@ -57,14 +57,13 @@ void SpriteManager::addGUISpriteToRenderList(	AnimatedSprite *sprite,
 {
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
-	PhysicalProperties *pp = sprite->getPhysicalProperties();
 
 	RenderItem itemToAdd;
 	itemToAdd.id = sprite->getFrameIndex();
 	renderList->addRenderItem(sprite->getCurrentImageID(),
-		pp->round(pp->getX()),
-		pp->round(pp->getY()),
-		pp->round(pp->getZ()),
+		(int)floor((sprite->getX() - viewport->getViewportX()) + 0.5f),
+		(int)floor((sprite->getY() - viewport->getViewportY()) + 0.5f),
+		0,
 		sprite->getAlpha(),
 		spriteType->getTextureWidth(),
 		spriteType->getTextureHeight());
@@ -163,7 +162,7 @@ Bot* SpriteManager::removeBot(Bot *botToRemove)
 	return NULL;
 	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
 }
-
+/*
 void SpriteManager::findSpriteCollisionsForSprite(Physics *physics, CollidableObject *sprite){
 	AABB *ss1 = sprite->getSweptShape();
 	AABB *ss2;
@@ -177,7 +176,7 @@ void SpriteManager::findSpriteCollisionsForSprite(Physics *physics, CollidableOb
 		botsIt++;
 	}
 }
-
+*/
 /*
 	update - This method should be called once per frame. It
 	goes through all of the sprites, including the player, and calls their
