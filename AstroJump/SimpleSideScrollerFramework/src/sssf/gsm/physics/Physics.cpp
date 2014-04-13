@@ -65,11 +65,11 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2CircleShape c;
 	c.m_p.Set(0, 0);
-	c.m_radius = 
+	c.m_radius = sprite->getRadius();
 	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &box;
-	fixtureDef.density = collidableObjectToAdd->getPhysicalProperties()->getDensity();
-	fixtureDef.friction = collidableObjectToAdd->getPhysicalProperties()->getFriction();
+	fixtureDef.shape = &c;
+	fixtureDef.density = sprite->getDensity();
+	fixtureDef.friction = sprite->getFriction();
 	body->CreateFixture(&fixtureDef);
 }
 
@@ -80,9 +80,11 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	that it does not test to see if the added object overlaps an object already 
 	in the game.
 */
-void Physics::removeCollidableObject(CollidableObject *collidableObjectToRemove)
+void Physics::removeSprite(AnimatedSprite *sprite)
 {
-	b2Body b = collidableObjectToRemove->getBody();
+	b2Body *b = sprite->getBody();
+	world->DestroyBody(b);
+	
 }
 
 /*
@@ -97,17 +99,4 @@ void Physics::update(Game *game)
 	world->Step(timeStep, velocityIt, positionIt);
 }
 
-/*
-	This method helps us employ walking and jumping on/from tiles. It is a look
-	ahead function which basically tells us if the sprite (co) will collide
-	on top of the tile's AABB.
-*/
-bool Physics::willSpriteCollideOnTile(CollidableObject *co, AABB *tileAABB)
-{
-	float yDiff = tileAABB->getTop() - co->getBoundingVolume()->getBottom() - co->getPhysicalProperties()->getVelocityY();
-	if (yDiff < 0.0f)
-		return true;
-	else
-		return false;
-}
 

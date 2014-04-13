@@ -55,8 +55,8 @@ public:
 	void				setCollisionListener(CollisionListener *initCollisionListener)	{ collisionListener = initCollisionListener;	}
 
 	// PUBLIC METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE OR CHANGE WHAT YOU LIKE
-	void addSprite(AnimatedSprite *collidableObjectToAdd);
-	void removeCollidableObject(CollidableObject *collidableObjectToRemove);
+	void addSprite(AnimatedSprite *sprite);
+	void removeSprite(AnimatedSprite *sprite);
 	void update(Game *game);
 
 };

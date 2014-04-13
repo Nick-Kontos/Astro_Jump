@@ -26,6 +26,8 @@ AnimatedSprite::AnimatedSprite(float x, float y, int r)
 	spawnVy = 0;
 	spawnX = x;
 	spawnY = y;
+	density = 1.0f;
+	friction = .3f;
 }
 
 /*

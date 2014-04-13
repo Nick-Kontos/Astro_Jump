@@ -44,10 +44,14 @@ protected:
 	float spawnY;
 	float spawnVy;
 	float spawnVx;
+	float density;
+	float friction;
 	int radius;
 
 public:
 	// INLINED ACCESSOR METHODS
+	float				getDensity()		{ return density; }
+	float				getFriction()		{ return friction; }
 	int					getRadius()			{ return radius; }
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
@@ -73,6 +77,14 @@ public:
 	{	alpha = initAlpha;						}
 	void setSpriteType(AnimatedSpriteType *initSpriteType)
 	{	spriteType = initSpriteType;			}
+	void setDensity(float f)
+	{
+		density = f;
+	}
+	void setFriction(float f)
+	{
+		friction = f;
+	}
 	void setBody(b2Body* b)
 	{
 		body = b;
