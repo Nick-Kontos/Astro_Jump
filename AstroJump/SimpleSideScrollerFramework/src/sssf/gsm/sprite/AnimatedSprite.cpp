@@ -16,8 +16,9 @@
 /*
 	AnimatedSprite - Default constructor, just sets everything to 0.
 */
-AnimatedSprite::AnimatedSprite(float x, float y)  
+AnimatedSprite::AnimatedSprite(float x, float y, int r)  
 {
+	radius = r;
 	spriteType = 0;
 	frameIndex = 0;
 	animationCounter = 0;

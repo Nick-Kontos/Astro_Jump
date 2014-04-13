@@ -58,15 +58,14 @@ void Physics::addSprite(AnimatedSprite *sprite)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	int x = collidableObjectToAdd->getPhysicalProperties()->getX();
-	int y = collidableObjectToAdd->getPhysicalProperties()->getY();
+	float x = sprite->getSpawnX();
+	float y = sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
-	bodyDef.userData = &collidableObjectToAdd;
+	bodyDef.userData = &sprite;
 	b2Body* body = world->CreateBody(&bodyDef);
-	b2PolygonShape box;
-	int width = collidableObjectToAdd->getBoundingVolume()->getWidth()/2;
-	int height = collidableObjectToAdd->getBoundingVolume()->getHeight() / 2;
-	box.SetAsBox(width, height);
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &box;
 	fixtureDef.density = collidableObjectToAdd->getPhysicalProperties()->getDensity();

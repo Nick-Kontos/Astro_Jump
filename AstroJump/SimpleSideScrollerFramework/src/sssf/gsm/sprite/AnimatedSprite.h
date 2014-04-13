@@ -44,9 +44,11 @@ protected:
 	float spawnY;
 	float spawnVy;
 	float spawnVx;
+	int radius;
 
 public:
 	// INLINED ACCESSOR METHODS
+	int					getRadius()			{ return radius; }
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
@@ -91,9 +93,13 @@ public:
 	{
 		spawnVy = Vy;
 	}
+	void setRadius(int r)
+	{
+		radius = r;
+	}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
-	AnimatedSprite(float x, float y);
+	AnimatedSprite(float x, float y, int r);
 	~AnimatedSprite();
 	void changeFrame();
 	unsigned int getCurrentImageID();
