@@ -46,7 +46,6 @@ Physics::Physics()
 */
 Physics::~Physics()
 {
-	// WE ARE DONE WITH ALL OF THESE
 	world->~b2World();
 }
 
@@ -87,13 +86,6 @@ void Physics::removeSprite(AnimatedSprite *sprite)
 	
 }
 
-/*
-	This is where all game physics starts each frame. It is called each frame 
-	by the game statem manager after player input and AI have been processed. It
-	updates the physical state of all dynamic objects in the game and
-	moves all objects to their end of frame positions, updates all necessary
-	object velocities, and calls all collision event handlers.
-*/
 void Physics::update(Game *game)
 {
 	world->Step(timeStep, velocityIt, positionIt);
