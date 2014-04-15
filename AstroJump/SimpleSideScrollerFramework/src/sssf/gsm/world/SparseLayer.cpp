@@ -10,7 +10,6 @@
 
 #include "sssf_VS\stdafx.h"
 #include "sssf\graphics\RenderList.h"
-#include "sssf\gsm\physics\CollidableObject.h"
 #include "sssf\gsm\physics\Physics.h"
 #include "sssf\gsm\world\SparseLayer.h"
 #include "sssf\gui\Viewport.h"
@@ -84,10 +83,4 @@ void SparseLayer::addRenderItemsToRenderList(RenderList *renderList,
 		// ONTO THE NEXT ONE
 		iterator++;
 	}
-}
-
-void SparseLayer::findTileCollisionsOverlappingSweptShape(	Physics *physics,
-													CollidableObject *dynamicObject)
-{
-	// CURRENTLY DOESN'T DO ANYTHING
 }

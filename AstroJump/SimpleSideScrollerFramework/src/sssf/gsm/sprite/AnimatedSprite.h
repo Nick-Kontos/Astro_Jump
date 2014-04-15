@@ -111,6 +111,7 @@ public:
 	}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
+	AnimatedSprite();
 	AnimatedSprite(float x, float y, int r);
 	~AnimatedSprite();
 	void changeFrame();

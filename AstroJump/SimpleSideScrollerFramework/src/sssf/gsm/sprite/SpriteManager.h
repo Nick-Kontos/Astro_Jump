@@ -60,7 +60,6 @@ public:
 
 	// METHODS DEFINED IN SpriteManager.cpp
 	void                enterYellowState(Game *game);
-	void				findSpriteCollisionsForSprite(Physics *physics, CollidableObject *sprite);
 	void				addBot(Bot *botToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
 	unsigned int		addSpriteType(AnimatedSpriteType *spriteTypeToAdd);

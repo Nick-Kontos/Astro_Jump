@@ -89,7 +89,7 @@ void RandomFloatingBot::pickRandomCyclesInRange()
 	pickRandomVelocity - calculates a random velocity vector for this
 	bot and initializes the appropriate instance variables.
 */
-void RandomFloatingBot::pickRandomVelocity(Physics *physics)
+/*void RandomFloatingBot::pickRandomVelocity(Physics *physics)
 {
 	// FIRST GET A RANDOM float FROM 0.0 TO 1.0
 	float randomAngleInRadians = ((float)rand())/((float)RAND_MAX);

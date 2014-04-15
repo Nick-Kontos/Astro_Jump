@@ -8,8 +8,8 @@ void TopDownSprite::updateSprite()
 
 	// AND NOW CALCULATE THE RADIANS
 	// FOR RENDERING THIS SPRITE
-	float vX = pp.getVelocityX();
-	float vY = pp.getVelocityY();
+	float vX = body->GetLinearVelocity().x;
+	float vY = body->GetLinearVelocity().y;
 	float epsilon = 0.00001f;
 
 	// IF THE Y VELOCITY IS 0 WE HAVE TO BE CAREFUL DIVIDING

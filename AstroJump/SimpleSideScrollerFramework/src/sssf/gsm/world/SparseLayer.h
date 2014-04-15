@@ -38,6 +38,4 @@ public:
 	SparseLayer();
 	~SparseLayer();
 	void			addRenderItemsToRenderList(RenderList *renderList,	Viewport *viewport);
-	void			findTileCollisionsOverlappingSweptShape(	Physics *physics,
-													CollidableObject *dynamicObject);
 };

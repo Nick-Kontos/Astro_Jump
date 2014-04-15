@@ -11,7 +11,6 @@
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
-#include "sssf\gsm\physics\Collision.h"
 #include "sssf\game\Game.h"
 #include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\gsm\physics\Physics.h"

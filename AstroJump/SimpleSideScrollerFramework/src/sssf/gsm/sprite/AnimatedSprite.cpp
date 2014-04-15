@@ -16,6 +16,19 @@
 /*
 	AnimatedSprite - Default constructor, just sets everything to 0.
 */
+AnimatedSprite::AnimatedSprite()
+{
+	radius = 0;
+	spriteType = 0;
+	frameIndex = 0;
+	animationCounter = 0;
+	spawnVx = 0;
+	spawnVy = 0;
+	spawnX = 0;
+	spawnY = 0;
+	density = 1.0f;
+	friction = .3f;
+}
 AnimatedSprite::AnimatedSprite(float x, float y, int r)  
 {
 	radius = r;

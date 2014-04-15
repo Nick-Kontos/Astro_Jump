@@ -40,7 +40,6 @@
 */
 #pragma once
 #include "sssf_VS\stdafx.h"
-#include "sssf\gsm\physics\CollidableObject.h"
 #include <list>
 #include <vector>
 
@@ -76,8 +75,4 @@ public:
 
 	// METHOD DEFINED IN CHILD CLASSES
 	virtual void addRenderItemsToRenderList(RenderList *renderList,	Viewport *viewport)=0;
-	virtual void findTileCollisionsForSprite(	Physics *physics,
-												CollidableObject *dynamicObject)=0;
-	virtual bool willSpriteCollideOnTile(	Physics *physics,
-											CollidableObject *dynamicObject)=0;
 };
