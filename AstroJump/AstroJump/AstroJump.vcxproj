@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(SolutionDir)SimpleSideScrollerFramework\src\;$(SolutionDir)PoseurSpriteTypesImporter\src\;$(SolutionDir)tinyxml\src\;$(SolutionDir)TMXMapImporter\src\;$(SolutionDir)XMLFileImporter\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(SolutionDir)SimpleSideScrollerFramework\src\;$(SolutionDir)PoseurSpriteTypesImporter\src\;$(SolutionDir)tinyxml\src\;$(SolutionDir)TMXMapImporter\src\;$(SolutionDir)XMLFileImporter\src\;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Common\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -59,6 +59,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;winmm.lib;PoseurSpriteTypesImporter.lib;SimpleSideScrollerFramework.lib;tinyxml.lib;TMXMapImporter.lib;XMLFileImporter.lib;Box2D.lib;FreeGLUT.lib;GLUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Box2D.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,7 +85,6 @@
   <ItemGroup>
     <ClInclude Include="AstroJump.h" />
     <ClInclude Include="AstroJumpButtonEventHandler.h" />
-    <ClInclude Include="AstroJumpCollisionListener.h" />
     <ClInclude Include="AstroJumpDataLoader.h" />
     <ClInclude Include="AstroJumpKeyEventHandler.h" />
     <ClInclude Include="AstroJumpTextGenerator.h" />
@@ -94,7 +94,6 @@
   <ItemGroup>
     <ClCompile Include="AstroJump.cpp" />
     <ClCompile Include="AstroJumpButtonEventHandler.cpp" />
-    <ClCompile Include="AstroJumpCollisionListener.cpp" />
     <ClCompile Include="AstroJumpDataLoader.cpp" />
     <ClCompile Include="AstroJumpKeyEventHandler.cpp" />
     <ClCompile Include="AstroJumpTextGenerator.cpp" />

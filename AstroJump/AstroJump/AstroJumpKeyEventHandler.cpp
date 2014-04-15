@@ -15,7 +15,6 @@ See BugsKeyEventHandler.h for a class description.
 #include "sssf\game\WStringTable.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\physics\Physics.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\state\GameStateManager.h"
@@ -39,20 +38,11 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 	// LET'S GET THE PLAYER'S PHYSICAL PROPERTIES, IN CASE WE WANT TO CHANGE THEM
 	GameStateManager *gsm = game->getGSM();
 	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
-	PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
 
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
-		if (input->isKeyDownForFirstTime(P_KEY))
-		{
-			gsm->getPhysics()->togglePhysics();
-		}
-		if (input->isKeyDownForFirstTime(T_KEY))
-		{
-			gsm->getPhysics()->activateForSingleUpdate();
-		}
 		if (input->isKeyDownForFirstTime(D_KEY))
 		{
 			viewport->toggleDebugView();
