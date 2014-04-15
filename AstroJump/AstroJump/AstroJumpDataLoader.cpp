@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "AstroJump\stdafx.h"
 
 // Bugs GAME INCLUDES
 #include "AstroJumpButtonEventHandler.h"

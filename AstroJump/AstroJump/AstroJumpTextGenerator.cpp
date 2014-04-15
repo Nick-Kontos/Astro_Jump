@@ -8,7 +8,7 @@ BugsTextGenerator.cpp
 See BugsTextGenerator.h for a class description.
 */
 
-#include "stdafx.h"
+#include "AstroJump\stdafx.h"
 #include "AstroJump.h"
 #include "AstroJumpTextGenerator.h"
 #include "sssf\game\Game.h"

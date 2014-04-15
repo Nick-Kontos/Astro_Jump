@@ -13,7 +13,7 @@
 	like additional gui controls, tiles, sprites, ai, and physics.
  */
 
-#include "stdafx.h"
+#include "AstroJump\stdafx.h"
 
 // BugginOut GAME INCLUDES
 #include "AstroJumpButtonEventHandler.h"

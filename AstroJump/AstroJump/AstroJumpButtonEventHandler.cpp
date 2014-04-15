@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "AstroJump\stdafx.h"
 #include "AstroJump.h"
 #include "AstroJumpButtonEventHandler.h"
 #include "sssf\game\Game.h"

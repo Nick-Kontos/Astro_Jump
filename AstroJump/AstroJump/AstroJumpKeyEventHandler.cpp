@@ -8,7 +8,7 @@ BugsKeyEventHandler.cpp
 See BugsKeyEventHandler.h for a class description.
 */
 
-#include "stdafx.h"
+#include "AstroJump\stdafx.h"
 #include "AstroJump.h"
 #include "AstroJumpKeyEventHandler.h"
 #include "sssf\game\Game.h"
