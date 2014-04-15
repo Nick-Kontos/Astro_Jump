@@ -86,10 +86,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	AstroJumpKeyEventHandler *astroJumpKeyHandler = new AstroJumpKeyEventHandler();
 	astroJumpGame->getInput()->registerKeyHandler((KeyEventHandler*)astroJumpKeyHandler);
 
-	// THIS WILL HANDLE PHYSICS COLLISION EVENTS
-	AstroJumpCollisionListener *astroJumpCollisionListener = new AstroJumpCollisionListener();
-	astroJumpGame->getGSM()->getPhysics()->setCollisionListener(astroJumpCollisionListener);
-
 	// START THE GAME LOOP
 	astroJumpGame->runGameLoop();
 
