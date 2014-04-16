@@ -38,6 +38,8 @@ static const wstring	W_START_COMMAND = L"Start";
 static const wstring	W_EXIT_COMMAND = L"Exit";
 static const wstring	W_SELECT_LEVEL_COMMAND = L"Select_Level";
 static const wstring	W_QUIT_COMMAND = L"Quit";
+static const wstring	W_HELP_COMMAND = L"Help";
+static const wstring	W_ABOUT_COMMAND = L"About";
 static const wstring	W_GREEN_CURSOR_PATH = L"data/gui/cursor/green_cursor.png";
 static const wstring	W_RED_CURSOR_PATH = L"data/gui/cursor/red_cursor.png";
 //SCREENS
@@ -46,12 +48,16 @@ static const wstring	W_MAIN_MENU_PATH = L"data/gui/overlays/Astro_Jump_Main_Menu
 static const wstring	W_SELECT_LEVEL_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Select_Level_Screen.png";
 static const wstring	W_VICTORY_PATH = L"data/gui/overlays/Astro_Jump_Victory_Screen.png";
 static const wstring	W_DEFEAT_PATH = L"data/gui/overlays/Astro_Jump_Defeat_Screen.png";
+static const wstring	W_HELP_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Help_Screen.png";
+static const wstring	W_ABOUT_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_About_Screen.png";
 //BUTTONS
 static const wstring	W_SELECT_LEVEL_PATH = L"data/gui/buttons/Astro_Jump_Select_Level_Button.png";
 static const wstring	W_EXIT_PATH = L"data/gui/buttons/Astro_Jump_Exit_Button.png";
 static const wstring	W_RESTART_PATH = L"data/gui/buttons/Astro_Jump_Restart_Button.png";
 static const wstring	W_NEXT_LEVEL_PATH = L"data/gui/buttons/Astro_Jump_Next_Level_Button.png";
 static const wstring	W_QUIT_PATH = L"data/gui/buttons/Astro_Jump_Quit_Button.png";
+static const wstring	W_HELP_PATH = L"data/gui/buttons/Astro_Jump_Help_Button.png";
+static const wstring	W_ABOUT_PATH = L"data/gui/buttons/Astro_Jump_About_Button.png";
 //EXTRAS WHICH WE DONT USE
 static const wstring	W_START_IMAGE_PATH = L"data/gui/buttons/start_game.png";
 static const wstring	W_START_IMAGE_MO_PATH = L"data/gui/buttons/start_game_mo.png";
