@@ -125,4 +125,6 @@ public:
 	void updateSprite();
 	void addImpulse(float f);
 	void addVelocity(float f);
+	void rotateClockwise(float increment);
+	void rotateCClockwise(float increment);
 };

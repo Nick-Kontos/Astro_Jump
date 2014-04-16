@@ -114,3 +114,11 @@ void AnimatedSprite::updateSprite()
 	if (animationCounter >= duration)
 		changeFrame();
 }
+void AnimatedSprite::rotateClockwise(float increment)
+{
+	body->SetTransform(body->GetPosition, (body->GetAngle + increment));
+}
+void AnimatedSprite::rotateCClockwise(float increment)
+{
+	body->SetTransform(body->GetPosition, (body->GetAngle - increment));
+}
