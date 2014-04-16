@@ -56,7 +56,7 @@ void RenderList::addRenderItem(	unsigned int id,
 		renderList[size].a = a;
 		renderList[size].width = width;
 		renderList[size].height = height;
-		renderList[size].roationInRadians = roation;
+		renderList[size].rotationInRadians = roation;
 		size++;
 	}
 }
