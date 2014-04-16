@@ -12,8 +12,8 @@ all of this data would better serve us if loaded from files.
 static const wstring	W_LEVEL_1_DIR = L"data/levels/IsometricGrass/";
 static const wstring	W_LEVEL_1_NAME = L"isometric_grass_and_water.tmx";
 static const wstring	W_LEVEL_1_PATH = W_LEVEL_1_DIR + W_LEVEL_1_NAME;
-static const wstring	W_INIT_FILE = L"data/BugsInit.txt";
-static const wstring	W_GUI_INIT_FILE = L"data/BugsGUI.txt";
+static const wstring	W_INIT_FILE = L"data/AstroJumpInit.txt";
+static const wstring	W_GUI_INIT_FILE = L"data/gui/AstroGUI.txt";
 static const string		W_DEBUG_FILE = "DebugOutput.txt";
 
 // HERE ARE THE GAME PROPERTIES WE ARE LOADING FROM FROM THE SETUP FILE
