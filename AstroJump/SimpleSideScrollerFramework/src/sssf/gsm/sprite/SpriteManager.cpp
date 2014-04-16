@@ -47,7 +47,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
-									spriteType->getTextureHeight());
+									spriteType->getTextureHeight(),
+									sprite->getBody()->GetAngle());
 	}
 }
 
@@ -66,7 +67,8 @@ void SpriteManager::addGUISpriteToRenderList(	AnimatedSprite *sprite,
 		0,
 		sprite->getAlpha(),
 		spriteType->getTextureWidth(),
-		spriteType->getTextureHeight());
+		spriteType->getTextureHeight(),
+		sprite->getBody()->GetAngle());
 }
 /*
 	addSpriteItemsToRenderList - This method goes through all of the sprites,
