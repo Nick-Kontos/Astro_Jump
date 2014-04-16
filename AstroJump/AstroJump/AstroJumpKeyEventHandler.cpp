@@ -43,12 +43,6 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
-		if (input->isKeyDownForFirstTime(D_KEY))
-		{
-			viewport->toggleDebugView();
-			game->getGraphics()->toggleDebugTextShouldBeRendered();
-		}
-
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;

@@ -112,9 +112,9 @@ method should be called only once for each object.
 */
 void AstroJumpTextGenerator::initText(Game *game)
 {
+	/*
 	// FIRST UPDATE THE TEXT THIS GENERATOR IS USING
 	appendMouseCoords(game);
-	appendAntRotationInfo(game);
 
 	// AND THEN HAND IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	GameText *text = game->getText();
@@ -122,7 +122,8 @@ void AstroJumpTextGenerator::initText(Game *game)
 
 	// LET'S ALSO DISPLAY SOME STUFF FOR PATHFINDING
 	appendPathfindingText(game);
-	text->addText(&pathfindingText, W_PATHFINDING_TEXT_X, W_PATHFINDING_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&pathfindingText, W_PATHFINDING_TEXT_X, W_PATHFINDING_TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight
+	*/
 }
 
 /*
@@ -135,11 +136,13 @@ void AstroJumpTextGenerator::updateText(Game *game)
 	// THE TEXT MANAGER (GameText) HAS A POINTER TO OUR TEXT, SO WE CAN
 	// SIMPLY CLEAR IT OUT OF OLD CHARACTER DATA AND FILL IT IN WITH
 	// WHAT WE WANT.
+	/*
 	textToGenerate.clear();
 	appendMouseCoords(game);
 	appendAntRotationInfo(game);
 
 	pathfindingText.clear();
 	appendPathfindingText(game);
+	*/
 }
 
