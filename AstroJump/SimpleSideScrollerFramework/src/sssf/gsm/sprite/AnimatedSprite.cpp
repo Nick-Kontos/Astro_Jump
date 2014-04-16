@@ -116,9 +116,9 @@ void AnimatedSprite::updateSprite()
 }
 void AnimatedSprite::rotateClockwise(float increment)
 {
-	body->SetTransform(body->GetPosition, (body->GetAngle + increment));
+	body->SetTransform(body->GetPosition(), (body->GetAngle() + increment));
 }
 void AnimatedSprite::rotateCClockwise(float increment)
 {
-	body->SetTransform(body->GetPosition, (body->GetAngle - increment));
+	body->SetTransform(body->GetPosition(), (body->GetAngle() - increment));
 }
