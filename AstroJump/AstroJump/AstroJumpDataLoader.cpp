@@ -92,6 +92,10 @@ void AstroJumpDataLoader::loadGame(Game *game, wstring gameInitFile)
 
 	// NOW INITIALIZE THE Game WITH ALL THE
 	// PLATFORM AND GAME SPECIFIC DATA WE JUST CREATED
+	game->initPlatformPlugins((GameGraphics*)AstroJumpGraphics,
+		(GameInput*)AstroJumpInput,
+		(GameOS*)AstroJumpOS,
+		(GameTimer*)AstroJumpTimer);
 	
 
 	// LOAD OUR CUSTOM TEXT GENERATOR, WHICH DRAWS
