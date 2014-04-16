@@ -163,17 +163,13 @@ levelInitFile argument in to the Game's game state manager.
 */
 void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 {
-	TiledLayer *background = new TiledLayer(1, 1, 2400, 1348, 0, false, 2400, 1348);
+	// LOAD THE LEVEL'S BACKGROUND TILES
+	TMXMapImporter tmxMapImporter;
+	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 
 	// SPECIFY WHO WILL DO THE PATHFINDING
 	GameStateManager *gsm = game->getGSM();
 	World *world = gsm->getWorld();
-	world->addLayer(background);
-	Tile *image = new Tile();
-	image->collidable = false;
-	TextureManager *worldTextureManager = game->getGraphics()->getWorldTextureManager();
-	image->textureID = worldTextureManager->loadTexture(L"data/levels/MapBackground.png");
-	background->addTile(image);
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 
 	// LOAD THE LEVEL'S SPRITE IMAGES

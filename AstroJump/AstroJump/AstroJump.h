@@ -9,8 +9,8 @@ all of this data would better serve us if loaded from files.
 */
 
 // HERE IS THE Bugs GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
-static const wstring	W_LEVEL_1_DIR = L"data/levels/";
-static const wstring	W_LEVEL_1_NAME = L"AstroJump_Level.tmx";
+static const wstring	W_LEVEL_1_DIR = L"data/levels/SideScrollerDesert/";
+static const wstring	W_LEVEL_1_NAME = L"SideScrollerDesertLevel.tmx";
 static const wstring	W_LEVEL_1_PATH = W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 static const wstring	W_INIT_FILE = L"data/AstroJumpInit.txt";
 static const wstring	W_GUI_INIT_FILE = L"data/gui/AstroGUI.txt";
