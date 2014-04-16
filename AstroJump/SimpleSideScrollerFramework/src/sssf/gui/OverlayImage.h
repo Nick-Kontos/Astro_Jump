@@ -22,4 +22,5 @@ struct OverlayImage
 	int alpha;		// TRANSPARENCY
 	int width;		// TEXTURE WIDTH TO USE
 	int height;		// TEXTURE HEIGHT TO USE
+	float roationInRadians; //init roation usually 0.0f for most GUIs (this is needed for new changes to direct x)
 };

@@ -29,6 +29,9 @@ private:
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
 	list<Bot*> bots;
+	
+	//These are the asteriods
+	list<AnimatedSprite*> asteriods;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	TopDownSprite player;
@@ -42,12 +45,9 @@ private:
 	BotRecycler recyclableBots;
 
 public:
-	//The player's state
-	boolean yellowState;
-	int   timeYellow;
 
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager()		{ yellowState = false; }
+	SpriteManager()		{}
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
