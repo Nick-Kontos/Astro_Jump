@@ -69,6 +69,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	fixtureDef.density = sprite->getDensity();
 	fixtureDef.friction = sprite->getFriction();
 	body->CreateFixture(&fixtureDef);
+	sprite->setBody(body);
 }
 
 /*

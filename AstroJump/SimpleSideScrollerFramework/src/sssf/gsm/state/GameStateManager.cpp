@@ -79,6 +79,11 @@ void GameStateManager::goToMainMenu()
 	currentGameState = GS_MAIN_MENU;
 }
 
+void GameStateManager::goToLevelSelect()
+{
+	currentGameState = GS_LEVEL_SELECT;
+}
+
 void GameStateManager::goToHelp()
 {
 	currentGameState = GS_IN_GAME_HELP;

@@ -37,6 +37,11 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 		game->setCurrentLevelFileName(W_LEVEL_1_NAME);
 		game->startGame();
 	}
+	else if (command.compare(W_SELECT_LEVEL_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToLevelSelect();
+	}
 	// THE USER PRESSED THE Quit BUTTON ON THE IN-GAME MENU,
 	// SO LET'S UNLOAD THE LEVEL AND RETURN TO THE MAIN MENU
 	else if (command.compare(W_QUIT_COMMAND) == 0)

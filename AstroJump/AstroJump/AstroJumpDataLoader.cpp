@@ -180,27 +180,16 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// @TODO - LATER WE'LL LOAD ALL LEVEL DATA FROM A FILE
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(W_GRAVITY);
-	TopDownSprite *player = spriteManager->getPlayer(); // CHECK CREATION OF PLAYER
-	//NOT SURE...........................................................................
-	physics->addSprite(player);
-	player->setRotationInRadians(0.0f);
-
-	// NOTE THAT RED BOX MAN IS SPRITE ID 1
+	AnimatedSprite *player = spriteManager->getPlayer(); // CHECK CREATION OF PLAYER
 	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-
-	// WHAT IS OUR SUBSTITUTE?
-	//PhysicalProperties *playerProps = player->getPhysicalProperties();
-	//playerProps->setX(PLAYER_INIT_X);
-	//playerProps->setY(PLAYER_INIT_Y);
-	//playerProps->setVelocity(0.0f, 0.0f);
-	//playerProps->setAccelerationX(0);
-	//playerProps->setAccelerationY(0);
-	//player->setOnTileThisFrame(false);
-	//player->setOnTileLastFrame(false);
-	//player->affixTightAABBBoundingVolume();
+	player->setSpawnX(PLAYER_INIT_X);
+	player->setSpawnY(PLAYER_INIT_Y);
+	player->setSpawnVx(0);
+	player->setSpawnVy(0);
+	physics->addSprite(player);
 
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
 	// A LINE NEAR THE TOP
@@ -393,12 +382,12 @@ void AstroJumpDataLoader::initHelpScreen(GameGUI *gui, DirectXTextureManager *gu
 	ScreenGUI *helpScreen = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_HELP_SCREEN_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
-	imageToAdd->width = 512;
-	imageToAdd->height = 512;
+	imageToAdd->width = 1367;
+	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
 	helpScreen->addOverlayImage(imageToAdd);
 
@@ -457,12 +446,12 @@ void AstroJumpDataLoader::initAboutScreen(GameGUI *gui, DirectXTextureManager *g
 	ScreenGUI *aboutScreen = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_ABOUT_SCREEN_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
-	imageToAdd->width = 512;
-	imageToAdd->height = 512;
+	imageToAdd->width = 1367;
+	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
 	aboutScreen->addOverlayImage(imageToAdd);
 
@@ -585,12 +574,12 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	ScreenGUI *mainMenuGUI = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_MAIN_MENU_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
-	imageToAdd->width = 512;
-	imageToAdd->height = 512;
+	imageToAdd->width = 1367;
+	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
 	mainMenuGUI->addOverlayImage(imageToAdd);
 
@@ -611,7 +600,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 		200,
 		100,
 		false,
-		W_SELECT_LEVEL_COMMAND);
+		W_START_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);

@@ -96,8 +96,8 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			botIterator++;
 		}
 		//add GUI sprites
-		addGUISpriteToRenderList(&healthbar, renderList, viewport);
-		addGUISpriteToRenderList(&lives, renderList, viewport);
+		//addGUISpriteToRenderList(&healthbar, renderList, viewport);
+		//addGUISpriteToRenderList(&lives, renderList, viewport);
 	}
 }
 
