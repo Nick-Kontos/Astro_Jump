@@ -50,7 +50,7 @@ struct RenderItem : public std::binary_function<RenderItem, RenderItem, bool>
 	int a;
 	int width;
 	int height;
-	float roationInRadians;
+	float rotationInRadians;
 
 	// WE HAVE DEFINED THIS COMPARISON SUCH THAT OUR LIST CAN BE
 	// SORTED USING THE sort METHOD FROM THE STL'S list CLASS.

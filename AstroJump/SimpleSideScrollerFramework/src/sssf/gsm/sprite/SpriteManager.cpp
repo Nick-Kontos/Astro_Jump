@@ -47,7 +47,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
-									spriteType->getTextureHeight());
+									spriteType->getTextureHeight(),
+									sprite->getRotationInRadians());
 	}
 }
 
@@ -66,7 +67,8 @@ void SpriteManager::addGUISpriteToRenderList(	AnimatedSprite *sprite,
 		0,
 		sprite->getAlpha(),
 		spriteType->getTextureWidth(),
-		spriteType->getTextureHeight());
+		spriteType->getTextureHeight(),
+		sprite->getRotationInRadians());
 }
 /*
 	addSpriteItemsToRenderList - This method goes through all of the sprites,
@@ -184,13 +186,6 @@ void SpriteManager::findSpriteCollisionsForSprite(Physics *physics, CollidableOb
 */
 void SpriteManager::update(Game *game)
 {
-	if (yellowState){
-		timeYellow++;
-	}
-	//note 90 is number of frames that player remains yellow
-	if (timeYellow >= 90){
-		yellowState = false;
-	}
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
@@ -204,8 +199,4 @@ void SpriteManager::update(Game *game)
 		bot->updateSprite();
 		botIterator++;
 	}
-}
-void SpriteManager::enterYellowState(Game *game){
-	yellowState = true;
-	timeYellow = 0;
 }

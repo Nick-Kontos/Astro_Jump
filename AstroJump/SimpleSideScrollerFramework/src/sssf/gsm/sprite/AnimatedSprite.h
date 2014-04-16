@@ -47,6 +47,7 @@ protected:
 	float density;
 	float friction;
 	int radius;
+	float rotationInRadians;
 
 public:
 	// INLINED ACCESSOR METHODS
@@ -62,6 +63,10 @@ public:
 	float				getSpawnY()			{ return spawnY; }
 	float				getSpawnVx()			{ return spawnVx; }
 	float				getSpawnVy()			{ return spawnVy; }
+	float				getRotationInRadians()
+	{
+		return body->GetAngle();
+	}
 	float				getX()
 	{
 		b2Vec2 b = body->GetPosition();
