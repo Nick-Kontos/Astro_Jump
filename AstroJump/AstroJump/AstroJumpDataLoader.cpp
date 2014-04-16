@@ -605,7 +605,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
 		412,
-		500,
+		200,
 		0,
 		255,
 		200,
@@ -627,7 +627,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
 		412,
-		400,
+		300,
 		0,
 		255,
 		200,
@@ -650,7 +650,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
 		412,
-		300,
+		400,
 		0,
 		255,
 		200,
@@ -673,13 +673,13 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
 		412,
-		200,
+		500,
 		0,
 		255,
 		200,
 		100,
 		false,
-		W_QUIT_COMMAND);
+		W_EXIT_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
