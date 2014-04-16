@@ -37,7 +37,8 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 
 	// LET'S GET THE PLAYER'S PHYSICAL PROPERTIES, IN CASE WE WANT TO CHANGE THEM
 	GameStateManager *gsm = game->getGSM();
-	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
+	SpriteManager *spritemanager = gsm->getSpriteManager();
+	AnimatedSprite *player = spritemanager->getPlayer();
 	Viewport *viewport = game->getGUI()->getViewport();
 
 	// IF THE GAME IS IN PROGRESS
@@ -68,7 +69,21 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-
+		if (input->isKeyDown(SPACE_KEY))
+		{
+			if (!spritemanager->getIsOnAsteriod()){
+				spritemanager->attachPlayerToAsteriod();
+			}
+			else {
+				spritemanager->jumpOffAsteriod();
+			}
+		}
+		if (input->isKeyDown(A_KEY)){
+			//rotate player counter-clockwise
+		}
+		if (input->isKeyDown(D_KEY)){
+			//rotate player clockwise
+		}
 	}
 
 	// 0X43 is HEX FOR THE 'C' VIRTUAL KEY

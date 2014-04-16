@@ -34,6 +34,7 @@ private:
 	list<AnimatedSprite*> asteriods;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
+	//****change to animatedsprite
 	TopDownSprite player;
 
 	//These sprites will be the health bar and lives displays
@@ -44,10 +45,12 @@ private:
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
 	BotRecycler recyclableBots;
 
+	bool isOnAsteriod;
 public:
 
+	
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager()		{}
+	SpriteManager()		{ isOnAsteriod = true; }
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
@@ -57,6 +60,7 @@ public:
 	AnimatedSprite*         getLives()              { return &lives;            }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
 	list<Bot*>::iterator	getEndOfBotsIterator()	{ return bots.end();		}
+	bool*					getIsOnAsteriod()		{ return &isOnAsteriod;     }
 
 	// METHODS DEFINED IN SpriteManager.cpp
 	void                enterYellowState(Game *game);
@@ -70,4 +74,6 @@ public:
 	Bot*				removeBot(Bot *botToRemove);
 	void				unloadSprites();
 	void				update(Game *game);
+	void				attachPlayerToAsteriod();
+	void				jumpOffAsteriod();
 };
