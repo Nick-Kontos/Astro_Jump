@@ -85,6 +85,9 @@ public:
 	void			goToMainMenu();
 	void            goToVictory();
 	void            goToGameOver();
+	void            goToHelp();
+	void            goToAbout();
+	void            goToLevelSelect();
 
 	// METHODS DEFINED in GameStateManager.cpp
 	GameStateManager();

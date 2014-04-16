@@ -52,4 +52,9 @@ public:
 	void initSplashScreen(Game *game, GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initMainMenu(GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initInGameGUI(GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initVictoryScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initDefeatScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initLevelSelectScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initAboutScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initHelpScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);
 };

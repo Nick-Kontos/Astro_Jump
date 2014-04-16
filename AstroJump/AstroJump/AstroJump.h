@@ -36,7 +36,9 @@ static const wstring	W_COLOR_KEY_BLUE = L"COLOR_KEY_BLUE";
 static const wstring	W_GO_TO_MM_COMMAND = L"Go To Main Menu";
 static const wstring	W_START_COMMAND = L"Start";
 static const wstring	W_EXIT_COMMAND = L"Exit";
+static const wstring	W_RESTART_COMMAND = L"Restart";
 static const wstring	W_SELECT_LEVEL_COMMAND = L"Select_Level";
+static const wstring	W_NEXT_LEVEL_COMMAND = L"Next_Level";
 static const wstring	W_QUIT_COMMAND = L"Quit";
 static const wstring	W_HELP_COMMAND = L"Help";
 static const wstring	W_ABOUT_COMMAND = L"About";
@@ -58,6 +60,7 @@ static const wstring	W_NEXT_LEVEL_PATH = L"data/gui/buttons/Astro_Jump_Next_Leve
 static const wstring	W_QUIT_PATH = L"data/gui/buttons/Astro_Jump_Quit_Button.png";
 static const wstring	W_HELP_PATH = L"data/gui/buttons/Astro_Jump_Help_Button.png";
 static const wstring	W_ABOUT_PATH = L"data/gui/buttons/Astro_Jump_About_Button.png";
+static const wstring	W_BACK_PATH = L"data/gui/buttons/Astro_Jump_Back_Button.png";
 //EXTRAS WHICH WE DONT USE
 static const wstring	W_START_IMAGE_PATH = L"data/gui/buttons/start_game.png";
 static const wstring	W_START_IMAGE_MO_PATH = L"data/gui/buttons/start_game_mo.png";

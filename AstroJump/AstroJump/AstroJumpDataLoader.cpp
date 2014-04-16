@@ -249,10 +249,272 @@ void AstroJumpDataLoader::hardCodedLoadGUIExample(Game *game)
 	initSplashScreen(game, gui, guiTextureManager);
 	initMainMenu(gui, guiTextureManager);
 	initInGameGUI(gui, guiTextureManager);
-	// initVictoryScreen(gui, guiTextureManager);
-	// initDefeatScreen(gui, guiTextureManager);
-	// initLevelSelectScreen(gui, guiTextureManager);
+	
+	initVictoryScreen(gui, guiTextureManager);
+	initDefeatScreen(gui, guiTextureManager);
+//	initLevelSelectScreen(gui, guiTextureManager);
+	initAboutScreen(gui, guiTextureManager);
+	initHelpScreen(gui, guiTextureManager);
 }
+
+void AstroJumpDataLoader::initVictoryScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager)
+{
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *victoryScreen = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_VICTORY_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 256;
+	imageToAdd->y = 100;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 512;
+	imageToAdd->height = 512;
+	imageToAdd->imageID = imageID;
+	victoryScreen->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN NEXT LEVEL BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_NEXT_LEVEL_PATH);
+	int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		500,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_NEXT_LEVEL_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	victoryScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD A EXIT BUTTON
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	normalTextureID = guiTextureManager->loadTexture(W_EXIT_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
+
+	// - INIT THE START BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		350,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_GO_TO_MM_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	victoryScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_VICTORY, victoryScreen);
+}
+
+void AstroJumpDataLoader::initDefeatScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager)
+{
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *deafeatScreen = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_DEFEAT_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 256;
+	imageToAdd->y = 100;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 512;
+	imageToAdd->height = 512;
+	imageToAdd->imageID = imageID;
+	deafeatScreen->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN NEXT LEVEL BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_RESTART_PATH);
+	int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		500,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_RESTART_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	deafeatScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD A EXIT BUTTON
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	normalTextureID = guiTextureManager->loadTexture(W_EXIT_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
+
+	// - INIT THE START BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		350,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_GO_TO_MM_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	deafeatScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_GAME_OVER, deafeatScreen);
+}
+
+
+
+void AstroJumpDataLoader::initHelpScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager)
+{
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *helpScreen = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_HELP_SCREEN_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 256;
+	imageToAdd->y = 100;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 512;
+	imageToAdd->height = 512;
+	imageToAdd->imageID = imageID;
+	helpScreen->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN NEXT LEVEL BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_BACK_PATH);
+	int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		500,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_GO_TO_MM_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	helpScreen->addButton(buttonToAdd);
+
+	//// AND LET'S ADD A EXIT BUTTON
+	//buttonToAdd = new Button();
+
+	//// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	//normalTextureID = guiTextureManager->loadTexture(W_EXIT_PATH);
+	//mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
+
+	//// - INIT THE START BUTTON
+	//buttonToAdd->initButton(normalTextureID,
+	//	mouseOverTextureID,
+	//	412,
+	//	350,
+	//	0,
+	//	255,
+	//	200,
+	//	100,
+	//	false,
+	//	W_GO_TO_MM_COMMAND);
+
+	//// AND NOW LOAD IT INTO A ScreenGUI
+	//deafeatScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_IN_GAME_HELP, helpScreen);
+}
+
+void AstroJumpDataLoader::initAboutScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager)
+{
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *aboutScreen = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_ABOUT_SCREEN_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 256;
+	imageToAdd->y = 100;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 512;
+	imageToAdd->height = 512;
+	imageToAdd->imageID = imageID;
+	aboutScreen->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN NEXT LEVEL BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_BACK_PATH);
+	int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		500,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_GO_TO_MM_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	aboutScreen->addButton(buttonToAdd);
+
+	//// AND LET'S ADD A EXIT BUTTON
+	//buttonToAdd = new Button();
+
+	//// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	//normalTextureID = guiTextureManager->loadTexture(W_EXIT_PATH);
+	//mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_START_IMAGE_MO_PATH);
+
+	//// - INIT THE START BUTTON
+	//buttonToAdd->initButton(normalTextureID,
+	//	mouseOverTextureID,
+	//	412,
+	//	350,
+	//	0,
+	//	255,
+	//	200,
+	//	100,
+	//	false,
+	//	W_GO_TO_MM_COMMAND);
+
+	//// AND NOW LOAD IT INTO A ScreenGUI
+	//deafeatScreen->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_IN_GAME_ABOUT, aboutScreen);
+}
+
 
 /*
 initCursor - initializes a simple little cursor for the gui.
@@ -354,6 +616,51 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
 
+	// AND LET'S ADD AN HELP BUTTON
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	normalTextureID = guiTextureManager->loadTexture(W_HELP_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		400,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_HELP_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	mainMenuGUI->addButton(buttonToAdd);
+
+
+	// AND LET'S ADD AN ABOUT BUTTON
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	normalTextureID = guiTextureManager->loadTexture(W_ABOUT_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		300,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_ABOUT_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	mainMenuGUI->addButton(buttonToAdd);
+
 	// AND LET'S ADD A START BUTTON
 	buttonToAdd = new Button();
 
@@ -366,7 +673,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
 		412,
-		350,
+		200,
 		0,
 		255,
 		200,
