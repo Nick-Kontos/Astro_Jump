@@ -43,6 +43,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)\;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(SolutionDir)SimpleSideScrollerFramework\src\;$(SolutionDir)PoseurSpriteTypesImporter\src\;$(SolutionDir)tinyxml\src\;$(SolutionDir)TMXMapImporter\src\;$(SolutionDir)XMLFileImporter\src\;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Common\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Apps\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
