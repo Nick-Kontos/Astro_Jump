@@ -18,7 +18,7 @@
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "Box2D/box2D.h"
 
-const float DEFAULT_GRAVITY = -10.0f;
+const float DEFAULT_GRAVITY = 10.0f;
 const float timeStep = 1.0f / 60.0f;
 
 
@@ -42,7 +42,7 @@ public:
 
 	// INLINED GET/SET METHODS
 	float				getGravity()					{ return gravity;					}
-	void				setGravity(float initGravity)									{ gravity = initGravity;						}
+	void				setGravity(float initGravity);
 
 	// PUBLIC METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE OR CHANGE WHAT YOU LIKE
 	void addSprite(AnimatedSprite *sprite);
