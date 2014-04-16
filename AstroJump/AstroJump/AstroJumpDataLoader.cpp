@@ -259,6 +259,7 @@ void AstroJumpDataLoader::initVictoryScreen(GameGUI *gui, DirectXTextureManager 
 	imageToAdd->width = 512;
 	imageToAdd->height = 512;
 	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
 	victoryScreen->addOverlayImage(imageToAdd);
 
 	// AND LET'S ADD AN NEXT LEVEL BUTTON
@@ -323,6 +324,7 @@ void AstroJumpDataLoader::initDefeatScreen(GameGUI *gui, DirectXTextureManager *
 	imageToAdd->width = 512;
 	imageToAdd->height = 512;
 	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
 	deafeatScreen->addOverlayImage(imageToAdd);
 
 	// AND LET'S ADD AN NEXT LEVEL BUTTON
@@ -389,6 +391,7 @@ void AstroJumpDataLoader::initHelpScreen(GameGUI *gui, DirectXTextureManager *gu
 	imageToAdd->width = 1367;
 	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
 	helpScreen->addOverlayImage(imageToAdd);
 
 	// AND LET'S ADD AN NEXT LEVEL BUTTON
@@ -453,6 +456,7 @@ void AstroJumpDataLoader::initAboutScreen(GameGUI *gui, DirectXTextureManager *g
 	imageToAdd->width = 1367;
 	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
 	aboutScreen->addOverlayImage(imageToAdd);
 
 	// AND LET'S ADD AN NEXT LEVEL BUTTON
@@ -581,6 +585,7 @@ void AstroJumpDataLoader::initMainMenu(GameGUI *gui, DirectXTextureManager *guiT
 	imageToAdd->width = 1367;
 	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
 	mainMenuGUI->addOverlayImage(imageToAdd);
 
 	// AND LET'S ADD AN EXIT BUTTON
