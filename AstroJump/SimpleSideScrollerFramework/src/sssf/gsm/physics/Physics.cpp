@@ -48,6 +48,12 @@ Physics::~Physics()
 	world->~b2World();
 }
 
+void Physics::setGravity(float initGravity)
+{
+	b2Vec2 g(0.0f, initGravity);
+	world->SetGravity(g);
+}
+
 /*
 	Informs the physics system of additional dynamic, collidable object
 	to keep track of
