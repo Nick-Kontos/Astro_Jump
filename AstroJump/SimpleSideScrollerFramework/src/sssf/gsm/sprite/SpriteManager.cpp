@@ -184,13 +184,7 @@ void SpriteManager::findSpriteCollisionsForSprite(Physics *physics, CollidableOb
 */
 void SpriteManager::update(Game *game)
 {
-	if (yellowState){
-		timeYellow++;
-	}
-	//note 90 is number of frames that player remains yellow
-	if (timeYellow >= 90){
-		yellowState = false;
-	}
+	
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
@@ -204,8 +198,4 @@ void SpriteManager::update(Game *game)
 		bot->updateSprite();
 		botIterator++;
 	}
-}
-void SpriteManager::enterYellowState(Game *game){
-	yellowState = true;
-	timeYellow = 0;
 }
