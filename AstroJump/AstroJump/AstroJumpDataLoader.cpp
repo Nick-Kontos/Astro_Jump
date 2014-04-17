@@ -185,6 +185,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
+	player->setRadius(0);
 	player->setSpawnX(PLAYER_INIT_X);
 	player->setSpawnY(PLAYER_INIT_Y);
 	player->setSpawnVx(0);

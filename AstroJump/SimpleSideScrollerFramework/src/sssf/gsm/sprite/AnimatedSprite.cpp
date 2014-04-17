@@ -118,9 +118,13 @@ void AnimatedSprite::updateSprite()
 }
 void AnimatedSprite::rotateClockwise(float increment)
 {
+	//to impulse or not to impulse?
 	body->SetTransform(body->GetPosition(), (body->GetAngle() + increment));
+	//body->ApplyAngularImpulse(increment, true);
 }
 void AnimatedSprite::rotateCClockwise(float increment)
 {
+	//to impulse or not to impulse?
 	body->SetTransform(body->GetPosition(), (body->GetAngle() - increment));
+	//body->ApplyAngularImpulse(increment, true);
 }

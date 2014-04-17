@@ -12,13 +12,5 @@ protected:
 
 public:
     
-	float getRotationInRadians()
-	{
-		return rotationInRadians;
-	}
-	void setRotationInRadians(float initRotation)
-	{
-		rotationInRadians = initRotation;
-	}
 	void updateSprite();
 };
