@@ -65,7 +65,9 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	float x =0.01f * sprite->getSpawnX();
 	float y =0.01f * sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
+	bodyDef.linearVelocity.Set(sprite->getSpawnVx(), sprite->getSpawnVy());
 	bodyDef.userData = &sprite;
+	bodyDef.linearDamping = sprite->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2CircleShape c;
 	c.m_p.Set(0,0);

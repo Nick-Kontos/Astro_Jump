@@ -48,6 +48,7 @@ protected:
 	float friction;
 	int radius;
 	float rotationInRadians;
+	float damping;
 
 public:
 	// INLINED ACCESSOR METHODS
@@ -63,6 +64,8 @@ public:
 	float				getSpawnY()			{ return spawnY; }
 	float				getSpawnVx()			{ return spawnVx; }
 	float				getSpawnVy()			{ return spawnVy; }
+	float				getDamping()			{ return damping; }
+	float				setDamping(float f)			{ damping = f; }
 	float				getRotationInRadians()
 	{
 		return body->GetAngle();
