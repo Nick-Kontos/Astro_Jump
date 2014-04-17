@@ -194,8 +194,8 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	asteroid->setSpriteType(spriteManager->getSpriteType(1));
 	asteroid->setAlpha(255);
 	asteroid->setCurrentState(IDLE);
-	asteroid->setSpawnX(1000.0f);
-	asteroid->setSpawnY(2000.0f);
+	asteroid->setSpawnX(200.0f);
+	asteroid->setSpawnY(200.0f);
 	asteroid->setSpawnVx(0);
 	asteroid->setSpawnVy(0);
 	physics->addSprite(asteroid);

@@ -71,7 +71,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 		if (input->isKeyDown(SPACE_KEY))
 		{
-			if (!spritemanager->getIsOnAsteriod()){
+ 			if (!spritemanager->getIsOnAsteriod()){
 				spritemanager->attachPlayerToAsteriod();
 			}
 			else {
