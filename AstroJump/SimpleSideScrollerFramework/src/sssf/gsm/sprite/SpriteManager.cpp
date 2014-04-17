@@ -224,7 +224,7 @@ void SpriteManager::attachPlayerToAsteriod()
 	while (asteriodIterator != asteriods.end()){
 		AnimatedSprite *asteriod = *asteriodIterator;
 		radius = asteriod->getSpriteType()->getTextureWidth() / 2;
-		if (radius <= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())
+		if (radius >= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())
 			+ (player.getY() - asteriod->getY()) * (player.getY() - asteriod->getY()))){
 			//player is on top of asteriod -- stick to it
 			//for now hold place with break so we can put a breakpoint here
