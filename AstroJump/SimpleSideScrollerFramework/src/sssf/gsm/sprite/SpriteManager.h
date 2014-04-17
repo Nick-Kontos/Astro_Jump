@@ -78,5 +78,5 @@ public:
 	void				unloadSprites();
 	void				update(Game *game);
 	void				attachPlayerToAsteriod();
-	void				jumpOffAsteriod();
+	void				jumpOffAsteriod(float jumpval);
 };

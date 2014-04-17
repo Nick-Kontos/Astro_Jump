@@ -234,8 +234,9 @@ void SpriteManager::attachPlayerToAsteriod()
 		asteriodIterator++;
 	}
 }
-void SpriteManager::jumpOffAsteriod()
+void SpriteManager::jumpOffAsteriod(float jump)
 {
-
+	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * sin(sin(player.getRotationInRadians())), jump * cos(cos(player.getRotationInRadians()))),
+		player.getBody()->GetWorldCenter(), true);
 	isOnAsteriod = false;
 }
