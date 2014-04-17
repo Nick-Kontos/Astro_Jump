@@ -6,5 +6,4 @@ void TopDownSprite::updateSprite()
 	// CALL THE PARENT METHOD TO UPDATE ANIMATION
 	AnimatedSprite::updateSprite();
 
-	
 }

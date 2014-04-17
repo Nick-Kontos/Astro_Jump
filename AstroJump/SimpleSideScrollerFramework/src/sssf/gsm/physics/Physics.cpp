@@ -62,8 +62,8 @@ void Physics::addSprite(AnimatedSprite *sprite)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	float x =0.01f * sprite->getSpawnX();
-	float y =0.01f * sprite->getSpawnY();
+	float x = sprite->getSpawnX();
+	float y = sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
 	bodyDef.linearVelocity.Set(sprite->getSpawnVx(), sprite->getSpawnVy());
 	bodyDef.userData = &sprite;
