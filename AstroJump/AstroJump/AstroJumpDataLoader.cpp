@@ -189,7 +189,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpawnY(200*.02f);
 	player->setSpawnVx(0);
 	player->setSpawnVy(0);
-	player->setRadius((128.0f*.02f)/2);
+	player->setRadius((128.0f/2)*.02f);
 	physics->addSprite(player);
 	AnimatedSprite *asteroid = new AnimatedSprite();
 	asteroid->setSpriteType(spriteManager->getSpriteType(1));
@@ -197,9 +197,9 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	asteroid->setCurrentState(IDLE);
 	asteroid->setSpawnX(25.0f*.02f);
 	asteroid->setSpawnY(25.0f*.02f);
-	asteroid->setSpawnVx(5.0f*.02f);
+	asteroid->setSpawnVx(8.0f);
 	asteroid->setSpawnVy(0.0f);
-	asteroid->setRadius((.02f * 512.0f)/2);
+	asteroid->setRadius((.02f * 512.0f/2));
 	physics->addSprite(asteroid);
 	spriteManager->addAsteriod(asteroid);
 	AnimatedSprite *asteroid1 = new AnimatedSprite();
@@ -210,7 +210,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	asteroid1->setSpawnY(25.0f*.02f);
 	asteroid1->setSpawnVx(0.0f);
 	asteroid1->setSpawnVy(0.0f);
-	asteroid1->setRadius((.02f * 512.0f)/2);
+	asteroid1->setRadius((.02f * 512.0f/2));
 	physics->addSprite(asteroid1);
 	spriteManager->addAsteriod(asteroid1);
 	AnimatedSprite *clear = spriteManager->getClear();
@@ -221,6 +221,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	clear->setSpawnY(1000*.02f);
 	clear->setSpawnVx(0);
 	clear->setSpawnVy(0);
+	clear->setRadius(1 * .02f);
 	physics->addSprite(clear);
 
 
@@ -723,22 +724,6 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 	// NOW ADD THE IN-GAME GUI
 	ScreenGUI *inGameGUI = new ScreenGUI();
 
-	unsigned int normalTextureID = guiTextureManager->loadTexture(W_QUIT_PATH);
-	unsigned int mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_QUIT_IMAGE_MO_PATH);
-
-	// INIT THE QUIT BUTTON
-	Button *buttonToAdd = new Button();
-	buttonToAdd->initButton(normalTextureID,
-		mouseOverTextureID,
-		0,
-		0,
-		0,
-		255,
-		200,
-		100,
-		false,
-		W_QUIT_COMMAND);
-	inGameGUI->addButton(buttonToAdd);
 
 	// AND LET'S ADD OUR SCREENS
 	gui->addScreenGUI(GS_GAME_IN_PROGRESS, inGameGUI);
