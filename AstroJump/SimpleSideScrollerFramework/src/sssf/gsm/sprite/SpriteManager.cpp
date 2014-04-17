@@ -42,8 +42,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		itemToAdd.id = sprite->getFrameIndex();
 		
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-									(int)floor((sprite->getX() - viewport->getViewportX()) + 0.5f),
-									(int)floor((sprite->getY() - viewport->getViewportY()) + 0.5f),
+			(int)floor((sprite->getX() - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth()/2,
+			(int)floor((sprite->getY() - viewport->getViewportY()) + 0.5f) - spriteType->getTextureHeight()/2,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
