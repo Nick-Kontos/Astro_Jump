@@ -190,6 +190,15 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpawnVx(0);
 	player->setSpawnVy(0);
 	physics->addSprite(player);
+	AnimatedSprite *asteroid = new AnimatedSprite();
+	asteroid->setSpriteType(spriteManager->getSpriteType(1));
+	asteroid->setAlpha(255);
+	asteroid->setCurrentState(IDLE);
+	player->setSpawnX(300.0f);
+	player->setSpawnY(500.0f);
+	player->setSpawnVx(0);
+	player->setSpawnVy(0);
+	physics->addSprite(asteroid);
 
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
 	// A LINE NEAR THE TOP
