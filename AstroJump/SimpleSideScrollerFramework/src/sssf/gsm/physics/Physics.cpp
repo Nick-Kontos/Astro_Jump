@@ -68,7 +68,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	bodyDef.userData = &sprite;
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2CircleShape c;
-	c.m_p.Set(.0169333f, .033866f);
+	c.m_p.Set(128, 64);
 	c.m_radius = sprite->getRadius();
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &c;

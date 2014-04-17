@@ -2,4 +2,5 @@
 <sprite_type_list>
   <sprite_type>player</sprite_type>
   <sprite_type>asteroids</sprite_type>
+  <sprite_type>clear</sprite_type>
 </sprite_type_list>
