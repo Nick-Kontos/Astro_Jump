@@ -3,7 +3,7 @@
  <width>512</width>
  <height>512</height>
  <images_list>
-  <image_file id="1"  file_name="test_asteriod_IDLE_.png"/>
+  <image_file id="1"  file_name="test_asteroid_IDLE.png"/>
  </images_list>
  <animations_list>
   <animation_state>

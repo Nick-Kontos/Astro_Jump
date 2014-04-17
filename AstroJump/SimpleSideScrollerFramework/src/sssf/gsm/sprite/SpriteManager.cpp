@@ -85,8 +85,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
 
-		// ADD THE PLAYER SPRITE
-		addSpriteToRenderList(&player, renderList, viewport);
+		
 		
 		//add asteriods
 		list<AnimatedSprite*>::iterator asteriodsIterator;
@@ -109,6 +108,8 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		//add GUI sprites
 		//addGUISpriteToRenderList(&healthbar, renderList, viewport);
 		//addGUISpriteToRenderList(&lives, renderList, viewport);
+	// ADD THE PLAYER SPRITE
+		addSpriteToRenderList(&player, renderList, viewport);
 	}
 }
 
@@ -122,7 +123,8 @@ void SpriteManager::addBot(Bot *botToAdd)
 	bots.push_back(botToAdd);
 }
 
-void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd){
+void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
+{
 	asteriods.push_back(asteriodToAdd);
 }
 /*
