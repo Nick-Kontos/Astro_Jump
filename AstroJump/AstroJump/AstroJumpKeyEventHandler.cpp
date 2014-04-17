@@ -75,7 +75,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 				spritemanager->attachPlayerToAsteriod();
 			}
 			else {
-				spritemanager->jumpOffAsteriod();
+				spritemanager->jumpOffAsteriod(2.0f);
 			}
 		}
 		if (input->isKeyDown(A_KEY)){
