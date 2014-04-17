@@ -48,6 +48,7 @@ protected:
 	float friction;
 	int radius;
 	float rotationInRadians;
+	float damping;
 
 public:
 	// INLINED ACCESSOR METHODS
@@ -63,6 +64,8 @@ public:
 	float				getSpawnY()			{ return spawnY; }
 	float				getSpawnVx()			{ return spawnVx; }
 	float				getSpawnVy()			{ return spawnVy; }
+	float				getDamping()			{ return damping; }
+	float				setDamping(float f)			{ damping = f; }
 	float				getRotationInRadians()
 	{
 		return body->GetAngle();
@@ -70,12 +73,12 @@ public:
 	float				getX()
 	{
 		b2Vec2 b = body->GetPosition();
-		return b.x;
+		return (100.0f *b.x);
 	}
 	float				getY()
 	{
 		b2Vec2 b = body->GetPosition();
-		return b.y;
+		return (100.0f * b.y);
 	}
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

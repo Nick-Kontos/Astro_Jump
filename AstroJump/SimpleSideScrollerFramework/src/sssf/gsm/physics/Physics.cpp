@@ -62,13 +62,15 @@ void Physics::addSprite(AnimatedSprite *sprite)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	float x = sprite->getSpawnX();
-	float y = sprite->getSpawnY();
+	float x =0.01f * sprite->getSpawnX();
+	float y =0.01f * sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
+	bodyDef.linearVelocity.Set(sprite->getSpawnVx(), sprite->getSpawnVy());
 	bodyDef.userData = &sprite;
+	bodyDef.linearDamping = sprite->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2CircleShape c;
-	c.m_p.Set(128, 64);
+	c.m_p.Set(0,0);
 	c.m_radius = sprite->getRadius();
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &c;
