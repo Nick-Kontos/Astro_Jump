@@ -88,6 +88,15 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		// ADD THE PLAYER SPRITE
 		addSpriteToRenderList(&player, renderList, viewport);
 		
+		//add asteriods
+		list<AnimatedSprite*>::iterator asteriodsIterator;
+		asteriodsIterator = asteriods.begin();
+		while (asteriodsIterator != asteriods.end())
+		{
+			AnimatedSprite *asteriod = (*asteriodsIterator);
+			addSpriteToRenderList(asteriod, renderList, viewport);
+			asteriodsIterator++;
+		}
 		// NOW ADD THE REST OF THE SPRITES
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
@@ -113,6 +122,9 @@ void SpriteManager::addBot(Bot *botToAdd)
 	bots.push_back(botToAdd);
 }
 
+void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd){
+	asteriods.push_back(asteriodToAdd);
+}
 /*
 	addSpriteType - This method is for adding a new sprite
 	type. Note that one sprite type can have many sprites. For

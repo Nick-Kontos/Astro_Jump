@@ -65,6 +65,7 @@ public:
 	// METHODS DEFINED IN SpriteManager.cpp
 	void                enterYellowState(Game *game);
 	void				addBot(Bot *botToAdd);
+	void				addAsteriod(AnimatedSprite *asteriodToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
 	unsigned int		addSpriteType(AnimatedSpriteType *spriteTypeToAdd);
 	void				addSpriteToRenderList(AnimatedSprite *sprite, RenderList *renderList, Viewport *viewport);
