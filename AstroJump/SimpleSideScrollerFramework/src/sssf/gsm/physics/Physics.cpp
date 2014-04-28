@@ -65,7 +65,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	float x = sprite->getSpawnX();
 	float y = sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
-	bodyDef.linearVelocity.Set(sprite->getSpawnVx(), sprite->getSpawnVy());
+	b2Vec2* initforce = new b2Vec2(sprite->getSpawnVx(), sprite->getSpawnVy());	
 	bodyDef.userData = &sprite;
 	bodyDef.linearDamping = sprite->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
@@ -78,6 +78,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	fixtureDef.friction = sprite->getFriction();
 	body->CreateFixture(&fixtureDef);
 	sprite->setBody(body);
+	sprite->getBody()->ApplyForceToCenter(*initforce, true);
 }
 
 /*

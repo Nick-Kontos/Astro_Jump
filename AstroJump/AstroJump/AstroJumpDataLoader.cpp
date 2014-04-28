@@ -185,11 +185,11 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-	player->setSpawnX(300*.02f);
-	player->setSpawnY(200*.02f);
+	player->setSpawnX(700*.02f);
+	player->setSpawnY(700*.02f);
 	player->setSpawnVx(0);
 	player->setSpawnVy(0);
-	player->setRadius((128.0f/2)*.02f);
+	player->setRadius((128.0f / 2 ) * .02f);
 	physics->addSprite(player);
 	AnimatedSprite *asteroid = new AnimatedSprite();
 	asteroid->setSpriteType(spriteManager->getSpriteType(1));
@@ -197,7 +197,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	asteroid->setCurrentState(IDLE);
 	asteroid->setSpawnX(25.0f*.02f);
 	asteroid->setSpawnY(25.0f*.02f);
-	asteroid->setSpawnVx(8.0f);
+	asteroid->setSpawnVx(50000.0f);
 	asteroid->setSpawnVy(0.0f);
 	asteroid->setRadius((.02f * 512.0f/2));
 	physics->addSprite(asteroid);
@@ -208,21 +208,12 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	asteroid1->setCurrentState(IDLE);
 	asteroid1->setSpawnX(700.0f*.02f);
 	asteroid1->setSpawnY(25.0f*.02f);
-	asteroid1->setSpawnVx(0.0f);
+	asteroid1->setSpawnVx(-5.0f);
 	asteroid1->setSpawnVy(0.0f);
 	asteroid1->setRadius((.02f * 512.0f/2));
 	physics->addSprite(asteroid1);
 	spriteManager->addAsteriod(asteroid1);
-	AnimatedSprite *clear = spriteManager->getClear();
-	clear->setSpriteType(spriteManager->getSpriteType(2));
-	clear->setAlpha(255);
-	clear->setCurrentState(IDLE);
-	clear->setSpawnX(1000*.02f);
-	clear->setSpawnY(1000*.02f);
-	clear->setSpawnVx(0);
-	clear->setSpawnVy(0);
-	clear->setRadius(1 * .02f);
-	physics->addSprite(clear);
+	
 
 
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG

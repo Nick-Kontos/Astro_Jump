@@ -1,11 +1,11 @@
 /*
-	Author: Richard McKenna
-			Stony Brook University
-			Computer Science Department
+Author: Richard McKenna
+Stony Brook University
+Computer Science Department
 
-	DirectXGraphics.cpp
+DirectXGraphics.cpp
 
-	See DirectXGraphics.h for a class description.
+See DirectXGraphics.h for a class description.
 */
 
 #include "sssf_VS\stdafx.h"
@@ -21,8 +21,8 @@
 #include "sssf\text\GameText.h"
 
 /*
-	DirectXGraphics - Default constructor, it doesn't initialize anything.
-	To setup all the DirectX objects call initGraphics after construction.
+DirectXGraphics - Default constructor, it doesn't initialize anything.
+To setup all the DirectX objects call initGraphics after construction.
 */
 DirectXGraphics::DirectXGraphics(Game *initGame)
 {
@@ -30,9 +30,9 @@ DirectXGraphics::DirectXGraphics(Game *initGame)
 }
 
 /*
-	~DirectXGraphics - Destructor, it destroys all of the DirectX pointers.
-	This would be called only when the application closes, unless someone 
-	decides to use different rendering technologies during the game.
+~DirectXGraphics - Destructor, it destroys all of the DirectX pointers.
+This would be called only when the application closes, unless someone
+decides to use different rendering technologies during the game.
 */
 DirectXGraphics::~DirectXGraphics()
 {
@@ -43,15 +43,15 @@ DirectXGraphics::~DirectXGraphics()
 }
 
 /*
-	containsDisplayMode - This method looks at the vector of display modes that
-	were presumably retrieved from the GPU, and tests to see if our desired
-	color format and screen resolution are inside. If found, true is returned,
-	otherwise false.
+containsDisplayMode - This method looks at the vector of display modes that
+were presumably retrieved from the GPU, and tests to see if our desired
+color format and screen resolution are inside. If found, true is returned,
+otherwise false.
 */
 bool DirectXGraphics::containsDisplayMode(vector<D3DDISPLAYMODE*> *displayModes,
-										  D3DFORMAT testColorFormat,
-										  int testScreenWidth,
-										  int testScreenHeight)
+	D3DFORMAT testColorFormat,
+	int testScreenWidth,
+	int testScreenHeight)
 {
 	vector<D3DDISPLAYMODE*>::iterator iterator;
 
@@ -77,9 +77,9 @@ bool DirectXGraphics::containsDisplayMode(vector<D3DDISPLAYMODE*> *displayModes,
 }
 
 /*
-	createDirectXDeviceAndSpriteHandler - THIS METHOD CREATES OUR GPU AND
-	SPRITE HANDLER (used for batch rendering textures) USING THE COLOR
-	FORMAT AND SCREEN RESOLUTION OF OUR CHOICE.
+createDirectXDeviceAndSpriteHandler - THIS METHOD CREATES OUR GPU AND
+SPRITE HANDLER (used for batch rendering textures) USING THE COLOR
+FORMAT AND SCREEN RESOLUTION OF OUR CHOICE.
 */
 HRESULT DirectXGraphics::createDirectXDeviceAndSpriteHandler()
 {
@@ -87,13 +87,13 @@ HRESULT DirectXGraphics::createDirectXDeviceAndSpriteHandler()
 	GameText *text = game->getText();
 
 	// CREATE OUR GPU
-    result = d3d->CreateDevice(D3DADAPTER_DEFAULT,
-						D3DDEVTYPE_HAL,
-						presentParameters.hDeviceWindow,
-						D3DCREATE_HARDWARE_VERTEXPROCESSING,
-						&presentParameters,
-						&graphicsDevice);
-	
+	result = d3d->CreateDevice(D3DADAPTER_DEFAULT,
+		D3DDEVTYPE_HAL,
+		presentParameters.hDeviceWindow,
+		D3DCREATE_HARDWARE_VERTEXPROCESSING,
+		&presentParameters,
+		&graphicsDevice);
+
 	// IF GPU CREATION WAS SUCCESSFUL
 	if (SUCCEEDED(result))
 	{
@@ -102,7 +102,7 @@ HRESULT DirectXGraphics::createDirectXDeviceAndSpriteHandler()
 		text->writeDebugOutput("\nD3DXCreateSprite(): ");
 
 		// CREATE OUR SPRITE HANDLER
-	    result = D3DXCreateSprite(graphicsDevice, &spriteHandler);
+		result = D3DXCreateSprite(graphicsDevice, &spriteHandler);
 		if (SUCCEEDED(result))
 		{
 			text->writeDebugOutput("SUCCEEDED");
@@ -119,9 +119,9 @@ HRESULT DirectXGraphics::createDirectXDeviceAndSpriteHandler()
 }
 
 /*
-	createTextureManager - This method constructs a technology-specific
-	TextureManager. Since this DirectXGraphics class uses the DirectX
-	library, this method creates a DirectXTextureManager.
+createTextureManager - This method constructs a technology-specific
+TextureManager. Since this DirectXGraphics class uses the DirectX
+library, this method creates a DirectXTextureManager.
 */
 TextureManager* DirectXGraphics::createTextureManager()
 {
@@ -131,14 +131,14 @@ TextureManager* DirectXGraphics::createTextureManager()
 }
 
 /*
-	endDirectXFrameRendering - This method should be called after rendering a frame
-	so that we can display what we've drawn on the GPU onto the monitor. It also
-	releases a lock on the GPU so other threads may use it.
+endDirectXFrameRendering - This method should be called after rendering a frame
+so that we can display what we've drawn on the GPU onto the monitor. It also
+releases a lock on the GPU so other threads may use it.
 */
 void DirectXGraphics::endDirectXFrameRendering()
 {
 	// ALL DONE DRAWING ONTO THE GPU FOR THIS FRAME
-    if (FAILED(graphicsDevice->EndScene()))
+	if (FAILED(graphicsDevice->EndScene()))
 		game->getText()->writeDebugOutput("\ngraphicsDevice->EndScene(): FAILED");
 
 	// PUT WHAT WE JUST RENDERED ONTO THE SCREEN
@@ -147,16 +147,16 @@ void DirectXGraphics::endDirectXFrameRendering()
 }
 
 /*
-	findAlternativeDisplayMode - If the player's GPU doesn't have the
-	display mode we want this method can pick a new one. It does so
-	by first seeing if there is another display mode with the resolution
-	we want but a different color model. If found, we'll use it. If not it
-	simply picks the largest one it can find. This method uses call-by-reference
-	to set the formatToSet, screenWidthToSet, & screenHeightToSet parameters
-	using the chosen display mode parameters.
+findAlternativeDisplayMode - If the player's GPU doesn't have the
+display mode we want this method can pick a new one. It does so
+by first seeing if there is another display mode with the resolution
+we want but a different color model. If found, we'll use it. If not it
+simply picks the largest one it can find. This method uses call-by-reference
+to set the formatToSet, screenWidthToSet, & screenHeightToSet parameters
+using the chosen display mode parameters.
 */
-void DirectXGraphics::findAlternativeDisplayMode(	vector<D3DDISPLAYMODE*> *displayModes,
-													D3DFORMAT &formatToSet)
+void DirectXGraphics::findAlternativeDisplayMode(vector<D3DDISPLAYMODE*> *displayModes,
+	D3DFORMAT &formatToSet)
 {
 	// FIRST FIND ONE WITH THE PREFERRED SCREEN
 	// DIMENSIONS, DEFAULT_SCREEN_HEIGHT &
@@ -209,8 +209,8 @@ void DirectXGraphics::findAlternativeDisplayMode(	vector<D3DDISPLAYMODE*> *displ
 }
 
 /*
-	getDirectXDisplayModes - This method queries the GPU and gets a vector
-	of all the display modes available, returning this data structure.
+getDirectXDisplayModes - This method queries the GPU and gets a vector
+of all the display modes available, returning this data structure.
 */
 vector<D3DDISPLAYMODE*>* DirectXGraphics::getDirectXDisplayModes()
 {
@@ -226,17 +226,17 @@ vector<D3DDISPLAYMODE*>* DirectXGraphics::getDirectXDisplayModes()
 
 		// HOW MANY MODES HAVE THIS COLOR MODEL?
 		int numAdapters = d3d->GetAdapterModeCount(
-										D3DADAPTER_DEFAULT,
-										format);
-	
+			D3DADAPTER_DEFAULT,
+			format);
+
 		// GET ALL FOR THIS COLOR MODEL
 		D3DDISPLAYMODE *displayModes = new D3DDISPLAYMODE[numAdapters];
 		for (int i = 0; i < numAdapters; i++)
 		{
-			d3d->EnumAdapterModes(	D3DADAPTER_DEFAULT,
-									format,
-									i,
-									&displayModes[i]);
+			d3d->EnumAdapterModes(D3DADAPTER_DEFAULT,
+				format,
+				i,
+				&displayModes[i]);
 
 			// PUT THEM INTO OUR VECTOR
 			displayOptions->push_back(&displayModes[i]);
@@ -247,12 +247,12 @@ vector<D3DDISPLAYMODE*>* DirectXGraphics::getDirectXDisplayModes()
 }
 
 /*
-	getScreenHeight - This method gets the screen height being used for rendering.
+getScreenHeight - This method gets the screen height being used for rendering.
 */
 int DirectXGraphics::getScreenHeight()
 {
 	// ASK THE GRAPHICS CARD
-/*	LPDIRECT3DSURFACE9 backbuffer;
+	/*	LPDIRECT3DSURFACE9 backbuffer;
 	graphicsDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
 	D3DSURFACE_DESC surfaceDescription;
 	backbuffer->GetDesc(&surfaceDescription);
@@ -262,12 +262,12 @@ int DirectXGraphics::getScreenHeight()
 }
 
 /*
-	getScreenWidth - This method gets the screen width being used for rendering.
+getScreenWidth - This method gets the screen width being used for rendering.
 */
 int DirectXGraphics::getScreenWidth()
 {
 	// ASK THE GRAPHICS CARD
-/*	LPDIRECT3DSURFACE9 backbuffer;
+	/*	LPDIRECT3DSURFACE9 backbuffer;
 	graphicsDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
 	D3DSURFACE_DESC surfaceDescription;
 	backbuffer->GetDesc(&surfaceDescription);
@@ -277,13 +277,13 @@ int DirectXGraphics::getScreenWidth()
 }
 
 /*
-	init - This is the entry point for the application setting up the
-	DirectX objects. It will get all available display modes and pick one,
-	then use it to make a GPU device. Once this method is called, rendering
-	can begin. It only needs to be called once at the start of the application.
-	Even if we lose the graphics card (ALT-TAB), we don't have to re-init. We
-	would have to re-init if we wished to change from fullscreen mode to 
-	windowed mode, or if we want to change the screen resolution or color model.
+init - This is the entry point for the application setting up the
+DirectX objects. It will get all available display modes and pick one,
+then use it to make a GPU device. Once this method is called, rendering
+can begin. It only needs to be called once at the start of the application.
+Even if we lose the graphics card (ALT-TAB), we don't have to re-init. We
+would have to re-init if we wished to change from fullscreen mode to
+windowed mode, or if we want to change the screen resolution or color model.
 */
 void DirectXGraphics::initGraphics(GameOS *os, bool isFullscreen)
 {
@@ -297,9 +297,9 @@ void DirectXGraphics::initGraphics(GameOS *os, bool isFullscreen)
 
 	// DOES THE PLAYER HAVE OUR DESIRED FORMAT?
 	if (containsDisplayMode(displayOptions,
-							DEFAULT_COLOR_FORMAT,
-							screenWidth,
-							screenHeight))
+		DEFAULT_COLOR_FORMAT,
+		screenWidth,
+		screenHeight))
 	{
 		// THE GPU HAS OUR DESIRED FORMAT
 		formatToUse = DEFAULT_COLOR_FORMAT;
@@ -307,18 +307,18 @@ void DirectXGraphics::initGraphics(GameOS *os, bool isFullscreen)
 	else
 	{
 		// THE GPU DOESN'T HAVE OUR DESIRED FORMAT, WE NEED TO PICK ANOTHER ONE
-		findAlternativeDisplayMode(	displayOptions,
-									formatToUse);
+		findAlternativeDisplayMode(displayOptions,
+			formatToUse);
 	}
 
 	// WE NEED TO FILL OUT A D3DPRESENT_PARAMETERS STRUCTURE WITH OUR
 	// PREFERENCES FOR CREATING OUR GPU DEVICE
 
 	// FIRST MAKE SURE OUR STRUCTURE IS EMPTY
-    ZeroMemory(&presentParameters, sizeof(presentParameters));
+	ZeroMemory(&presentParameters, sizeof(presentParameters));
 
 	// WINDOWED MODE OR FULLSCREEN?
-    presentParameters.Windowed = !isFullscreen;
+	presentParameters.Windowed = !isFullscreen;
 
 	// DISCARD OLD FRAMES
 	presentParameters.SwapEffect = D3DSWAPEFFECT_FLIP;// D3DSWAPEFFECT_DISCARD;
@@ -337,19 +337,19 @@ void DirectXGraphics::initGraphics(GameOS *os, bool isFullscreen)
 	// AND INITIALIZATION WOULD HAVE TO GO HERE
 
 	// THE DISPLAY MODE WE WILL BE USING
-    presentParameters.BackBufferFormat	= formatToUse;
-    presentParameters.BackBufferWidth	= screenWidth;
-    presentParameters.BackBufferHeight	= screenHeight;
+	presentParameters.BackBufferFormat = formatToUse;
+	presentParameters.BackBufferWidth = screenWidth;
+	presentParameters.BackBufferHeight = screenHeight;
 
 	// OK, NOW WE CAN MAKE OUR GPU & SPRITE HANDLER.
 	createDirectXDeviceAndSpriteHandler();
 }
 
 /*
-	initTextFont - This method will initialize our font object, which
-	we need to do all text rendering. It only needs to be done at the
-	start of the application unless we want to change the font we
-	are using.
+initTextFont - This method will initialize our font object, which
+we need to do all text rendering. It only needs to be done at the
+start of the application unless we want to change the font we
+are using.
 */
 void DirectXGraphics::initTextFont(int fontSize)
 {
@@ -365,13 +365,13 @@ void DirectXGraphics::initTextFont(int fontSize)
 		DEFAULT_QUALITY,			// RENDERING QUALITY 
 		DEFAULT_PITCH | FF_MODERN,	// FONT FAMILY NAME
 		TEXT(""),					// FONT FACE NAME
-		&textFont );				// THE FONT WE ARE CREATING
+		&textFont);				// THE FONT WE ARE CREATING
 }
 
 /*
-	reloadGraphics - This method recreates the GPU and sprite handler and
-	then reloads all the textures in the current texture managers. This would
-	be called after regaining the GPU.
+reloadGraphics - This method recreates the GPU and sprite handler and
+then reloads all the textures in the current texture managers. This would
+be called after regaining the GPU.
 */
 void DirectXGraphics::reloadGraphics()
 {
@@ -382,11 +382,11 @@ void DirectXGraphics::reloadGraphics()
 }
 
 /*
-	renderDirectXRenderList - This method renders a render list of game
-	elements to the screen. It can process render lists for the game
-	world or the gui. Note that GUI render lists use screen coordinates
-	and so don't have to be offset, but game world lists use world
-	coordinates, and so they will need to be offset.
+renderDirectXRenderList - This method renders a render list of game
+elements to the screen. It can process render lists for the game
+world or the gui. Note that GUI render lists use screen coordinates
+and so don't have to be offset, but game world lists use world
+coordinates, and so they will need to be offset.
 */
 void DirectXGraphics::renderGUIRenderList()
 {
@@ -406,24 +406,24 @@ void DirectXGraphics::renderGUIRenderList()
 		// LET'S GET THE TEXTURE WE WANT TO RENDER
 		int id = itemToRender.id;
 		texture = ((DirectXTextureManager*)guiTextureManager)->getTexture(id);
-		D3DXVECTOR3 position = D3DXVECTOR3(	(FLOAT)(itemToRender.x),
-											(FLOAT)(itemToRender.y),
-											0);
+		D3DXVECTOR3 position = D3DXVECTOR3((FLOAT)(itemToRender.x),
+			(FLOAT)(itemToRender.y),
+			0);
 
 		// RENDER THE OPAQUE ITEMS
 		if (itemToRender.a == 255)
 		{
 			if (FAILED(spriteHandler->Draw(
-					texture, 
-					rect,
-			        NULL,
-					&position,
-					DEFAULT_ALPHA_COLOR)))
+				texture,
+				rect,
+				NULL,
+				&position,
+				DEFAULT_ALPHA_COLOR)))
 			{
 				game->getText()->writeDebugOutput("\nspriteHandler->Draw: FAILED");
 			}
 		}
-			
+
 		// RENDER THE ITEMS WITH EG TRANSPARENCY
 		else
 		{
@@ -433,11 +433,11 @@ void DirectXGraphics::renderGUIRenderList()
 				itemToRender.a = 255;
 
 			if (FAILED(spriteHandler->Draw(
-					texture,
-					rect,
-					NULL,
-					&position,
-					D3DCOLOR_ARGB(itemToRender.a, 255, 255, 255))))
+				texture,
+				rect,
+				NULL,
+				&position,
+				D3DCOLOR_ARGB(itemToRender.a, 255, 255, 255))))
 			{
 				game->getText()->writeDebugOutput("\nspriteHandler->Draw: FAILED");
 			}
@@ -450,6 +450,10 @@ void DirectXGraphics::renderGUIRenderList()
 		delete rect;
 }
 
+/*
+Renders all tiles and sprites. Note that these objects can
+be rotated.
+*/
 void DirectXGraphics::renderWorldRenderList()
 {
 	worldRenderList->resetIterator();
@@ -468,22 +472,22 @@ void DirectXGraphics::renderWorldRenderList()
 			delete rect;
 		rect = NULL;
 		itemToRender = worldRenderList->next();
-		
+
 		// LET'S GET THE TEXTURE WE WANT TO RENDER
 		int id = itemToRender.id;
 		if (id >= 0)
 		{
 			texture = ((DirectXTextureManager*)worldTextureManager)->getTexture(id);
-			D3DXVECTOR3 position = D3DXVECTOR3(	(FLOAT)(itemToRender.x),
-											(FLOAT)(itemToRender.y),
-												0);
+			D3DXVECTOR3 position = D3DXVECTOR3((FLOAT)(itemToRender.x),
+				(FLOAT)(itemToRender.y),
+				0);
 
 			position.x += viewport->getViewportOffsetX();
 			position.y += viewport->getViewportOffsetY();
 
 			// ADJUST FOR THE GUI OFFSET
 			if ((position.x < viewport->getViewportOffsetX())
-				||  (position.y < viewport->getViewportOffsetY()))
+				|| (position.y < viewport->getViewportOffsetY()))
 			{
 				IDirect3DSurface9 *surface;
 				UINT level = 0;
@@ -506,7 +510,7 @@ void DirectXGraphics::renderWorldRenderList()
 					int yDiff = viewport->getViewportOffsetY() - (int)position.y;
 					rect->top = yDiff;
 					position.y += yDiff;
-				}	
+				}
 			}
 
 			// LET'S PUT THE STANDARD ROTATION MATRIX ASIDE
@@ -560,15 +564,14 @@ void DirectXGraphics::renderWorldRenderList()
 			if (itemToRender.a == 255)
 			{
 				if (FAILED(spriteHandler->Draw(
-					texture, 
+					texture,
 					rect,
-			        NULL,
-					&position,
+					NULL,
+					NULL,
 					DEFAULT_ALPHA_COLOR)))
 				{
 					game->getText()->writeDebugOutput("\nspriteHandler->Draw: FAILED");
 				}
-			
 				// RENDER THE ITEMS WITH CUSTOM TRANSPARENCY
 				else
 				{
@@ -576,12 +579,11 @@ void DirectXGraphics::renderWorldRenderList()
 						itemToRender.a = 0;
 					else if (itemToRender.a > 255)
 						itemToRender.a = 255;
-
 					if (FAILED(spriteHandler->Draw(
 						texture,
 						rect,
 						NULL,
-						&position,
+						NULL,
 						D3DCOLOR_ARGB(itemToRender.a, 255, 255, 255))))
 					{
 						game->getText()->writeDebugOutput("\nspriteHandler->Draw: FAILED");
@@ -595,6 +597,11 @@ void DirectXGraphics::renderWorldRenderList()
 	worldRenderList->clear();
 	if (rect != NULL)
 		delete rect;
+
+	// AND RESTORE THE MATRIX USED FOR RENDERING THE GUI
+	D3DXMATRIX identityMatrix;
+	D3DXMatrixIdentity(&identityMatrix);
+	spriteHandler->SetTransform(&identityMatrix);
 }
 
 
@@ -608,16 +615,16 @@ void DirectXGraphics::renderGame(Game *game)
 	HRESULT result = graphicsDevice->TestCooperativeLevel();
 
 	// IF WE HAVE THE GPU, RENDER THE GAME
-	if (SUCCEEDED(result)) 
+	if (SUCCEEDED(result))
 	{
 		// NOW PREPARE TO RENDER THE LISTS USING
 		// BATCH TEXTURE RENDERING
-		startDirectXFrameRendering();	
+		startDirectXFrameRendering();
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
 		// RENDER THE WORLD RENDER LIST
 		renderWorldRenderList();
-		
+
 		// RENDER THE GUI RENDER LIST
 		renderGUIRenderList();
 
@@ -635,17 +642,17 @@ void DirectXGraphics::renderGame(Game *game)
 	}
 
 	// WE'VE LOST THE GPU, SLEEP UNTIL WE GET IT BACK
-	else if (result == D3DERR_DEVICELOST) 
-	{ 
+	else if (result == D3DERR_DEVICELOST)
+	{
 		spriteHandler->OnLostDevice();
 		textFont->OnLostDevice();
-		Sleep(100); 
+		Sleep(100);
 	}
 
 	// WE'VE GOT IT BACK, RELOAD EVERYTHING. NOTE THAT
 	// WE'LL ONLY GET THIS MESSAGE ONCE.
 	else if (result == D3DERR_DEVICENOTRESET)
-	{ 
+	{
 		if (FAILED(graphicsDevice->Reset(&presentParameters)))
 		{
 			game->getText()->writeDebugOutput("\ngraphicsDevice->Reset: FAILED - Reloading GPU images");
@@ -659,10 +666,9 @@ void DirectXGraphics::renderGame(Game *game)
 	}
 }
 
-
 /*
-	renderTextToDraw - This method renders a single piece of
-	text to the screen using our EG font.
+renderTextToDraw - This method renders a single piece of
+text to the screen using our EG font.
 */
 void DirectXGraphics::renderTextToDraw(TextToDraw *textToDraw)
 {
@@ -671,18 +677,18 @@ void DirectXGraphics::renderTextToDraw(TextToDraw *textToDraw)
 	textRect.top = textToDraw->y;
 	textRect.bottom = textToDraw->y + textToDraw->height;
 	LPCWSTR lpcwstrText = (*textToDraw->getText()).c_str();
-	if (FAILED(textFont->DrawText (
-				spriteHandler, 
-				lpcwstrText, 
-				-1, 
-				&textRect, 
-				DT_LEFT, 
-				fontColor )))
+	if (FAILED(textFont->DrawText(
+		spriteHandler,
+		lpcwstrText,
+		-1,
+		&textRect,
+		DT_LEFT,
+		fontColor)))
 		game->getText()->writeDebugOutput("\ntextFont->DrawText: FAILED");
 }
 
 /*
-	setColorKey - This sets the color key to be used for loading images.
+setColorKey - This sets the color key to be used for loading images.
 */
 void DirectXGraphics::setColorKey(int r, int g, int b)
 {
@@ -690,7 +696,7 @@ void DirectXGraphics::setColorKey(int r, int g, int b)
 }
 
 /*
-	setFontColor - This sets the color to be used for rendering text.
+setFontColor - This sets the color to be used for rendering text.
 */
 void DirectXGraphics::setFontColor(int r, int g, int b)
 {
@@ -698,9 +704,9 @@ void DirectXGraphics::setFontColor(int r, int g, int b)
 }
 
 /*
-	shutdownGraphics - This method releases the DirectX objects we've created
-	so that other applications can use the GPU. This should only be called
-	when the application is closing.
+shutdownGraphics - This method releases the DirectX objects we've created
+so that other applications can use the GPU. This should only be called
+when the application is closing.
 */
 void DirectXGraphics::shutdown()
 {
@@ -726,19 +732,20 @@ void DirectXGraphics::shutdown()
 	{
 		d3d->Release();
 		d3d = NULL;
-	}}
+	}
+}
 
 /*
-	startDirectXFrameRendering - This does some setup for rendering, like locking
-	the GPU. Only one thread at a time can have a lock on the GPU.
+startDirectXFrameRendering - This does some setup for rendering, like locking
+the GPU. Only one thread at a time can have a lock on the GPU.
 */
 void DirectXGraphics::startDirectXFrameRendering()
 {
 	// CLEAR OUT ALL THE OLD RENDERING
-    if (FAILED(graphicsDevice->Clear(0, NULL, D3DCLEAR_TARGET, BACKGROUND_COLOR, 1.0f, 0)))
+	if (FAILED(graphicsDevice->Clear(0, NULL, D3DCLEAR_TARGET, BACKGROUND_COLOR, 1.0f, 0)))
 		game->getText()->writeDebugOutput("\ngraphicsDevice->Clear(): FAILED");
 
 	// ALLOWS DRAWING TO START, LOCKING THE GPU
-    if (FAILED(graphicsDevice->BeginScene()))
+	if (FAILED(graphicsDevice->BeginScene()))
 		game->getText()->writeDebugOutput("\ngraphicsDevice->BeginScene(): FAILED");
 }
