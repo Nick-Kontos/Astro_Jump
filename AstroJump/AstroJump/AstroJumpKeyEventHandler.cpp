@@ -47,6 +47,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
+		player->rotateClockwise(0.0f);
 		if (input->isKeyDown(UP_KEY))
 		{
 			viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
@@ -80,11 +81,11 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDown(A_KEY)){
 			//rotate player counter-clockwise
-			player->rotateCClockwise(0.1f);
+			player->rotateCClockwise(0.5f);
 		}
 		if (input->isKeyDown(D_KEY)){
 			//rotate player clockwise
-			player->rotateClockwise(0.1f);
+			player->rotateClockwise(0.5f);
 		}
 	}
 
