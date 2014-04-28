@@ -39,6 +39,7 @@ public:
 	// CONSTRUCDT/DESTRUCTOR
 	Physics();
 	~Physics();
+	Physics(float f1, float f2);
 
 	// INLINED GET/SET METHODS
 	float				getGravity()					{ return gravity;					}

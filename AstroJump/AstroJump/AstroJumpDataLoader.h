@@ -14,13 +14,20 @@ game data, gui data, and world (i.e. level) data.
 #include "sssf\game\Game.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
-
+//Lua INCLUDES
+#include "LuaPlusFramework\LuaPlus.h"
+namespace lua
+{
+	extern GameStateManager* gsm;
+}
 class AstroJumpDataLoader : public GameDataLoader
 {
 private:
 	// WE NEED THESE GUYS TO INIT OUR WINDOWS WINDOW
 	HINSTANCE hInstance;
 	int nCmdShow;
+	GameStateManager *gsm;
+
 
 public:
 	AstroJumpDataLoader()	{}

@@ -111,7 +111,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 
 		// ADD THE PLAYER SPRITE
 		addSpriteToRenderList(&player, renderList, viewport);
-		addSpriteToRenderList(&clear, renderList, viewport);
 	}
 }
 

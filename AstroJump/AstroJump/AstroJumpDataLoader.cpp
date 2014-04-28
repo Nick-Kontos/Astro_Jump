@@ -3,6 +3,7 @@
 // Bugs GAME INCLUDES
 #include "AstroJumpButtonEventHandler.h"
 #include "AstroJumpDataLoader.h"
+using namespace lua;
 #include "AstroJump.h"
 #include "AstroJumpKeyEventHandler.h"
 #include "AstroJumpTextGenerator.h"
@@ -36,10 +37,17 @@
 // ANIMATED SPRITE TYPE LOADING
 #include "psti\PoseurSpriteTypesImporter.h"
 
+//Lua INCLUDES
+#include "LuaPlusFramework\LuaPlus.h"
+using namespace LuaPlus;
 /*
 loadGame - This method loads the setup game data into the game and
 constructs all the needed objects for the game to work.
 */
+namespace lua
+{
+	GameStateManager* gsm;
+}
 void AstroJumpDataLoader::loadGame(Game *game, wstring gameInitFile)
 {
 	// AND LET'S READ IN THE GAME SETUP INFO
@@ -157,6 +165,48 @@ void AstroJumpDataLoader::loadGUI(Game *game, wstring guiInitFile)
 	hardCodedLoadGUIExample(game);
 }
 
+void setGravity(float f)
+{
+	GameStateManager* gsm = lua::gsm;
+	Physics *physics = gsm->getPhysics();
+	physics->setGravity(f);
+}
+
+void createAsteroid(float x, float y, float vx, float vy, float r)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	AnimatedSprite *a = new AnimatedSprite();
+	a->setSpriteType(spriteManager->getSpriteType(1));
+	a->setAlpha(255);
+	a->setCurrentState(IDLE);
+	a->setSpawnX(x);
+	a->setSpawnY(y);
+	a->setSpawnVx(vx);
+	a->setSpawnVy(vy);
+	a->setRadius(r);
+	Physics *physics = gsm->getPhysics();
+	physics->addSprite(a);
+	spriteManager->addAsteriod(a);
+
+}
+void createPlayer(float x, float y, float vx, float vy, float r)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	AnimatedSprite *a = spriteManager->getPlayer();
+	a->setSpriteType(spriteManager->getSpriteType(0));
+	a->setAlpha(255);
+	a->setCurrentState(IDLE);
+	a->setSpawnX(x);
+	a->setSpawnY(y);
+	a->setSpawnVx(vx);
+	a->setSpawnVy(vy);
+	a->setRadius(r);
+	Physics *physics = gsm->getPhysics();
+	physics->addSprite(a);
+}
+
 /*
 loadLevel - This method should load the data the level described by the
 levelInitFile argument in to the Game's game state manager.
@@ -168,92 +218,22 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 
 	// SPECIFY WHO WILL DO THE PATHFINDING
-	GameStateManager *gsm = game->getGSM();
+	gsm = game->getGSM();
+	lua::gsm = game->getGSM();
 	World *world = gsm->getWorld();
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 
 	// LOAD THE LEVEL'S SPRITE IMAGES
 	PoseurSpriteTypesImporter psti;
 	psti.loadSpriteTypes(game, SPRITE_TYPES_LIST);
+	//Load level from lua
 
-	// LET'S MAKE A PLAYER SPRITE
-	// @TODO - LATER WE'LL LOAD ALL LEVEL DATA FROM A FILE
-	Physics *physics = gsm->getPhysics();
-	physics->setGravity(W_GRAVITY);
-	AnimatedSprite *player = spriteManager->getPlayer(); // CHECK CREATION OF PLAYER
-	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
-	player->setSpriteType(playerSpriteType);
-	player->setAlpha(255);
-	player->setCurrentState(IDLE);
-	player->setSpawnX(300*.02f);
-	player->setSpawnY(200*.02f);
-	player->setSpawnVx(0);
-	player->setSpawnVy(0);
-	player->setRadius((128.0f/2)*.02f);
-	physics->addSprite(player);
-	AnimatedSprite *asteroid = new AnimatedSprite();
-	asteroid->setSpriteType(spriteManager->getSpriteType(1));
-	asteroid->setAlpha(255);
-	asteroid->setCurrentState(IDLE);
-	asteroid->setSpawnX(25.0f*.02f);
-	asteroid->setSpawnY(25.0f*.02f);
-	asteroid->setSpawnVx(8.0f);
-	asteroid->setSpawnVy(0.0f);
-	asteroid->setRadius((.02f * 512.0f/2));
-	physics->addSprite(asteroid);
-	spriteManager->addAsteriod(asteroid);
-	AnimatedSprite *asteroid1 = new AnimatedSprite();
-	asteroid1->setSpriteType(spriteManager->getSpriteType(1));
-	asteroid1->setAlpha(255);
-	asteroid1->setCurrentState(IDLE);
-	asteroid1->setSpawnX(700.0f*.02f);
-	asteroid1->setSpawnY(25.0f*.02f);
-	asteroid1->setSpawnVx(0.0f);
-	asteroid1->setSpawnVy(0.0f);
-	asteroid1->setRadius((.02f * 512.0f/2));
-	physics->addSprite(asteroid1);
-	spriteManager->addAsteriod(asteroid1);
-	AnimatedSprite *clear = spriteManager->getClear();
-	clear->setSpriteType(spriteManager->getSpriteType(2));
-	clear->setAlpha(255);
-	clear->setCurrentState(IDLE);
-	clear->setSpawnX(1000*.02f);
-	clear->setSpawnY(1000*.02f);
-	clear->setSpawnVx(0);
-	clear->setSpawnVy(0);
-	clear->setRadius(1 * .02f);
-	physics->addSprite(clear);
-
-
-	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
-	// A LINE NEAR THE TOP
-
-	// UNCOMMENT THE FOLLOWING CODE BLOCK WHEN YOU ARE READY TO ADD SOME BOTS
-	/*	for (int i = 2; i <= 26; i++)
-	{
-	float botX = 400.0f + (i * 100.0f);
-	float botY = 100.0f;
-	makeRandomJumpingBot(game, botSpriteType, botX, botY);
-	}
-
-	// AND THEN STRATEGICALLY PLACED AROUND THE LEVEL
-	makeRandomJumpingBot(game, botSpriteType, 400, 100);
-	makeRandomJumpingBot(game, botSpriteType, 200, 400);
-	makeRandomJumpingBot(game, botSpriteType, 400, 400);
-	makeRandomJumpingBot(game, botSpriteType, 800, 700);
-	makeRandomJumpingBot(game, botSpriteType, 900, 700);
-	makeRandomJumpingBot(game, botSpriteType, 1000, 700);
-	makeRandomJumpingBot(game, botSpriteType, 100, 1000);
-	makeRandomJumpingBot(game, botSpriteType, 300, 1000);
-	makeRandomJumpingBot(game, botSpriteType, 500, 1000);
-	makeRandomJumpingBot(game, botSpriteType, 100, 1400);
-	makeRandomJumpingBot(game, botSpriteType, 400, 1400);
-	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
-
-	// AND THEN A BUNCH LINED UP NEAR THE LEVEL EXIT
-	for (int i = 0; i < 14; i++)
-	makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
-	*/
+	LuaState* lua_state = LuaState::Create();
+	
+	int result = lua_state->DoFile("level1.lua");
+	lua_state->GetGlobals().RegisterDirect("createAsteroid", createAsteroid);
+	lua_state->GetGlobals().RegisterDirect("createPlayer", createPlayer);
+	lua_state->GetGlobals().RegisterDirect("setGravity", setGravity);
 }
 
 /*

@@ -23,10 +23,15 @@
 #include <vector>
 #include <list>
 #include "Box2D\Box2D.h"
+extern "C"
+{
+	#include "Lua\src\lua.h"
+	#include "Lua\src\lauxlib.h"
+	#include "Lua\src\lualib.h"
+}
 
 /*
-	The constructor initializes the data structures and loads
-	the necessary ones with recyclable objects for collision tests.
+	The default constructor initializes box2D.
 */
 Physics::Physics()
 {
