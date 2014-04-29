@@ -18,7 +18,7 @@
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "Box2D/box2D.h"
 
-const float DEFAULT_GRAVITY = 10.0f;
+const float DEFAULT_GRAVITY = 0.0f;
 const float timeStep = 1.0f / 60.0f;
 
 

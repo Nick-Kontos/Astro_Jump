@@ -165,14 +165,15 @@ void AstroJumpDataLoader::loadGUI(Game *game, wstring guiInitFile)
 	hardCodedLoadGUIExample(game);
 }
 
-void setGravity(float f)
+int LuaSetGravity(float f)
 {
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
-	physics->setGravity(f);
+	physics->setGravity(f*.02);
+	return f;
 }
 
-void createAsteroid(float x, float y, float vx, float vy, float r)
+int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -180,17 +181,18 @@ void createAsteroid(float x, float y, float vx, float vy, float r)
 	a->setSpriteType(spriteManager->getSpriteType(1));
 	a->setAlpha(255);
 	a->setCurrentState(IDLE);
-	a->setSpawnX(x);
-	a->setSpawnY(y);
-	a->setSpawnVx(vx);
-	a->setSpawnVy(vy);
-	a->setRadius(r);
+	a->setSpawnX(x*.02);
+	a->setSpawnY(y*.02);
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	a->setRadius(r*.02);
 	Physics *physics = gsm->getPhysics();
 	physics->addSprite(a);
 	spriteManager->addAsteriod(a);
+	return x;
 
 }
-void createPlayer(float x, float y, float vx, float vy, float r)
+int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -198,15 +200,22 @@ void createPlayer(float x, float y, float vx, float vy, float r)
 	a->setSpriteType(spriteManager->getSpriteType(0));
 	a->setAlpha(255);
 	a->setCurrentState(IDLE);
-	a->setSpawnX(x);
-	a->setSpawnY(y);
-	a->setSpawnVx(vx);
-	a->setSpawnVy(vy);
-	a->setRadius(r);
+	a->setSpawnX(x*.02);
+	a->setSpawnY(y*.02);
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	a->setRadius(r*.02);
 	Physics *physics = gsm->getPhysics();
 	physics->addSprite(a);
+	return x;
 }
-
+int LuaIncAndReturn(float f)
+{
+	GameStateManager* gsm = lua::gsm;
+	Physics *physics = gsm->getPhysics();
+	physics->setGravity(f);
+	return f;
+}
 /*
 loadLevel - This method should load the data the level described by the
 levelInitFile argument in to the Game's game state manager.
@@ -230,10 +239,14 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	LuaState* lua_state = LuaState::Create();
 	
-	int result = lua_state->DoFile("level1.lua");
-	lua_state->GetGlobals().RegisterDirect("createAsteroid", createAsteroid);
-	lua_state->GetGlobals().RegisterDirect("createPlayer", createPlayer);
-	lua_state->GetGlobals().RegisterDirect("setGravity", setGravity);
+	int result = lua_state->DoFile("Level1.lua");
+	lua_state->GetGlobals().RegisterDirect("incAndReturn", LuaIncAndReturn);
+	lua_state->GetGlobals().RegisterDirect("createPlayer", LuaCreatePlayer);
+	lua_state->GetGlobals().RegisterDirect("createAsteroid", LuaCreateAsteroid);
+	lua_state->GetGlobals().RegisterDirect("setGravity", LuaSetGravity);
+
+	LuaFunction<void> la = lua_state->GetGlobal("levela");
+	la();
 }
 
 /*

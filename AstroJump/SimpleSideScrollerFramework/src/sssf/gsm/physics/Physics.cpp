@@ -50,6 +50,7 @@ Physics::~Physics()
 void Physics::setGravity(float initGravity)
 {
 	b2Vec2 g(0.0f, initGravity);
+	gravity = initGravity;
 	world->SetGravity(g);
 }
 
