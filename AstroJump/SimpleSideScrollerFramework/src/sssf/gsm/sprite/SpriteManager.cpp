@@ -55,6 +55,15 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 	}
 }
 
+void SpriteManager::addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport)
+{
+	AnimatedSpriteType *spriteType = backgroundsprite->getSpriteType();
+	renderList->addRenderItem(backgroundsprite->getCurrentImageID(),
+								0 - viewport->getViewportX() + 0.5f,
+								0 - viewport->getViewportY() + 0.5f,
+								0, 255, spriteType->getTextureWidth(), spriteType->getTextureHeight(), 0);
+}
+
 void SpriteManager::addGUISpriteToRenderList(	AnimatedSprite *sprite,
 											RenderList *renderList,
 											Viewport *viewport)
@@ -84,10 +93,12 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 	GameGUI *gui = game->getGUI();
 	if (gsm->isWorldRenderable())
 	{
+
 		GameGraphics *graphics = game->getGraphics();
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
-		
+		//add background image
+
 		//add asteriods
 		list<AnimatedSprite*>::iterator asteriodsIterator;
 		asteriodsIterator = asteriods.begin();

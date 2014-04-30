@@ -170,7 +170,16 @@ int LuaSetGravity(float f)
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(f*.02);
-	//physics->constructBoundries(gsm->getWorld()->getWorldHeight(), gsm->getWorld()->getWorldWidth());
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	AnimatedSprite *a = spriteManager->getBackground();
+	a->setSpriteType(spriteManager->getSpriteType(2));
+	a->setAlpha(255);
+	a->setCurrentState(IDLE);
+	a->setSpawnX(0);
+	a->setSpawnY(0);
+	a->setSpawnVx(0);
+	a->setSpawnVy(0);
+	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	return f;
 }
 
