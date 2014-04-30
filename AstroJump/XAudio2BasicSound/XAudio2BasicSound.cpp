@@ -34,6 +34,36 @@
 XAudio2BasicSound::XAudio2BasicSound()
 {
 
+	isRunning = false;
+	//
+	// Initialize XAudio2
+	//
+	CoInitializeEx(NULL, COINIT_MULTITHREADED);
+
+	pXAudio2 = NULL;
+
+	UINT32 flags = 0;
+#ifdef _DEBUG
+	flags |= XAUDIO2_DEBUG_ENGINE;
+#endif
+
+	if (FAILED(hr = XAudio2Create(&pXAudio2, flags)))
+	{
+		wprintf(L"Failed to init XAudio2 engine: %#X\n", hr);
+		CoUninitialize();
+	}
+
+	//
+	// Create a mastering voice
+	//
+	pMasteringVoice = NULL;
+
+	if (FAILED(hr = pXAudio2->CreateMasteringVoice(&pMasteringVoice)))
+	{
+		wprintf(L"Failed creating mastering voice: %#X\n", hr);
+		SAFE_RELEASE(pXAudio2);
+		CoUninitialize();
+	}
 }
 
 XAudio2BasicSound::~XAudio2BasicSound()
@@ -47,75 +77,61 @@ XAudio2BasicSound::~XAudio2BasicSound()
 //--------------------------------------------------------------------------------------
 	int XAudio2BasicSound::start()
 {
-    HRESULT hr;
-
-    //
-    // Initialize XAudio2
-    //
-    CoInitializeEx( NULL, COINIT_MULTITHREADED );
-
-    IXAudio2* pXAudio2 = NULL;
-
-    UINT32 flags = 0;
-#ifdef _DEBUG
-    flags |= XAUDIO2_DEBUG_ENGINE;
-#endif
-
-    if( FAILED( hr = XAudio2Create( &pXAudio2, flags ) ) )
-    {
-        wprintf( L"Failed to init XAudio2 engine: %#X\n", hr );
-        CoUninitialize();
-        return 0;
-    }
-
-    //
-    // Create a mastering voice
-    //
-    IXAudio2MasteringVoice* pMasteringVoice = NULL;
-
-    if( FAILED( hr = pXAudio2->CreateMasteringVoice( &pMasteringVoice ) ) )
-    {
-        wprintf( L"Failed creating mastering voice: %#X\n", hr );
-        SAFE_RELEASE( pXAudio2 );
-        CoUninitialize();
-        return 0;
-    }
-
-    //
-    // Play a PCM wave file
-    //
-    wprintf( L"Playing mono WAV PCM file..." );
-    if( FAILED( hr = PlayPCM( pXAudio2, L"Media\\Wavs\\MusicMono.wav" ) ) )
-    {
-        wprintf( L"Failed creating source voice: %#X\n", hr );
-        SAFE_RELEASE( pXAudio2 );
-        CoUninitialize();
-        return 0;
-    }
+		if (pSourceVoice != NULL)
+		{
+			    XAUDIO2_VOICE_STATE state;
+			    pSourceVoice->GetState( &state );
+			    isRunning = ( state.BuffersQueued > 0 ) != 0;
+		}
+		
+   
+		if (!isRunning)
+		{
+			//
+			// Play a PCM wave file
+			//
+			wprintf(L"Playing mono WAV PCM file...");
+			if (FAILED(hr = PlayPCM(pXAudio2, L"Media\\Wavs\\MusicMono.wav")))
+			{
+				wprintf(L"Failed creating source voice: %#X\n", hr);
+				SAFE_RELEASE(pXAudio2);
+				CoUninitialize();
+				return 0;
+			}
+		}
+   
 
     //
     // Play a 5.1 PCM wave extensible file
     //
-    wprintf( L"\nPlaying 5.1 WAV PCM file..." );
+   /* wprintf( L"\nPlaying 5.1 WAV PCM file..." );
     if( FAILED( hr = PlayPCM( pXAudio2, L"Media\\Wavs\\MusicSurround.wav" ) ) )
     {
         wprintf( L"Failed creating source voice: %#X\n", hr );
         SAFE_RELEASE( pXAudio2 );
         CoUninitialize();
         return 0;
-    }
+    }*/
 
-    //
-    // Cleanup XAudio2
-    //
-    wprintf( L"\nFinished playing\n" );
-
-    // All XAudio2 interfaces are released when the engine is destroyed, but being tidy
-    pMasteringVoice->DestroyVoice();
-
-    SAFE_RELEASE( pXAudio2 );
-    CoUninitialize();
+  
+	return 0;
 }
+
+	void XAudio2BasicSound::cleanup()
+	{
+		//
+		// Cleanup XAudio2
+		//
+		wprintf(L"\nFinished playing\n");
+
+		// All XAudio2 interfaces are released when the engine is destroyed, but being tidy
+		pMasteringVoice->DestroyVoice();
+
+		SAFE_RELEASE(pXAudio2);
+		CoUninitialize();
+
+	}
+	
 
 
 //--------------------------------------------------------------------------------------
@@ -167,7 +183,6 @@ XAudio2BasicSound::~XAudio2BasicSound()
     //
 
     // Create the source voice
-    IXAudio2SourceVoice* pSourceVoice;
     if( FAILED( hr = pXaudio2->CreateSourceVoice( &pSourceVoice, pwfx ) ) )
     {
         wprintf( L"Error %#X creating source voice\n", hr );
@@ -190,28 +205,29 @@ XAudio2BasicSound::~XAudio2BasicSound()
     }
 
     hr = pSourceVoice->Start( 0 );
+	isRunning = true;
 
     // Let the sound play
-    BOOL isRunning = TRUE;
-    while( SUCCEEDED( hr ) && isRunning )
-    {
-        XAUDIO2_VOICE_STATE state;
-        pSourceVoice->GetState( &state );
-        isRunning = ( state.BuffersQueued > 0 ) != 0;
+    //BOOL isRunning = TRUE;
+    //while( SUCCEEDED( hr ) && isRunning )
+    //{
+    //    XAUDIO2_VOICE_STATE state;
+    //    pSourceVoice->GetState( &state );
+    //    isRunning = ( state.BuffersQueued > 0 ) != 0;
 
-        // Wait till the escape key is pressed
-        if( GetAsyncKeyState( VK_ESCAPE ) )
-            break;
+    //    // Wait till the escape key is pressed
+    //    if( GetAsyncKeyState( VK_ESCAPE ) )
+    //        break;
 
-        Sleep( 10 );
-    }
+    //    Sleep( 10 );
+    //}
 
-    // Wait till the escape key is released
-    while( GetAsyncKeyState( VK_ESCAPE ) )
-        Sleep( 10 );
+    //// Wait till the escape key is released
+    //while( GetAsyncKeyState( VK_ESCAPE ) )
+    //    Sleep( 10 );
 
-    pSourceVoice->DestroyVoice();
-    SAFE_DELETE_ARRAY( pbWaveData );
+    //pSourceVoice->DestroyVoice();
+    //SAFE_DELETE_ARRAY( pbWaveData );
 
     return hr;
 }

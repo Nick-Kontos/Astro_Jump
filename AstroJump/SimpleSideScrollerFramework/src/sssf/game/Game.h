@@ -31,6 +31,7 @@
 // PREPROCESSOR INCLUDE STATEMENTS
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\state\GameState.h"
+#include "XAudio2BasicSound\XAudio2BasicSound.h"
 
 // FORWARD DECLARATIONS OF CLASSES USED BY GAME
 class GameDataLoader;
@@ -67,6 +68,7 @@ private:
 	GameInput			*input;
 	GameOS				*os;
 	GameTimer			*timer;
+	XAudio2BasicSound	*audio;
 
 	// THIS WILL KEEP TRACK OF THE NAME OF THE LEVEL FILE
 	// THAT IS CURRENTLY BEING USED
@@ -76,7 +78,8 @@ public:
 	// INLINED ACCESSOR METHODS - THE REAL THINGS
 	GameStateManager*	getGSM()				{ return gsm;								}
 	GameGUI*			getGUI()				{ return gui;								}
-	GameText*			getText()				{ return text;								}
+	GameText*			getText()				{ return text; }
+	XAudio2BasicSound*	getAudio()				{ return audio; }
 
 	// INLINED ACCESSOR METHODS - ACTUALLY SUB-CLASSES
 	GameDataLoader*		getDataLoader()			{ return dataLoader;						}
@@ -90,6 +93,7 @@ public:
 
 	// INLINED MUTATOR METHODS
 	void	setDataLoader(GameDataLoader *initDL) { dataLoader = initDL; }
+	void	setAudio(XAudio2BasicSound *initAud) { audio = initAud; }
 	void	setCurrentLevelFileName(wstring initCurrentLevelFileName) { currentLevelFileName = initCurrentLevelFileName; }
 
 	// METHODS DEFINED IN Game.cpp

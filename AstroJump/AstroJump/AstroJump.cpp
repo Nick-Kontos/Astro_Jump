@@ -88,7 +88,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	astroJumpGame->getInput()->registerKeyHandler((KeyEventHandler*)astroJumpKeyHandler);
 
 	XAudio2BasicSound *aud = new XAudio2BasicSound();
-	aud->start();
+	//aud->start();
+	astroJumpGame->setAudio(aud);
 
 	// START THE GAME LOOP
 	astroJumpGame->runGameLoop();
