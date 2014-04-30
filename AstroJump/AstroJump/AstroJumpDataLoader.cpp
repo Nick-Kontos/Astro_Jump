@@ -170,6 +170,7 @@ int LuaSetGravity(float f)
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(f*.02);
+	physics->constructBoundries(gsm->getWorld()->getWorldHeight(), gsm->getWorld()->getWorldWidth());
 	return f;
 }
 
