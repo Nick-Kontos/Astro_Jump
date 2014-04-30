@@ -170,7 +170,7 @@ int LuaSetGravity(float f)
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(f*.02);
-	physics->constructBoundries(gsm->getWorld()->getWorldHeight(), gsm->getWorld()->getWorldWidth());
+	//physics->constructBoundries(gsm->getWorld()->getWorldHeight(), gsm->getWorld()->getWorldWidth());
 	return f;
 }
 
@@ -217,7 +217,7 @@ levelInitFile argument in to the Game's game state manager.
 */
 void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 {
-	// LOAD THE LEVEL'S BACKGROUND TILES
+	// LOAD THE LEVEL'S BACKGROUND *IMAGE*
 	TMXMapImporter tmxMapImporter;
 	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 

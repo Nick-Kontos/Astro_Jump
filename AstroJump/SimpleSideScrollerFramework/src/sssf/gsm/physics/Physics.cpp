@@ -106,7 +106,7 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	fixtureDef.friction = player->getFriction();
 	//add collision filtering
 	//player is 0 bit
-	fixtureDef.filter.categoryBits = 0;
+	fixtureDef.filter.categoryBits = 3;
 	//they collide with world boundries
 	fixtureDef.filter.maskBits = 1;
 	//set restitution values

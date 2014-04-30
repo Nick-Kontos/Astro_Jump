@@ -30,12 +30,14 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
 	
 	// IS THE SPRITE VIEWABLE?
+	
 	if (viewport->areWorldCoordinatesInViewport(	
 									sprite->getX() / .02f,
 									sprite->getY() / .02f,
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight()))
 	{
+	
 		// SINCE IT'S VIEWABLE, ADD IT TO THE RENDER LIST
 		RenderItem itemToAdd;
 		itemToAdd.id = sprite->getFrameIndex();
@@ -85,8 +87,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		GameGraphics *graphics = game->getGraphics();
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
-
-		
 		
 		//add asteriods
 		list<AnimatedSprite*>::iterator asteriodsIterator;
