@@ -47,6 +47,7 @@ private:
 	BotRecycler recyclableBots;
 
 	bool isOnAsteriod;
+	bool isOverAsteriod;
 public:
 
 	
@@ -57,6 +58,7 @@ public:
 	// INLINED ACCESSOR METHODS
 	int						getNumberOfSprites()	{ return bots.size();		}
 	TopDownSprite*			getPlayer()				{ return &player;			}
+	AnimatedSprite*			getBackground()			{ return &background;       }
 	AnimatedSprite*         getHealthBar()          { return &healthbar;        }
 	AnimatedSprite*         getLives()              { return &lives;            }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
@@ -69,6 +71,7 @@ public:
 	void				addAsteriod(AnimatedSprite *asteriodToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
 	unsigned int		addSpriteType(AnimatedSpriteType *spriteTypeToAdd);
+	void				addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport);
 	void				addSpriteToRenderList(AnimatedSprite *sprite, RenderList *renderList, Viewport *viewport);
 	void                addGUISpriteToRenderList(AnimatedSprite *sprite, RenderList *renderList, Viewport *viewport);
 	void				clearSprites();

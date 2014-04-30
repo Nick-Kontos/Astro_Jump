@@ -112,6 +112,15 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	//set restitution values
 	fixtureDef.restitution = 0.7f;
 	body->CreateFixture(&fixtureDef);
+	//now create a sensor fixture for detecting collision with asteriods
+	b2FixtureDef sensor;
+	sensor.shape = &c;
+	sensor.density = 0;
+	sensor.isSensor = true;
+	sensor.filter.categoryBits = 0;
+	sensor.filter.maskBits = 2;
+	body->CreateFixture(&sensor);
+
 	player->setBody(body);
 
 	//add an initial velocity
