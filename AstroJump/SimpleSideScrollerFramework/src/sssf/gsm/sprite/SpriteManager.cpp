@@ -29,21 +29,24 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
 	
-
 	// IS THE SPRITE VIEWABLE?
+	
 	if (viewport->areWorldCoordinatesInViewport(	
-									sprite->getX(),
-									sprite->getY(),
+									sprite->getX() / .02f,
+									sprite->getY() / .02f,
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight()))
 	{
+	
 		// SINCE IT'S VIEWABLE, ADD IT TO THE RENDER LIST
 		RenderItem itemToAdd;
 		itemToAdd.id = sprite->getFrameIndex();
-		
+		int x = (int)floor(((sprite->getX() / .02f) - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth() / 2;
+		int y = (int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureHeight() / 2;
+
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-			(int)floor((sprite->getX() - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth()/2,
-			(int)floor((sprite->getY() - viewport->getViewportY()) + 0.5f) - spriteType->getTextureHeight()/2,
+			(int)floor(((sprite->getX() / .02f) - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth()/2,
+			(int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureWidth() / 2,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
@@ -84,8 +87,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		GameGraphics *graphics = game->getGraphics();
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
-
-		
 		
 		//add asteriods
 		list<AnimatedSprite*>::iterator asteriodsIterator;
@@ -111,7 +112,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 
 		// ADD THE PLAYER SPRITE
 		addSpriteToRenderList(&player, renderList, viewport);
-		addSpriteToRenderList(&clear, renderList, viewport);
 	}
 }
 
@@ -237,7 +237,7 @@ void SpriteManager::attachPlayerToAsteriod()
 }
 void SpriteManager::jumpOffAsteriod(float jump)
 {
-	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * sin(sin(player.getRotationInRadians())), jump * cos(cos(player.getRotationInRadians()))),
+	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
-	isOnAsteriod = false;
+	//isOnAsteriod = false;
 }

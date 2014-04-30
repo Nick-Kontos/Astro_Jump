@@ -73,12 +73,12 @@ public:
 	float				getX()
 	{
 		b2Vec2 b = body->GetPosition();
-		return (50.0f *b.x);
+		return (b.x);
 	}
 	float				getY()
 	{
 		b2Vec2 b = body->GetPosition();
-		return (50.0f * b.y);
+		return (b.y);
 	}
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

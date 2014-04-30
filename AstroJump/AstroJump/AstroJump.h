@@ -66,7 +66,7 @@ static const wstring	W_START_IMAGE_PATH = L"data/gui/buttons/start_game.png";
 static const wstring	W_START_IMAGE_MO_PATH = L"data/gui/buttons/start_game_mo.png";
 static const wstring	W_EXIT_IMAGE_PATH = L"data/gui/buttons/exit_game.png";
 static const wstring	W_EXIT_IMAGE_MO_PATH = L"data/gui/buttons/exit_game_mo.png";
-static const wstring	W_QUIT_IMAGE_PATH = L"data/gui/buttons/quit.png";
+static const wstring	W_QUIT_IMAGE_PATH = L"data/gui/buttons/Astro_Jump_Quit_Button.png";
 static const wstring	W_QUIT_IMAGE_MO_PATH = L"data/gui/buttons/quit_mo.png";
 static const wstring	W_GRID_CELL_SELECTOR_PATH = L"data/gui/overlays/GridCellSelector.png";
 

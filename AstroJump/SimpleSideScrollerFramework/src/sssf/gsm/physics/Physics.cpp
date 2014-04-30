@@ -25,8 +25,7 @@
 #include "Box2D\Box2D.h"
 
 /*
-	The constructor initializes the data structures and loads
-	the necessary ones with recyclable objects for collision tests.
+	The default constructor initializes box2D.
 */
 Physics::Physics()
 {
@@ -51,6 +50,7 @@ Physics::~Physics()
 void Physics::setGravity(float initGravity)
 {
 	b2Vec2 g(0.0f, initGravity);
+	gravity = initGravity;
 	world->SetGravity(g);
 }
 
@@ -65,7 +65,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	float x = sprite->getSpawnX();
 	float y = sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
-	bodyDef.linearVelocity.Set(sprite->getSpawnVx(), sprite->getSpawnVy());
+	b2Vec2* initforce = new b2Vec2(sprite->getSpawnVx(), sprite->getSpawnVy());	
 	bodyDef.userData = &sprite;
 	bodyDef.linearDamping = sprite->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
@@ -78,8 +78,136 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	fixtureDef.friction = sprite->getFriction();
 	body->CreateFixture(&fixtureDef);
 	sprite->setBody(body);
+	sprite->getBody()->ApplyForceToCenter(*initforce, true);
 }
 
+void Physics::addPlayer(AnimatedSprite *player, float x, float y)
+{
+	//add some things to the sprite fields
+	player->setRadius(player->getSpriteType()->getTextureWidth() / 2 * .02f);
+	player->setSpawnX(x);
+	player->setSpawnY(y);
+
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(player->getSpawnX(), player->getSpawnY());
+	bodyDef.userData = &player;
+	bodyDef.linearDamping = player->getDamping();
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = player->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	fixtureDef.density = player->getDensity();
+	fixtureDef.friction = player->getFriction();
+	//add collision filtering
+	//player is 0 bit
+	fixtureDef.filter.categoryBits = 3;
+	//they collide with world boundries
+	fixtureDef.filter.maskBits = 1;
+	//set restitution values
+	fixtureDef.restitution = 0.7f;
+	body->CreateFixture(&fixtureDef);
+	player->setBody(body);
+
+	//add an initial velocity
+	b2Vec2* initforce = new b2Vec2(x, y);
+	player->getBody()->ApplyForceToCenter(*initforce, true);
+}
+
+void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
+{
+	//add some things to the sprite fields
+	asteriod->setRadius(asteriod->getSpriteType()->getTextureWidth() / 2 * .02f);
+	asteriod->setSpawnX(x);
+	asteriod->setSpawnY(y);
+
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(x, y);	
+	bodyDef.userData = &asteriod;
+	bodyDef.linearDamping = asteriod->getDamping();
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = asteriod->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	fixtureDef.density = asteriod->getDensity();
+	fixtureDef.friction = asteriod->getFriction();
+	//add collision filtering
+	//asteriods are 2 bit
+	fixtureDef.filter.categoryBits = 2;
+	//they collide with walls and other asteriods
+	fixtureDef.filter.maskBits = 3;
+	//set resitution values
+	fixtureDef.restitution = 0.5f;
+	body->CreateFixture(&fixtureDef);
+	asteriod->setBody(body);
+
+	//add an initial velocity
+	asteriod->getBody()->ApplyForceToCenter(b2Vec2(asteriod->getSpawnVx(), asteriod->getSpawnVy()), true);
+}
+
+void Physics::constructBoundries(int height, int width){
+	//create up boundry
+	b2BodyDef up;	
+	up.position.Set( 0, width / 2 );
+	up.type = b2_staticBody;
+	b2Body* upBody = world->CreateBody(&up);
+	b2PolygonShape upBoundry;
+	upBoundry.SetAsBox(width, 1);
+	b2FixtureDef upFixture;
+	upFixture.shape = &upBoundry;
+	upFixture.filter.categoryBits = 1;
+	upFixture.filter.maskBits = 0;
+	upBody->CreateFixture(&upFixture);
+
+	//create down boundry
+	b2BodyDef down;
+	down.position.Set(height, width / 2);
+	down.type = b2_staticBody;
+	b2Body* downBody = world->CreateBody(&down);
+	b2PolygonShape downBoundry;
+	downBoundry.SetAsBox(width, 1);
+	b2FixtureDef downFixture;
+	downFixture.shape = &downBoundry;
+	downFixture.filter.categoryBits = 1;
+	downFixture.filter.maskBits = 0;
+	downBody->CreateFixture(&downFixture);
+
+	b2BodyDef left;
+	left.position.Set(height / 2, 0);
+	left.type = b2_staticBody;
+	b2Body* leftBody = world->CreateBody(&left);
+	b2PolygonShape leftBoundry;
+	leftBoundry.SetAsBox(1, height);
+	b2FixtureDef leftFixture;
+	leftFixture.shape = &leftBoundry;
+	leftFixture.filter.categoryBits = 1;
+	leftFixture.filter.maskBits = 0;
+	leftBody->CreateFixture(&leftFixture);
+
+	b2BodyDef right;
+	right.position.Set(height / 2, width);
+	right.type = b2_staticBody;
+	b2Body* rightBody = world->CreateBody(&right);
+	b2PolygonShape rightBoundry;
+	rightBoundry.SetAsBox(1, height);
+	b2FixtureDef rightFixture;
+	rightFixture.shape = &rightBoundry;
+	rightFixture.filter.categoryBits = 1;
+	rightFixture.filter.maskBits = 0;
+	rightBody->CreateFixture(&rightFixture);
+
+}
 /*
 	Removes a dynamic, collidable object from the physics system. Note that
 	this method should not be used mid-collision, as a result of a collition 
