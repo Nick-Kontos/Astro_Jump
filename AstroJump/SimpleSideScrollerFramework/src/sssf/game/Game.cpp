@@ -132,6 +132,7 @@ void Game::runGameLoop()
 		// OF THE APP, SO WE NEED TO CHECK AGAIN
 		if (gsm->isAppActive())
 		{
+			audio->start(L"Media\\Wavs\\MusicMono.wav");
 			// USE THE INPUT TO UPDATE THE GAME
 			processGameData();
 
@@ -200,6 +201,8 @@ void Game::shutdown()
 
 	// RELEASE GAME CONTROLLERS IF NECESSARY
 	input->shutdown();
+
+	//audio->cleanup();
 
 	// WE MAY SHUTDOWN OTHER THINGS HERE LIKE SOUND & MUSIC
 	// RESOURCES IN THE FUTURE

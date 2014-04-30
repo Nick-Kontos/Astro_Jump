@@ -42,6 +42,8 @@
 #include "sssf\platforms\DirectX\DirectXGraphics.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
 
+#include "XAudio2BasicSound.h"
+
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
 	then initialize all the platform-dependent technologies, then construct all the custom data for our 
@@ -84,6 +86,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	// SPECIFY WHO WILL HANDLE KEY EVENTS
 	AstroJumpKeyEventHandler *astroJumpKeyHandler = new AstroJumpKeyEventHandler();
 	astroJumpGame->getInput()->registerKeyHandler((KeyEventHandler*)astroJumpKeyHandler);
+
+	XAudio2BasicSound *aud = new XAudio2BasicSound();
+	//aud->start();
+	astroJumpGame->setAudio(aud);
+
+	XAudio2BasicSound *aud2 = new XAudio2BasicSound();
+	//aud->start();
+	astroJumpGame->setEffectsAudio(aud2);
 
 	// START THE GAME LOOP
 	astroJumpGame->runGameLoop();
