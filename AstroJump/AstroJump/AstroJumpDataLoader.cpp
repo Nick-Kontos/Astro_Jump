@@ -181,13 +181,10 @@ int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 	a->setSpriteType(spriteManager->getSpriteType(1));
 	a->setAlpha(255);
 	a->setCurrentState(IDLE);
-	a->setSpawnX(x*.02);
-	a->setSpawnY(y*.02);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
-	a->setRadius(r*.02);
 	Physics *physics = gsm->getPhysics();
-	physics->addSprite(a);
+	physics->addAsteriod(a, x * .02f, y * .02f);
 	spriteManager->addAsteriod(a);
 	return x;
 
@@ -200,13 +197,10 @@ int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 	a->setSpriteType(spriteManager->getSpriteType(0));
 	a->setAlpha(255);
 	a->setCurrentState(IDLE);
-	a->setSpawnX(x*.02);
-	a->setSpawnY(y*.02);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
-	a->setRadius(r*.02);
 	Physics *physics = gsm->getPhysics();
-	physics->addSprite(a);
+	physics->addPlayer(a, x * .02f, y * .02f);
 	return x;
 }
 int LuaIncAndReturn(float f)
