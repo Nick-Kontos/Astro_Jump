@@ -82,11 +82,11 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDown(A_KEY)){
 			//rotate player counter-clockwise
-			player->rotateCClockwise(1.0f);
+			player->rotateCClockwise(2.5f);
 		}
 		if (input->isKeyDown(D_KEY)){
 			//rotate player clockwise
-			player->rotateClockwise(1.0f);
+			player->rotateClockwise(2.5f);
 		}
 	}
 
