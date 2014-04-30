@@ -69,6 +69,7 @@ private:
 	GameOS				*os;
 	GameTimer			*timer;
 	XAudio2BasicSound	*audio;
+	XAudio2BasicSound	*effectsAudio;
 
 	// THIS WILL KEEP TRACK OF THE NAME OF THE LEVEL FILE
 	// THAT IS CURRENTLY BEING USED
@@ -80,6 +81,7 @@ public:
 	GameGUI*			getGUI()				{ return gui;								}
 	GameText*			getText()				{ return text; }
 	XAudio2BasicSound*	getAudio()				{ return audio; }
+	XAudio2BasicSound*	getEffectsAudio()		{ return effectsAudio; }
 
 	// INLINED ACCESSOR METHODS - ACTUALLY SUB-CLASSES
 	GameDataLoader*		getDataLoader()			{ return dataLoader;						}
@@ -94,6 +96,7 @@ public:
 	// INLINED MUTATOR METHODS
 	void	setDataLoader(GameDataLoader *initDL) { dataLoader = initDL; }
 	void	setAudio(XAudio2BasicSound *initAud) { audio = initAud; }
+	void	setEffectsAudio(XAudio2BasicSound *initAud) { effectsAudio = initAud; }
 	void	setCurrentLevelFileName(wstring initCurrentLevelFileName) { currentLevelFileName = initCurrentLevelFileName; }
 
 	// METHODS DEFINED IN Game.cpp

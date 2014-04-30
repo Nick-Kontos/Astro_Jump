@@ -91,6 +91,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	//aud->start();
 	astroJumpGame->setAudio(aud);
 
+	XAudio2BasicSound *aud2 = new XAudio2BasicSound();
+	//aud->start();
+	astroJumpGame->setEffectsAudio(aud2);
+
 	// START THE GAME LOOP
 	astroJumpGame->runGameLoop();
 

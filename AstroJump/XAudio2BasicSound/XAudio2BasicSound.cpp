@@ -75,7 +75,7 @@ XAudio2BasicSound::~XAudio2BasicSound()
 //--------------------------------------------------------------------------------------
 // Entry point to the program
 //--------------------------------------------------------------------------------------
-	int XAudio2BasicSound::start()
+int XAudio2BasicSound::start(LPCWSTR file)
 {
 		if (pSourceVoice != NULL)
 		{
@@ -91,7 +91,7 @@ XAudio2BasicSound::~XAudio2BasicSound()
 			// Play a PCM wave file
 			//
 			wprintf(L"Playing mono WAV PCM file...");
-			if (FAILED(hr = PlayPCM(pXAudio2, L"Media\\Wavs\\MusicMono.wav")))
+			if (FAILED(hr = PlayPCM(pXAudio2, file)))
 			{
 				wprintf(L"Failed creating source voice: %#X\n", hr);
 				SAFE_RELEASE(pXAudio2);

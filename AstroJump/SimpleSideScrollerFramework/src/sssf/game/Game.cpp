@@ -132,7 +132,7 @@ void Game::runGameLoop()
 		// OF THE APP, SO WE NEED TO CHECK AGAIN
 		if (gsm->isAppActive())
 		{
-			audio->start();
+			audio->start(L"Media\\Wavs\\MusicMono.wav");
 			// USE THE INPUT TO UPDATE THE GAME
 			processGameData();
 

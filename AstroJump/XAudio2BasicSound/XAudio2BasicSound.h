@@ -19,7 +19,7 @@ public:
 
 	XAudio2BasicSound();
 	~XAudio2BasicSound();
-	int start();
+	int start(LPCWSTR file);
 
 	void cleanup();
 	HRESULT PlayPCM(IXAudio2* pXaudio2, LPCWSTR szFilename);
