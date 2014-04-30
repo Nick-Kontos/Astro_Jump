@@ -76,6 +76,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 				spritemanager->attachPlayerToAsteriod();
 			}
 			else {
+				game->getEffectsAudio()->start(L"Media\\Jump.wav");
 				spritemanager->jumpOffAsteriod(10.0f);
 			}
 		}
