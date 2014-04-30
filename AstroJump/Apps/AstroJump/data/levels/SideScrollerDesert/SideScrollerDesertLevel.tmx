@@ -3,14 +3,6 @@
  <tileset firstgid="1" name="SandstonePlatforms" tilewidth="64" tileheight="64">
   <image source="SandstonePlatforms.png" width="640" height="400"/>
  </tileset>
- <imagelayer name="BackgroundImageLayer" width="50" height="30">
-  <image source="MapBackground.png"/>
-  <properties>
-   <property name="collidable" value="false"/>
-   <property name="imageheight" value="800"/>
-   <property name="imagewidth" value="1600"/>
-  </properties>
- </imagelayer>
  <layer name="ForegroundPlatformLayer" width="50" height="30">
   <properties>
    <property name="collidable" value="true"/>
