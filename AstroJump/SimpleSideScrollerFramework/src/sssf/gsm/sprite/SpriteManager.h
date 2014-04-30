@@ -57,7 +57,6 @@ public:
 	// INLINED ACCESSOR METHODS
 	int						getNumberOfSprites()	{ return bots.size();		}
 	TopDownSprite*			getPlayer()				{ return &player;			}
-	AnimatedSprite*			getClear()				{ return &clear; }
 	AnimatedSprite*         getHealthBar()          { return &healthbar;        }
 	AnimatedSprite*         getLives()              { return &lives;            }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
