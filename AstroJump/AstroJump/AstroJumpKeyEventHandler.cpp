@@ -76,16 +76,16 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 				spritemanager->attachPlayerToAsteriod();
 			}
 			else {
-				spritemanager->jumpOffAsteriod(2.0f);
+				spritemanager->jumpOffAsteriod(10.0f);
 			}
 		}
 		if (input->isKeyDown(A_KEY)){
 			//rotate player counter-clockwise
-			player->rotateCClockwise(0.5f);
+			player->rotateCClockwise(1.0f);
 		}
 		if (input->isKeyDown(D_KEY)){
 			//rotate player clockwise
-			player->rotateClockwise(0.5f);
+			player->rotateClockwise(1.0f);
 		}
 	}
 

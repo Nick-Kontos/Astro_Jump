@@ -45,7 +45,10 @@ public:
 	void				setGravity(float initGravity);
 
 	// PUBLIC METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE OR CHANGE WHAT YOU LIKE
+	void constructBoundries(int height, int width);
 	void addSprite(AnimatedSprite *sprite);
+	void addPlayer(AnimatedSprite *player, float x, float y);
+	void addAsteriod(AnimatedSprite *asteriod, float x, float y);
 	void removeSprite(AnimatedSprite *sprite);
 	void update(Game *game);
 

@@ -176,42 +176,36 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	PoseurSpriteTypesImporter psti;
 	psti.loadSpriteTypes(game, SPRITE_TYPES_LIST);
 
+	// LOAD THE INVISIBLE BOUNDRIES FOR THE EDGES OF THE LEVEL
+	Physics *physics = gsm->getPhysics();
+	//physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
+
 	// LET'S MAKE A PLAYER SPRITE
 	// @TODO - LATER WE'LL LOAD ALL LEVEL DATA FROM A FILE
-	Physics *physics = gsm->getPhysics();
 	physics->setGravity(W_GRAVITY);
 	AnimatedSprite *player = spriteManager->getPlayer(); // CHECK CREATION OF PLAYER
 	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-	player->setSpawnX(700*.02f);
-	player->setSpawnY(700*.02f);
 	player->setSpawnVx(0);
 	player->setSpawnVy(0);
-	player->setRadius((128.0f / 2 ) * .02f);
-	physics->addSprite(player);
+	physics->addPlayer(player, 700 * .02f, 700 * .02f);
 	AnimatedSprite *asteroid = new AnimatedSprite();
 	asteroid->setSpriteType(spriteManager->getSpriteType(1));
 	asteroid->setAlpha(255);
 	asteroid->setCurrentState(IDLE);
-	asteroid->setSpawnX(25.0f*.02f);
-	asteroid->setSpawnY(25.0f*.02f);
-	asteroid->setSpawnVx(50000.0f);
-	asteroid->setSpawnVy(0.0f);
-	asteroid->setRadius((.02f * 512.0f/2));
-	physics->addSprite(asteroid);
+	asteroid->setSpawnVx(10000.0f);
+	asteroid->setSpawnVy(-100.0f);
+	physics->addAsteriod(asteroid, 100.0f*.02f, 150.0f*.02f);
 	spriteManager->addAsteriod(asteroid);
 	AnimatedSprite *asteroid1 = new AnimatedSprite();
 	asteroid1->setSpriteType(spriteManager->getSpriteType(1));
 	asteroid1->setAlpha(255);
 	asteroid1->setCurrentState(IDLE);
-	asteroid1->setSpawnX(700.0f*.02f);
-	asteroid1->setSpawnY(25.0f*.02f);
-	asteroid1->setSpawnVx(-5.0f);
+	asteroid1->setSpawnVx(0.0f);
 	asteroid1->setSpawnVy(0.0f);
-	asteroid1->setRadius((.02f * 512.0f/2));
-	physics->addSprite(asteroid1);
+	physics->addAsteriod(asteroid1, 700.0f * .02f, 150.0f * .02f);
 	spriteManager->addAsteriod(asteroid1);
 	
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite_type>
  <width>128</width>
- <height>256</height>
+ <height>64</height>
  <images_list>
   <image_file id="1"  file_name="player_IDLE.png"/>
  </images_list>

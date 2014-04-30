@@ -239,5 +239,5 @@ void SpriteManager::jumpOffAsteriod(float jump)
 {
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
-	isOnAsteriod = false;
+	//isOnAsteriod = false;
 }
