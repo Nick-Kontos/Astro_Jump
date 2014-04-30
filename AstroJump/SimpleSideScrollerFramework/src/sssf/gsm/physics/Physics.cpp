@@ -25,8 +25,7 @@
 #include "Box2D\Box2D.h"
 
 /*
-	The constructor initializes the data structures and loads
-	the necessary ones with recyclable objects for collision tests.
+	The default constructor initializes box2D.
 */
 Physics::Physics()
 {
@@ -51,6 +50,7 @@ Physics::~Physics()
 void Physics::setGravity(float initGravity)
 {
 	b2Vec2 g(0.0f, initGravity);
+	gravity = initGravity;
 	world->SetGravity(g);
 }
 
