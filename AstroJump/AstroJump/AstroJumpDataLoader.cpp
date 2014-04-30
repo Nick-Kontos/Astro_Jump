@@ -712,6 +712,23 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 	// NOW ADD THE IN-GAME GUI
 	ScreenGUI *inGameGUI = new ScreenGUI();
 
+	unsigned int normalTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_PATH);
+	unsigned int mouseOverTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_PATH);
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		0,
+		0,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_QUIT_COMMAND);
+	inGameGUI->addButton(buttonToAdd);
+
 
 	// AND LET'S ADD OUR SCREENS
 	gui->addScreenGUI(GS_GAME_IN_PROGRESS, inGameGUI);
