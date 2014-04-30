@@ -144,7 +144,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>Box2D.lib;XAudio2BasicSound.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;XAudio2BasicSound.lib;LuaPlusFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)/Common;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
