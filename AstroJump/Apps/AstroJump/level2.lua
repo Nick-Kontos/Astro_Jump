@@ -2,7 +2,7 @@ function levela()
 	--set gravity
 	setGravity(0.0)
 	--set up asteroids
-	createAsteroid(700.0,100.0,0.0,0.0,29.0)
+	createWinAsteroid(700.0,100.0,0.0,0.0,29.0)
 	createAsteroid(700.0,725.0,0.0,0.0,29.0)
 	createAsteroid(1500.0,900.0,0.0,0.0,29.0)
 	createAsteroid(2000.0,1500.0,0.0,0.0,29.0)

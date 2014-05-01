@@ -4,6 +4,7 @@
  <height>256</height>
  <images_list>
   <image_file id="1"  file_name="test_asteroid_IDLE.png"/>
+  <image_file id="2"  file_name="test_asteroid_VICTORY.png"/>
  </images_list>
  <animations_list>
   <animation_state>
@@ -12,5 +13,11 @@
     <pose image_id="1" duration="1"/>
    </animation_sequence>
   </animation_state>
+  <animation_state>
+    <state>WIN</state>
+   <animation_sequence>
+     <pose image_id="2" duration="1"/>
+   </animation_sequence>
+   </animation_state>
  </animations_list>  
 </sprite_type>

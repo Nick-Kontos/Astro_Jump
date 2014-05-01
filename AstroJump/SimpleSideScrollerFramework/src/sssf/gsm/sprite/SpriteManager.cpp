@@ -122,6 +122,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		//addGUISpriteToRenderList(&lives, renderList, viewport);
 
 		// ADD THE PLAYER SPRITE
+		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		addSpriteToRenderList(&player, renderList, viewport);
 	}
 }
@@ -200,6 +201,7 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		enemies.pop_back();
 	}
 	physic->removeSprite(&player);
+	physic->removeSprite(&winAsteroid);
 
 }
 

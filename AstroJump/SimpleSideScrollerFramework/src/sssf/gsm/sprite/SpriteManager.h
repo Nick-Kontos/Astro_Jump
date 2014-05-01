@@ -45,6 +45,7 @@ private:
 	//These sprites will be the health bar and lives displays
 	AnimatedSprite healthbar;
 	AnimatedSprite lives;
+	AnimatedSprite winAsteroid;
 	
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
@@ -62,6 +63,7 @@ public:
 	// INLINED ACCESSOR METHODS
 	int						getNumberOfSprites()	{ return bots.size();		}
 	TopDownSprite*			getPlayer()				{ return &player;			}
+	AnimatedSprite*			getWinAsteroid()		{ return &winAsteroid; }
 	//AnimatedSprite*			getBackground()			{ return &background;       }
 	AnimatedSprite*         getHealthBar()          { return &healthbar;        }
 	AnimatedSprite*         getLives()              { return &lives;            }
