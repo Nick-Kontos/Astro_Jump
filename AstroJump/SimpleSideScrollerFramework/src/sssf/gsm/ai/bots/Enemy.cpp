@@ -12,7 +12,13 @@ void Enemy::think(float x, float y)
 	else
 	{
 		float vx = (x - x1) / d;
+		if (vx < 0)
+		{
+			currentState = L"RUNNING_BACK";
+		}
+		else
+			currentState = L"RUNNING";
 		float vy = (y - y1) / d;
-		body->SetLinearVelocity(b2Vec2(vx, vy));
+		body->SetLinearVelocity(b2Vec2(5*vx, 5*vy));
 	}
 }
