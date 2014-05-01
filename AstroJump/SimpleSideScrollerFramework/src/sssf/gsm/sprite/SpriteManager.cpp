@@ -201,6 +201,7 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		enemies.pop_back();
 	}
 	physic->removeSprite(&player);
+	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
 
 }
@@ -254,6 +255,21 @@ void SpriteManager::update(Game *game)
 		enemy->updateSprite();
 		enemyIterator++;
 	}
+	if ((&attachedasteroid == NULL))
+	{
+		if (attachedasteroid.getBody()->GetPosition().x == winAsteroid.getBody()->GetPosition().x && attachedasteroid.getBody()->GetPosition().y == winAsteroid.getBody()->GetPosition().y)
+		{
+			game->getGSM()->goToVictory();
+		}
+	}
+	if (!isOnAsteriod)
+	{
+		if (player.getBody()->GetLinearVelocity().x == 0 && player.getBody()->GetLinearVelocity().y == 0)
+		{
+			game->getGSM()->goToGameOver();
+		}
+	}
+
 }
 void SpriteManager::attachPlayerToAsteriod()
 {

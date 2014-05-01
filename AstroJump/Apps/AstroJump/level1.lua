@@ -7,7 +7,7 @@ function levela()
 	createAsteroid(900.0,500.0,0.0,0.0,29.0)
 	createAsteroid(1200.0,500.0,0.0,0.0,29.0)
 	createAsteroid(1500.0,500.0,0.0,0.0,29.0)
-	createAsteroid(1800.0,500.0,0.0,0.0,29.0)
+	createWinAsteroid(1800.0,500.0,0.0,0.0,29.0)
 	
 	--set up player
 	createPlayer(300.0,200.0,0,0,4.0)
