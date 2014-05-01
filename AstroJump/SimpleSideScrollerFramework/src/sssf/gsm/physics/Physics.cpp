@@ -24,6 +24,7 @@
 #include <list>
 #include "Box2D\Box2D.h"
 #include "sssf\gsm\physics\MyContactListener.h"
+#include "sssf\gsm\sprite\SpriteManager.h"
 
 /*
 	The default constructor initializes box2D.
@@ -55,10 +56,10 @@ void Physics::setGravity(float initGravity)
 	world->SetGravity(g);
 }
 
-void Physics::initContactListener(Game *game)
+void Physics::initContactListener(SpriteManager *sm)
 {
-	MyContactListener listener(game);
-	world->SetContactListener(&listener);
+	MyContactListener listener(sm);
+	//world->SetContactListener(&listener);
 }
 
 /*
@@ -113,7 +114,7 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	fixtureDef.friction = player->getFriction();
 	//add collision filtering
 	//player is 0 bit
-	fixtureDef.filter.categoryBits = 3;
+	fixtureDef.filter.categoryBits = 4;
 	//they collide with world boundries
 	fixtureDef.filter.maskBits = 1;
 	//set restitution values
