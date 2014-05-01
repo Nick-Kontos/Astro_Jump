@@ -855,7 +855,7 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 		200,
 		100,
 		false,
-		W_QUIT_COMMAND);
+		W_QUIT_MM_COMMAND);
 	inGameGUI->addButton(buttonToAdd);
 
 
