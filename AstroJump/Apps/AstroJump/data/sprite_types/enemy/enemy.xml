@@ -4,7 +4,7 @@
     <width>128</width>
     <height>128</height>
     <images_list>
-        <image_file id="0" file_name="EricIdle.png"/>
+        <image_file id="26" file_name="EricIdle.png"/>
         <image_file id="1" file_name="EricIdleBack.png"/>
         <image_file id="2" file_name="EricLookBack.png"/>
         <image_file id="3" file_name="EricLookUp.png"/>
@@ -35,13 +35,13 @@
         <animation_state>
             <state>IDLE</state>
             <animation_sequence>
-                <pose image_id="0" duration="30"/>
+                <pose image_id="26" duration="30"/>
 				<pose image_id="3" duration="30"/>
-				<pose image_id="0" duration="2"/>
+				<pose image_id="26" duration="2"/>
 				<pose image_id="5" duration="30"/>
-				<pose image_id="0" duration="2"/>
+				<pose image_id="26" duration="2"/>
 				<pose image_id="3" duration="30"/>
-				<pose image_id="0" duration="2"/>
+				<pose image_id="26" duration="2"/>
 				<pose image_id="5" duration="30"/>
 				
 				
@@ -63,9 +63,9 @@
         <animation_state>
             <state>RUNNING</state>
             <animation_sequence>
-                <pose image_id="0" duration="4"/>
+                <pose image_id="26" duration="4"/>
                 <pose image_id="13" duration="4"/>
-                <pose image_id="0" duration="4"/>
+                <pose image_id="26" duration="4"/>
                 <pose image_id="13" duration="4"/>
             </animation_sequence>
         </animation_state>
@@ -102,11 +102,11 @@
         <animation_state>
             <state>JUMPING</state>
             <animation_sequence>
-                <pose image_id="0" duration="3"/>
+                <pose image_id="26" duration="3"/>
                 <pose image_id="11" duration="3"/>
                 <pose image_id="12" duration="7"/>
                 <pose image_id="11" duration="3"/>
-                <pose image_id="0" duration="3"/>
+                <pose image_id="26" duration="3"/>
             </animation_sequence>
         </animation_state>
     </animations_list>  
