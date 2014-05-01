@@ -42,12 +42,12 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 			game->setCurrentLevelFileName("level2.lua");
 			game->startGame();
 		}
-		if (game->getCurrentLevelFileName().compare("level2.lua") == 0)
+		else if (game->getCurrentLevelFileName().compare("level2.lua") == 0)
 		{
 			game->setCurrentLevelFileName("level3.lua");
 			game->startGame();
 		}
-		if (game->getCurrentLevelFileName().compare("level3.lua") == 0)
+		else if (game->getCurrentLevelFileName().compare("level3.lua") == 0)
 		{
 			game->setCurrentLevelFileName("level1.lua");
 			game->startGame();
