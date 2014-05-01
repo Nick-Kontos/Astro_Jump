@@ -301,6 +301,7 @@ void SpriteManager::attachPlayerToAsteriod()
 }
 void SpriteManager::jumpOffAsteriod(float jump)
 {
+	player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
 	if (!initial)
