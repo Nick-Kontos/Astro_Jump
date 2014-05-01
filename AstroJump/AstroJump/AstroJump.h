@@ -43,6 +43,7 @@ static const wstring	W_RESTART_COMMAND = L"Restart";
 static const wstring	W_SELECT_LEVEL_COMMAND = L"Select_Level";
 static const wstring	W_NEXT_LEVEL_COMMAND = L"Next_Level";
 static const wstring	W_QUIT_COMMAND = L"Quit";
+static const wstring	W_QUIT_MM_COMMAND = L"Quit_MM";
 static const wstring	W_HELP_COMMAND = L"Help";
 static const wstring	W_ABOUT_COMMAND = L"About";
 static const wstring	W_GREEN_CURSOR_PATH = L"data/gui/cursor/green_cursor.png";

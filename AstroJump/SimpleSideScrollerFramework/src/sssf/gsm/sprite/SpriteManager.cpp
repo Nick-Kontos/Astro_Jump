@@ -263,12 +263,13 @@ void SpriteManager::attachPlayerToAsteriod()
 	float radius;
 	while (asteriodIterator != asteroids.end()){
 		AnimatedSprite *asteriod = *asteriodIterator;
-		radius = asteriod->getSpriteType()->getTextureWidth() / 2;
+		radius = asteriod->getSpriteType()->getTextureWidth() / 2 * .02f;
 		if (radius >= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())
 			+ (player.getY() - asteriod->getY()) * (player.getY() - asteriod->getY()))){
 			//player is on top of asteriod -- stick to it
 			//for now hold place with break so we can put a breakpoint here
 			isOnAsteriod = true;
+			attachedasteroid = *asteriod;
 			break;
 		}
 		asteriodIterator++;
@@ -278,5 +279,7 @@ void SpriteManager::jumpOffAsteriod(float jump)
 {
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
-	//isOnAsteriod = false;
+	//(attachedasteroid.getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+	//	attachedasteroid.getBody()->GetWorldCenter(), true));
+	isOnAsteriod = false;
 }

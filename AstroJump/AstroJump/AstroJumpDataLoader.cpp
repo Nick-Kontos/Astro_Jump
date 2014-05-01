@@ -169,6 +169,7 @@ int LuaSetGravity(float f)
 {
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
+	SpriteManager *spriteManager = gsm->getSpriteManager();
 	physics->setGravity(f*.02);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	//init the contact listener in physics
@@ -871,7 +872,7 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 		200,
 		100,
 		false,
-		W_QUIT_COMMAND);
+		W_QUIT_MM_COMMAND);
 	inGameGUI->addButton(buttonToAdd);
 
 
