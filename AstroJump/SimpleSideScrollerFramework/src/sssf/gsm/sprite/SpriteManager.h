@@ -40,7 +40,6 @@ private:
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	//****change to animatedsprite
 	TopDownSprite player;
-	AnimatedSprite attachedasteroid;
 	//AnimatedSprite background;
 
 	//These sprites will be the health bar and lives displays
@@ -54,6 +53,8 @@ private:
 
 	bool isOnAsteriod;
 	bool isOverAsteriod;
+	bool won=false;
+	int attachedAsteroid=0;
 public:
 
 	

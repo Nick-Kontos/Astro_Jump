@@ -255,12 +255,9 @@ void SpriteManager::update(Game *game)
 		enemy->updateSprite();
 		enemyIterator++;
 	}
-	if ((&attachedasteroid == NULL))
+	if (won)
 	{
-		if (attachedasteroid.getBody()->GetPosition().x == winAsteroid.getBody()->GetPosition().x && attachedasteroid.getBody()->GetPosition().y == winAsteroid.getBody()->GetPosition().y)
-		{
-			game->getGSM()->goToVictory();
-		}
+		game->getGSM()->goToVictory();
 	}
 	if (!isOnAsteriod)
 	{
@@ -277,7 +274,9 @@ void SpriteManager::attachPlayerToAsteriod()
 	vector<AnimatedSprite*>::iterator asteriodIterator;
 	asteriodIterator = asteroids.begin();
 	float radius;
-	while (asteriodIterator != asteroids.end()){
+	int num = 0;
+	while (asteriodIterator != asteroids.end())
+	{
 		AnimatedSprite *asteriod = *asteriodIterator;
 		radius = asteriod->getSpriteType()->getTextureWidth() / 2 * .02f;
 		if (radius >= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())
@@ -285,17 +284,22 @@ void SpriteManager::attachPlayerToAsteriod()
 			//player is on top of asteriod -- stick to it
 			//for now hold place with break so we can put a breakpoint here
 			isOnAsteriod = true;
-			attachedasteroid = *asteriod;
+			attachedAsteroid = num;
 			break;
 		}
 		asteriodIterator++;
+		num++;
+	}
+	if (radius >= sqrt((player.getX() - winAsteroid.getX()) * (player.getX() - winAsteroid.getX()) + (player.getY() - winAsteroid.getY()) * (player.getY() - winAsteroid.getY())))
+	{
+		won = true;
 	}
 }
 void SpriteManager::jumpOffAsteriod(float jump)
 {
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
-	//(attachedasteroid.getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
-	//	attachedasteroid.getBody()->GetWorldCenter(), true));
+	(asteroids[attachedAsteroid]->getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+		asteroids[attachedAsteroid]->getBody()->GetWorldCenter(), true));
 	isOnAsteriod = false;
 }
