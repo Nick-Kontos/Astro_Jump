@@ -425,7 +425,7 @@ void AstroJumpDataLoader::initDefeatScreen(GameGUI *gui, DirectXTextureManager *
 		200,
 		100,
 		false,
-		W_GO_TO_MM_COMMAND);
+		W_QUIT_MM_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	deafeatScreen->addButton(buttonToAdd);

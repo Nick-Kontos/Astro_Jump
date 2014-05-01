@@ -77,7 +77,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 			}
 			else {
 				game->getEffectsAudio()->start(L"Media\\Jump.wav");
-				spritemanager->jumpOffAsteriod(20.0f);
+				spritemanager->jumpOffAsteriod(40.0f);
 			}
 		}
 		if (input->isKeyDown(A_KEY)){

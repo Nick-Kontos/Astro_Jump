@@ -203,6 +203,9 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 	physic->removeSprite(&player);
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
+	attachedAsteroid = 0;
+	initial = true;
+	won = false;
 
 }
 
@@ -261,7 +264,7 @@ void SpriteManager::update(Game *game)
 	}
 	if (!isOnAsteriod)
 	{
-		if (player.getBody()->GetLinearVelocity().x == 0 && player.getBody()->GetLinearVelocity().y == 0)
+		if (player.getBody()->GetLinearVelocity().x <= .1 && player.getBody()->GetLinearVelocity().y <= .1)
 		{
 			game->getGSM()->goToGameOver();
 		}
@@ -297,6 +300,7 @@ void SpriteManager::attachPlayerToAsteriod()
 }
 void SpriteManager::jumpOffAsteriod(float jump)
 {
+	//player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
 	if (!initial)
