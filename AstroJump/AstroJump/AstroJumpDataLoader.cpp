@@ -173,7 +173,7 @@ int LuaSetGravity(float f)
 	physics->setGravity(f*.02);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	//init the contact listener in physics
-	//physics->initContactListener(spriteManager);
+	physics->initContactListener(spriteManager);
 	return f;
 }
 

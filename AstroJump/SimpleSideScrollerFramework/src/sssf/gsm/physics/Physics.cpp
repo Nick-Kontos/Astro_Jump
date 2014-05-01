@@ -58,8 +58,9 @@ void Physics::setGravity(float initGravity)
 
 void Physics::initContactListener(SpriteManager *sm)
 {
+	//ILLEGAL listener is out of scope
 	MyContactListener listener(sm);
-	//world->SetContactListener(&listener);
+	world->SetContactListener(&listener);
 }
 
 /*
@@ -163,7 +164,6 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	sensor.shape = &c;
 	sensor.density = 0;
 	sensor.isSensor = true;
-	sensor.filter.categoryBits = 0;
 	sensor.filter.maskBits = 2;
 	body->CreateFixture(&sensor);
 

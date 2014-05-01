@@ -270,7 +270,6 @@ void SpriteManager::update(Game *game)
 }
 void SpriteManager::attachPlayerToAsteriod()
 {
-	//may leak memory
 	vector<AnimatedSprite*>::iterator asteriodIterator;
 	asteriodIterator = asteroids.begin();
 	float radius;

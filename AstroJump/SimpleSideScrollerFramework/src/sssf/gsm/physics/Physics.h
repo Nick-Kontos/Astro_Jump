@@ -30,7 +30,6 @@ class Physics
 public:
 	// THIS IS APPLIED TO EVERY SPRITE EVERY FRAME
 	float gravity;
-
 	int velocityIt = 8;
 	int positionIt = 4;
 	
