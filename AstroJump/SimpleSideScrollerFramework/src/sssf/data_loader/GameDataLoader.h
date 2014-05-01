@@ -48,5 +48,5 @@ public:
 	// METHODS TO BE DEFINED INSIDE CHILD CLASSES
 	virtual void loadGame(Game *game, wstring gameInitFile)=0;
 	virtual void loadGUI(Game *game, wstring guiInitFile)=0;
-	virtual void loadWorld(Game *game, wstring levelInitFile)=0;
+	virtual void loadWorld(Game *game, string levelInitFile)=0;
 };

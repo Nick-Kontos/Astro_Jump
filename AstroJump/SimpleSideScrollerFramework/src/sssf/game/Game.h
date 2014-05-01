@@ -73,7 +73,7 @@ private:
 
 	// THIS WILL KEEP TRACK OF THE NAME OF THE LEVEL FILE
 	// THAT IS CURRENTLY BEING USED
-	wstring				currentLevelFileName;
+	string				currentLevelFileName;
 
 public:
 	// INLINED ACCESSOR METHODS - THE REAL THINGS
@@ -91,13 +91,13 @@ public:
 	GameTimer*			getTimer()				{ return timer;								}
 
 	// AND FOR GETTING THE NAME OF THE FILE USED FOR LOADING THIS LEVEL
-	wstring				getCurrentLevelFileName()	{ return currentLevelFileName;			}
+	string				getCurrentLevelFileName()	{ return currentLevelFileName;			}
 
 	// INLINED MUTATOR METHODS
 	void	setDataLoader(GameDataLoader *initDL) { dataLoader = initDL; }
 	void	setAudio(XAudio2BasicSound *initAud) { audio = initAud; }
 	void	setEffectsAudio(XAudio2BasicSound *initAud) { effectsAudio = initAud; }
-	void	setCurrentLevelFileName(wstring initCurrentLevelFileName) { currentLevelFileName = initCurrentLevelFileName; }
+	void	setCurrentLevelFileName(string initCurrentLevelFileName) { currentLevelFileName = initCurrentLevelFileName; }
 
 	// METHODS DEFINED IN Game.cpp
 	Game();
