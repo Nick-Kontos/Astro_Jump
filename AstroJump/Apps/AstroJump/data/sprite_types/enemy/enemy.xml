@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+    <image_config>SEPARATED</image_config>
+    <width>128</width>
+    <height>128</height>
+    <images_list>
+        <image_file id="0" file_name="EricIdle.png"/>
+        <image_file id="1" file_name="EricIdleBack.png"/>
+        <image_file id="2" file_name="EricLookBack.png"/>
+        <image_file id="3" file_name="EricLookUp.png"/>
+        <image_file id="4" file_name="EricLookUp1.png"/>
+        <image_file id="5" file_name="EricLookDown.png"/>
+        <image_file id="6" file_name="EricLookDown1.png"/>
+        <image_file id="7" file_name="EricLookBackUp.png"/>
+        <image_file id="8" file_name="EricLookBackUp1.png"/>
+        <image_file id="9" file_name="EricLookBackDown.png"/>
+        <image_file id="10" file_name="EricLookBackDown1.png"/>
+        <image_file id="11" file_name="EricJump1.png"/>
+        <image_file id="12" file_name="EricJump2.png"/>
+        <image_file id="13" file_name="EricRun.png"/>
+        <image_file id="14" file_name="EricRunBack.png"/>
+        <image_file id="15" file_name="EricShoot1.png"/>
+        <image_file id="16" file_name="EricShoot2.png"/>
+        <image_file id="17" file_name="EricShoot3.png"/>
+        <image_file id="18" file_name="EricCharge1.png"/>
+        <image_file id="19" file_name="EricCharge2.png"/>
+        <image_file id="20" file_name="EricCharge3.png"/>
+        <image_file id="21" file_name="EricCharge4.png"/>
+		<image_file id="22" file_name="EricCharge5.png"/>
+		<image_file id="23" file_name="EricChargeShot1.png"/>
+		<image_file id="24" file_name="EricChargeShot2.png"/>
+		<image_file id="25" file_name="EricChargeShot3.png"/>
+    </images_list>
+    <animations_list>
+        <animation_state>
+            <state>IDLE</state>
+            <animation_sequence>
+                <pose image_id="0" duration="30"/>
+				<pose image_id="3" duration="30"/>
+				<pose image_id="0" duration="2"/>
+				<pose image_id="5" duration="30"/>
+				<pose image_id="0" duration="2"/>
+				<pose image_id="3" duration="30"/>
+				<pose image_id="0" duration="2"/>
+				<pose image_id="5" duration="30"/>
+				
+				
+				
+				
+				
+                <pose image_id="3" duration="1"/>
+                <pose image_id="4" duration="60"/>
+                <pose image_id="8" duration="30"/>
+                <pose image_id="7" duration="1"/>
+                <pose image_id="2" duration="1"/>
+                <pose image_id="9" duration="1"/>
+                <pose image_id="10" duration="30"/>
+                <pose image_id="6" duration="30"/>
+                <pose image_id="5" duration="1"/>
+				
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>RUNNING</state>
+            <animation_sequence>
+                <pose image_id="0" duration="4"/>
+                <pose image_id="13" duration="4"/>
+                <pose image_id="0" duration="4"/>
+                <pose image_id="13" duration="4"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>RUNNING_BACK</state>
+            <animation_sequence>
+                <pose image_id="1" duration="4"/>
+                <pose image_id="14" duration="4"/>
+                <pose image_id="1" duration="4"/>
+                <pose image_id="14" duration="4"/>
+            </animation_sequence>
+        </animation_state>  
+        <animation_state>
+            <state>SHOOTING</state>
+            <animation_sequence>
+                <pose image_id="15" duration="3"/>
+                <pose image_id="16" duration="3"/>
+                <pose image_id="17" duration="3"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>CHARGE_SHOT</state>
+            <animation_sequence>
+                <pose image_id="18" duration="15"/>
+                <pose image_id="19" duration="15"/>
+                <pose image_id="20" duration="15"/>
+                <pose image_id="21" duration="15"/>
+                <pose image_id="22" duration="15"/>
+                <pose image_id="23" duration="10"/>
+				<pose image_id="24" duration="40"/>
+				<pose image_id="25" duration="5"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>JUMPING</state>
+            <animation_sequence>
+                <pose image_id="0" duration="3"/>
+                <pose image_id="11" duration="3"/>
+                <pose image_id="12" duration="7"/>
+                <pose image_id="11" duration="3"/>
+                <pose image_id="0" duration="3"/>
+            </animation_sequence>
+        </animation_state>
+    </animations_list>  
+</sprite_type>

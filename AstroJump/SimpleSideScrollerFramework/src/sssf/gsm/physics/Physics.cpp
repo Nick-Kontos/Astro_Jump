@@ -23,6 +23,7 @@
 #include <vector>
 #include <list>
 #include "Box2D\Box2D.h"
+#include "sssf\gsm\physics\MyContactListener.h"
 
 /*
 	The default constructor initializes box2D.
@@ -52,6 +53,12 @@ void Physics::setGravity(float initGravity)
 	b2Vec2 g(0.0f, initGravity);
 	gravity = initGravity;
 	world->SetGravity(g);
+}
+
+void Physics::initContactListener(Game *game)
+{
+	MyContactListener listener(game);
+	world->SetContactListener(&listener);
 }
 
 /*

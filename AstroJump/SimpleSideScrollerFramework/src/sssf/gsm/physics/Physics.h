@@ -17,6 +17,7 @@
 #include "sssf\gsm\world\Tile.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "Box2D/box2D.h"
+#include "sssf\gsm\physics\MyContactListener.h"
 
 const float DEFAULT_GRAVITY = 0.0f;
 const float timeStep = 1.0f / 60.0f;
@@ -52,6 +53,7 @@ public:
 	void addEnemy(AnimatedSprite *enemy, float x, float y);
 	void addAsteriod(AnimatedSprite *asteriod, float x, float y);
 	void removeSprite(AnimatedSprite *sprite);
+	void initContactListener(Game *game);
 	void update(Game *game);
 
 };
