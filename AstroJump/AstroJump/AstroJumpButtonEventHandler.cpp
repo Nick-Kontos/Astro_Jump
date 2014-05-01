@@ -31,6 +31,28 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 		game->getGUI()->getViewport()->setViewportY(0.0f);
 		game->startGame();
 	}
+	else if (command.compare(W_NEXT_LEVEL_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->unloadCurrentLevel();
+		game->getGUI()->getViewport()->setViewportX(0.0f);
+		game->getGUI()->getViewport()->setViewportY(0.0f);
+		if (game->getCurrentLevelFileName().compare("level1.lua")==0)
+		{
+			game->setCurrentLevelFileName("level2.lua");
+			game->startGame();
+		}
+		if (game->getCurrentLevelFileName().compare("level2.lua") == 0)
+		{
+			game->setCurrentLevelFileName("level3.lua");
+			game->startGame();
+		}
+		if (game->getCurrentLevelFileName().compare("level3.lua") == 0)
+		{
+			game->setCurrentLevelFileName("level1.lua");
+			game->startGame();
+		}
+	}
 	else if (command.compare(W_GO_TO_MM_COMMAND) == 0)
 	{
 		GameStateManager *gsm = game->getGSM();
