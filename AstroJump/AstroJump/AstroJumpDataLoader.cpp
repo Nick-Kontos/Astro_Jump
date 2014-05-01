@@ -231,7 +231,7 @@ int LuaIncAndReturn(float f)
 loadLevel - This method should load the data the level described by the
 levelInitFile argument in to the Game's game state manager.
 */
-void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
+void AstroJumpDataLoader::loadWorld(Game *game, string levelInitFile)
 {
 	// LOAD THE LEVEL'S BACKGROUND *IMAGE*
 	TMXMapImporter tmxMapImporter;
@@ -249,8 +249,8 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	//Load level from lua
 
 	LuaState* lua_state = LuaState::Create();
-	
-	int result = lua_state->DoFile("Level1.lua");
+	const char * c = levelInitFile.c_str();
+	int result = lua_state->DoFile(c);
 	lua_state->GetGlobals().RegisterDirect("incAndReturn", LuaIncAndReturn);
 	lua_state->GetGlobals().RegisterDirect("createPlayer", LuaCreatePlayer);
 	lua_state->GetGlobals().RegisterDirect("createAsteroid", LuaCreateAsteroid);
