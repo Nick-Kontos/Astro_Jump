@@ -169,6 +169,7 @@ int LuaSetGravity(float f)
 {
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
+	SpriteManager *spriteManager = gsm->getSpriteManager();
 	physics->setGravity(f*.02);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	//init the contact listener in physics
