@@ -264,7 +264,7 @@ void SpriteManager::update(Game *game)
 	}
 	if (!isOnAsteriod)
 	{
-		if (player.getBody()->GetLinearVelocity().x == 0 && player.getBody()->GetLinearVelocity().y == 0)
+		if (player.getBody()->GetLinearVelocity().x <= .1 && player.getBody()->GetLinearVelocity().y <= .1)
 		{
 			game->getGSM()->goToGameOver();
 		}
