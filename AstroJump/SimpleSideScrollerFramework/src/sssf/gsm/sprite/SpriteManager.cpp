@@ -284,6 +284,7 @@ void SpriteManager::attachPlayerToAsteriod()
 			//player is on top of asteriod -- stick to it
 			//for now hold place with break so we can put a breakpoint here
 			isOnAsteriod = true;
+			initial = false;
 			attachedAsteroid = num;
 			break;
 		}
@@ -299,7 +300,10 @@ void SpriteManager::jumpOffAsteriod(float jump)
 {
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
 		player.getBody()->GetWorldCenter(), true);
-	(asteroids[attachedAsteroid]->getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
-		asteroids[attachedAsteroid]->getBody()->GetWorldCenter(), true));
+	if (!initial)
+	{
+		(asteroids[attachedAsteroid]->getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+			asteroids[attachedAsteroid]->getBody()->GetWorldCenter(), true));
+	}
 	isOnAsteriod = false;
 }

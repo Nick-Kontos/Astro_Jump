@@ -310,8 +310,8 @@ void AstroJumpDataLoader::initVictoryScreen(GameGUI *gui, DirectXTextureManager 
 	ScreenGUI *victoryScreen = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_VICTORY_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
 	imageToAdd->width = 512;
@@ -375,8 +375,8 @@ void AstroJumpDataLoader::initDefeatScreen(GameGUI *gui, DirectXTextureManager *
 	ScreenGUI *deafeatScreen = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_DEFEAT_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
 	imageToAdd->width = 512;

@@ -54,6 +54,7 @@ private:
 	bool isOnAsteriod;
 	bool isOverAsteriod;
 	bool won=false;
+	bool initial = true;
 	int attachedAsteroid=0;
 public:
 
