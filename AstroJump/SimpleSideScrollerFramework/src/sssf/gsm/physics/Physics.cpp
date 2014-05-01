@@ -24,6 +24,7 @@
 #include <list>
 #include "Box2D\Box2D.h"
 #include "sssf\gsm\physics\MyContactListener.h"
+#include "sssf\gsm\sprite\SpriteManager.h"
 
 /*
 	The default constructor initializes box2D.
@@ -55,10 +56,10 @@ void Physics::setGravity(float initGravity)
 	world->SetGravity(g);
 }
 
-void Physics::initContactListener(Game *game)
+void Physics::initContactListener(SpriteManager *sm)
 {
-	MyContactListener listener(game);
-	world->SetContactListener(&listener);
+	MyContactListener listener(sm);
+	//world->SetContactListener(&listener);
 }
 
 /*
