@@ -184,10 +184,23 @@ AnimatedSpriteType* SpriteManager::getSpriteType(unsigned int typeIndex)
 	unloadSprites - This method removes all artwork from memory that
 	has been allocated for game sprites.
 */
-void SpriteManager::unloadSprites()
+void SpriteManager::unloadSprites(GameStateManager *gsm)
 {
+	Physics *physic = gsm->getPhysics();
+	while (asteroids.size()>=1)
+	{
+		AnimatedSprite *asteroid = asteroids.back();
+		physic->removeSprite(asteroid);		
+		asteroids.pop_back();
+	}
+	while (enemies.size() >= 1)
+	{
+		AnimatedSprite *enemy = enemies.back();
+		physic->removeSprite(enemy);
+		enemies.pop_back();
+	}
+	physic->removeSprite(&player);
 
-	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
 }
 
 Bot* SpriteManager::removeBot(Bot *botToRemove)

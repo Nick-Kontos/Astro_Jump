@@ -15,6 +15,12 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	}
 	// THE USER PRESSED THE MOUSE BUTTON ON THE SPLASH
 	// SCREEN, SO LET'S GO TO THE MAIN MENU
+	else if (command.compare(W_QUIT_MM_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->unloadCurrentLevel();
+		gsm->goToMainMenu();
+	}
 	else if (command.compare(W_GO_TO_MM_COMMAND) == 0)
 	{
 		GameStateManager *gsm = game->getGSM();

@@ -86,7 +86,7 @@ public:
 	void				clearSprites();
 	AnimatedSpriteType* getSpriteType(unsigned int typeIndex);
 	Bot*				removeBot(Bot *botToRemove);
-	void				unloadSprites();
+	void				unloadSprites(GameStateManager *gsm);
 	void				update(Game *game);
 	void				attachPlayerToAsteriod();
 	void				jumpOffAsteriod(float jumpval);
