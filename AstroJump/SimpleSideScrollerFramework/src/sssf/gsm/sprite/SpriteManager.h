@@ -52,7 +52,7 @@ public:
 
 	
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager()		{ isOnAsteriod = true; }
+	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
@@ -63,7 +63,10 @@ public:
 	AnimatedSprite*         getLives()              { return &lives;            }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
 	list<Bot*>::iterator	getEndOfBotsIterator()	{ return bots.end();		}
-	bool*					getIsOnAsteriod()		{ return &isOnAsteriod;     }
+	bool					getIsOnAsteriod()		{ return isOnAsteriod;     }
+	bool					getIsOverAsteriod()		{ return isOverAsteriod;	}
+	void					setIsOnAsteriod(bool b)		{ isOnAsteriod = b;		}
+	void					setIsOverAsteriod(bool b)		{ isOverAsteriod = b; }
 
 	// METHODS DEFINED IN SpriteManager.cpp
 	void                enterYellowState(Game *game);
