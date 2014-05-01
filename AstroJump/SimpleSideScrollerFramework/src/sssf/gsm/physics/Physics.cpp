@@ -88,7 +88,45 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	sprite->setBody(body);
 	sprite->getBody()->ApplyForceToCenter(*initforce, true);
 }
+void Physics::addEnemy(AnimatedSprite *player, float x, float y)
+{
+	//add some things to the sprite fields
+	player->setRadius(player->getSpriteType()->getTextureWidth() / 2 * .02f);
+	player->setSpawnX(x);
+	player->setSpawnY(y);
 
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(player->getSpawnX(), player->getSpawnY());
+	bodyDef.userData = &player;
+	bodyDef.linearDamping = player->getDamping();
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = player->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	fixtureDef.density = player->getDensity();
+	fixtureDef.friction = player->getFriction();
+	//add collision filtering
+	//player is 0 bit
+	fixtureDef.filter.categoryBits = 4;
+	//they collide with world boundries
+	fixtureDef.filter.maskBits = 5;
+	//set restitution values
+	fixtureDef.restitution = 0.7f;
+	body->CreateFixture(&fixtureDef);
+
+	player->setBody(body);
+
+	//add an initial velocity
+	b2Vec2* initforce = new b2Vec2(x, y);
+	player->getBody()->ApplyForceToCenter(*initforce, true);
+
+}
 void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 {
 	//add some things to the sprite fields
@@ -116,7 +154,7 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	//player is 0 bit
 	fixtureDef.filter.categoryBits = 4;
 	//they collide with world boundries
-	fixtureDef.filter.maskBits = 1;
+	fixtureDef.filter.maskBits = 5;
 	//set restitution values
 	fixtureDef.restitution = 0.7f;
 	body->CreateFixture(&fixtureDef);

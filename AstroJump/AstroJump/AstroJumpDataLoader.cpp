@@ -170,15 +170,6 @@ int LuaSetGravity(float f)
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(f*.02);
-	SpriteManager *spriteManager = gsm->getSpriteManager();
-	AnimatedSprite *a = spriteManager->getBackground();
-	a->setSpriteType(spriteManager->getSpriteType(2));
-	a->setAlpha(255);
-	a->setCurrentState(IDLE);
-	a->setSpawnX(0);
-	a->setSpawnY(0);
-	a->setSpawnVx(0);
-	a->setSpawnVy(0);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	//init the contact listener in physics
 	physics->initContactListener(spriteManager);
@@ -198,6 +189,22 @@ int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 	Physics *physics = gsm->getPhysics();
 	physics->addAsteriod(a, x * .02f, y * .02f);
 	spriteManager->addAsteriod(a);
+	return x;
+
+}
+int LuaCreateBot(float x, float y, float vx, float vy, float r)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	Enemy *a = new Enemy();
+	a->setSpriteType(spriteManager->getSpriteType(2));
+	a->setAlpha(255);
+	a->setCurrentState(L"IDLE");
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	Physics *physics = gsm->getPhysics();
+	physics->addEnemy(a, x * .02f, y * .02f);
+	spriteManager->addEnemy(a);
 	return x;
 
 }
@@ -226,7 +233,7 @@ int LuaIncAndReturn(float f)
 loadLevel - This method should load the data the level described by the
 levelInitFile argument in to the Game's game state manager.
 */
-void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
+void AstroJumpDataLoader::loadWorld(Game *game, string levelInitFile)
 {
 	// LOAD THE LEVEL'S BACKGROUND *IMAGE*
 	TMXMapImporter tmxMapImporter;
@@ -244,12 +251,13 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	//Load level from lua
 
 	LuaState* lua_state = LuaState::Create();
-	
-	int result = lua_state->DoFile("Level1.lua");
+	const char * c = levelInitFile.c_str();
+	int result = lua_state->DoFile(c);
 	lua_state->GetGlobals().RegisterDirect("incAndReturn", LuaIncAndReturn);
 	lua_state->GetGlobals().RegisterDirect("createPlayer", LuaCreatePlayer);
 	lua_state->GetGlobals().RegisterDirect("createAsteroid", LuaCreateAsteroid);
 	lua_state->GetGlobals().RegisterDirect("setGravity", LuaSetGravity);
+	lua_state->GetGlobals().RegisterDirect("createEnemy", LuaCreateBot);
 
 	LuaFunction<void> la = lua_state->GetGlobal("levela");
 	la();
