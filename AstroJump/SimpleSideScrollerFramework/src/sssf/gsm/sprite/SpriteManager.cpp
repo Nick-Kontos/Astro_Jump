@@ -55,14 +55,14 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 	}
 }
 
-void SpriteManager::addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport)
-{
-	AnimatedSpriteType *spriteType = backgroundsprite->getSpriteType();
-	renderList->addRenderItem(backgroundsprite->getCurrentImageID(),
-								0 - viewport->getViewportX() + 0.5f,
-								0 - viewport->getViewportY() + 0.5f,
-								0, 255, spriteType->getTextureWidth(), spriteType->getTextureHeight(), 0);
-}
+//void SpriteManager::addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport)
+//{
+//	AnimatedSpriteType *spriteType = backgroundsprite->getSpriteType();
+//	renderList->addRenderItem(backgroundsprite->getCurrentImageID(),
+//								0 - viewport->getViewportX() + 0.5f,
+//								0 - viewport->getViewportY() + 0.5f,
+//								0, 255, spriteType->getTextureWidth(), spriteType->getTextureHeight(), 0);
+//}
 
 void SpriteManager::addGUISpriteToRenderList(	AnimatedSprite *sprite,
 											RenderList *renderList,
@@ -99,23 +99,23 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		Viewport *viewport = gui->getViewport();
 		//add background image
 
-		//add asteriods
-		list<AnimatedSprite*>::iterator asteriodsIterator;
-		asteriodsIterator = asteriods.begin();
-		while (asteriodsIterator != asteriods.end())
+		//add asteroids
+		vector<AnimatedSprite*>::iterator asteroidsIterator;
+		asteroidsIterator = asteroids.begin();
+		while (asteroidsIterator != asteroids.end())
 		{
-			AnimatedSprite *asteriod = (*asteriodsIterator);
-			addSpriteToRenderList(asteriod, renderList, viewport);
-			asteriodsIterator++;
+			AnimatedSprite *asteroid = (*asteroidsIterator);
+			addSpriteToRenderList(asteroid, renderList, viewport);
+			asteroidsIterator++;
 		}
 		// NOW ADD THE REST OF THE SPRITES
-		list<Bot*>::iterator botIterator;
-		botIterator = bots.begin();
-		while (botIterator != bots.end())
+		list<Enemy*>::iterator enemyIterator;
+		enemyIterator = enemies.begin();
+		while (enemyIterator != enemies.end())
 		{			
-			Bot *bot = (*botIterator);
-			addSpriteToRenderList(bot, renderList, viewport);
-			botIterator++;
+			Enemy *enemy = (*enemyIterator);
+			addSpriteToRenderList(enemy, renderList, viewport);
+			enemyIterator++;
 		}
 		//add GUI sprites
 		//addGUISpriteToRenderList(&healthbar, renderList, viewport);
@@ -135,10 +135,14 @@ void SpriteManager::addBot(Bot *botToAdd)
 {
 	bots.push_back(botToAdd);
 }
+void SpriteManager::addEnemy(Enemy *enemyToAdd)
+{
+	enemies.push_back(enemyToAdd);
+}
 
 void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
 {
-	asteriods.push_back(asteriodToAdd);
+	asteroids.push_back(asteriodToAdd);
 }
 /*
 	addSpriteType - This method is for adding a new sprite
@@ -217,23 +221,32 @@ void SpriteManager::update(Game *game)
 	player.updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES
-	list<Bot*>::iterator botIterator;
-	botIterator = bots.begin();
-	while (botIterator != bots.end())
+	list<Enemy*>::iterator enemyIterator;
+	enemyIterator = enemies.begin();
+	while (enemyIterator != enemies.end())
 	{
-		Bot *bot = (*botIterator);
-		bot->think(game);
-		bot->updateSprite();
-		botIterator++;
+		Enemy *enemy = (*enemyIterator);
+		int t = enemy->getTargetAsteroid();
+		int a = asteroids.size();
+		if (a == t)
+		{
+			enemy->resetTarget();
+			t = 0;
+		}
+		float x = asteroids[t]->getX();
+		float y = asteroids[t]->getY();
+		enemy->think(x,y);
+		enemy->updateSprite();
+		enemyIterator++;
 	}
 }
 void SpriteManager::attachPlayerToAsteriod()
 {
 	//may leak memory
-	list<AnimatedSprite*>::iterator asteriodIterator;
-	asteriodIterator = asteriods.begin();
+	vector<AnimatedSprite*>::iterator asteriodIterator;
+	asteriodIterator = asteroids.begin();
 	float radius;
-	while (asteriodIterator != asteriods.end()){
+	while (asteriodIterator != asteroids.end()){
 		AnimatedSprite *asteriod = *asteriodIterator;
 		radius = asteriod->getSpriteType()->getTextureWidth() / 2;
 		if (radius >= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())

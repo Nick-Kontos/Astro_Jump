@@ -170,15 +170,6 @@ int LuaSetGravity(float f)
 	GameStateManager* gsm = lua::gsm;
 	Physics *physics = gsm->getPhysics();
 	physics->setGravity(f*.02);
-	SpriteManager *spriteManager = gsm->getSpriteManager();
-	AnimatedSprite *a = spriteManager->getBackground();
-	a->setSpriteType(spriteManager->getSpriteType(2));
-	a->setAlpha(255);
-	a->setCurrentState(IDLE);
-	a->setSpawnX(0);
-	a->setSpawnY(0);
-	a->setSpawnVx(0);
-	a->setSpawnVy(0);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	return f;
 }
@@ -196,6 +187,22 @@ int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 	Physics *physics = gsm->getPhysics();
 	physics->addAsteriod(a, x * .02f, y * .02f);
 	spriteManager->addAsteriod(a);
+	return x;
+
+}
+int LuaCreateBot(float x, float y, float vx, float vy, float r)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	Enemy *a = new Enemy();
+	a->setSpriteType(spriteManager->getSpriteType(2));
+	a->setAlpha(255);
+	a->setCurrentState(L"IDLE");
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	Physics *physics = gsm->getPhysics();
+	physics->addEnemy(a, x * .02f, y * .02f);
+	spriteManager->addEnemy(a);
 	return x;
 
 }
@@ -248,6 +255,7 @@ void AstroJumpDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	lua_state->GetGlobals().RegisterDirect("createPlayer", LuaCreatePlayer);
 	lua_state->GetGlobals().RegisterDirect("createAsteroid", LuaCreateAsteroid);
 	lua_state->GetGlobals().RegisterDirect("setGravity", LuaSetGravity);
+	lua_state->GetGlobals().RegisterDirect("createEnemy", LuaCreateBot);
 
 	LuaFunction<void> la = lua_state->GetGlobal("levela");
 	la();

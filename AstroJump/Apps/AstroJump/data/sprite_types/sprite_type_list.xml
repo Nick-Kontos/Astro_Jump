@@ -2,5 +2,5 @@
 <sprite_type_list>
   <sprite_type>player</sprite_type>
   <sprite_type>asteroids</sprite_type>
-  <sprite_type>background</sprite_type>
+  <sprite_type>enemy</sprite_type>
 </sprite_type_list>
