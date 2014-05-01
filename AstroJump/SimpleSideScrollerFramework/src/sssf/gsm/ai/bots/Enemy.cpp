@@ -11,8 +11,8 @@ void Enemy::think(float x, float y)
 	}
 	else
 	{
-		float vx = abs(x - x1) / d;
-		float vy = abs(y - y1) / d;
+		float vx = (x - x1) / d;
+		float vy = (y - y1) / d;
 		body->SetLinearVelocity(b2Vec2(vx, vy));
 	}
 }
