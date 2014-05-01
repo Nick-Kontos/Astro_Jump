@@ -172,56 +172,33 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	asteriod->getBody()->ApplyForceToCenter(b2Vec2(asteriod->getSpawnVx(), asteriod->getSpawnVy()), true);
 }
 
-void Physics::constructBoundries(int height, int width){
-	//create up boundry
-	b2BodyDef up;	
-	up.position.Set( 0, width / 2 );
-	up.type = b2_staticBody;
-	b2Body* upBody = world->CreateBody(&up);
-	b2PolygonShape upBoundry;
-	upBoundry.SetAsBox(width, 1);
-	b2FixtureDef upFixture;
-	upFixture.shape = &upBoundry;
-	upFixture.filter.categoryBits = 1;
-	upFixture.filter.maskBits = 0;
-	upBody->CreateFixture(&upFixture);
-
-	//create down boundry
-	b2BodyDef down;
-	down.position.Set(height, width / 2);
-	down.type = b2_staticBody;
-	b2Body* downBody = world->CreateBody(&down);
-	b2PolygonShape downBoundry;
-	downBoundry.SetAsBox(width, 1);
-	b2FixtureDef downFixture;
-	downFixture.shape = &downBoundry;
-	downFixture.filter.categoryBits = 1;
-	downFixture.filter.maskBits = 0;
-	downBody->CreateFixture(&downFixture);
-
-	b2BodyDef left;
-	left.position.Set(height / 2, 0);
-	left.type = b2_staticBody;
-	b2Body* leftBody = world->CreateBody(&left);
-	b2PolygonShape leftBoundry;
-	leftBoundry.SetAsBox(1, height);
-	b2FixtureDef leftFixture;
-	leftFixture.shape = &leftBoundry;
-	leftFixture.filter.categoryBits = 1;
-	leftFixture.filter.maskBits = 0;
-	leftBody->CreateFixture(&leftFixture);
-
-	b2BodyDef right;
-	right.position.Set(height / 2, width);
-	right.type = b2_staticBody;
-	b2Body* rightBody = world->CreateBody(&right);
-	b2PolygonShape rightBoundry;
-	rightBoundry.SetAsBox(1, height);
-	b2FixtureDef rightFixture;
-	rightFixture.shape = &rightBoundry;
-	rightFixture.filter.categoryBits = 1;
-	rightFixture.filter.maskBits = 0;
-	rightBody->CreateFixture(&rightFixture);
+void Physics::constructBoundries(int height, int width)
+{
+	b2BodyDef myBodyDef;
+	myBodyDef.type = b2_staticBody;
+	myBodyDef.position.Set(0, 0);
+	b2EdgeShape edgeShape;
+	edgeShape.Set(b2Vec2(0, 0), b2Vec2(width, 0));
+	b2FixtureDef myFixtureDef;
+	myFixtureDef.shape = &edgeShape;
+	//add north boundary
+	b2Body* northbound = world->CreateBody(&myBodyDef);
+	northbound->CreateFixture(&myFixtureDef);
+	//add west boundary
+	edgeShape.Set(b2Vec2(0, 0), b2Vec2(0, height));
+	myFixtureDef.shape = &edgeShape;
+	b2Body* westbound = world->CreateBody(&myBodyDef);
+	westbound->CreateFixture(&myFixtureDef);
+	//add south boundary
+	edgeShape.Set(b2Vec2(0, height), b2Vec2(width, height));
+	myFixtureDef.shape = &edgeShape;
+	b2Body* southbound = world->CreateBody(&myBodyDef);
+	southbound->CreateFixture(&myFixtureDef);
+	//add east boundary
+	edgeShape.Set(b2Vec2(width, 0), b2Vec2(width, height));
+	myFixtureDef.shape = &edgeShape;
+	b2Body* eastbound = world->CreateBody(&myBodyDef);
+	eastbound->CreateFixture(&myFixtureDef);
 
 }
 /*
