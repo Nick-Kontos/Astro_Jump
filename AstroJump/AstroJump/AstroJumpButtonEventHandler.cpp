@@ -19,12 +19,16 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->getGUI()->getViewport()->setViewportX(0.0f);
+		game->getGUI()->getViewport()->setViewportY(0.0f);
 		gsm->goToMainMenu();
 	}
 	else if (command.compare(W_RESTART_COMMAND) == 0)
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->getGUI()->getViewport()->setViewportX(0.0f);
+		game->getGUI()->getViewport()->setViewportY(0.0f);
 		game->startGame();
 	}
 	else if (command.compare(W_GO_TO_MM_COMMAND) == 0)
