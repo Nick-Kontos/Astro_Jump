@@ -34,6 +34,9 @@ static const wstring	W_COLOR_KEY_BLUE = L"COLOR_KEY_BLUE";
 
 // CONSTANTS FOR ARTWORK - NOTE, THIS SHOULD REALLY BE LOADED FROM A FILE
 static const wstring	W_GO_TO_MM_COMMAND = L"Go To Main Menu";
+static const wstring	W_LEVEL1_COMMAND = L"Level1";
+static const wstring	W_LEVEL2_COMMAND = L"Level2";
+static const wstring	W_LEVEL3_COMMAND = L"Level3";
 static const wstring	W_START_COMMAND = L"Start";
 static const wstring	W_EXIT_COMMAND = L"Exit";
 static const wstring	W_RESTART_COMMAND = L"Restart";
@@ -53,6 +56,10 @@ static const wstring	W_DEFEAT_PATH = L"data/gui/overlays/Astro_Jump_Defeat_Scree
 static const wstring	W_HELP_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Help_Screen1.png";
 static const wstring	W_ABOUT_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_About_Screen1.png";
 //BUTTONS
+static const wstring	W_LEVEL1_PATH = L"data/gui/buttons/Astro_Jump_Level1_Button.png";
+static const wstring	W_LEVEL2_PATH = L"data/gui/buttons/Astro_Jump_Level2_Button.png";
+static const wstring	W_LEVEL3_PATH = L"data/gui/buttons/Astro_Jump_Level3_Button.png";
+
 static const wstring	W_SELECT_LEVEL_PATH = L"data/gui/buttons/Astro_Jump_Select_Level_Button.png";
 static const wstring	W_EXIT_PATH = L"data/gui/buttons/Astro_Jump_Exit_Button.png";
 static const wstring	W_RESTART_PATH = L"data/gui/buttons/Astro_Jump_Restart_Button.png";
