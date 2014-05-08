@@ -50,21 +50,25 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		player->rotateClockwise(0.0f);
 		if (input->isKeyDown(UP_KEY))
 		{
+			spritemanager->lockScreen = false;
 			viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
 		if (input->isKeyDown(DOWN_KEY))
 		{
+			spritemanager->lockScreen = false;
 			viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
 		if (input->isKeyDown(LEFT_KEY))
 		{
+			spritemanager->lockScreen = false;
 			viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
 		if (input->isKeyDown(RIGHT_KEY))
 		{
+			spritemanager->lockScreen = false;
 			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
@@ -87,6 +91,10 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDown(D_KEY)){
 			//rotate player clockwise
 			player->rotateClockwise(2.5f);
+		}
+		if (input->isKeyDown(SHIFT_KEY))
+		{
+			spritemanager->lockScreen = true;
 		}
 	}
 
