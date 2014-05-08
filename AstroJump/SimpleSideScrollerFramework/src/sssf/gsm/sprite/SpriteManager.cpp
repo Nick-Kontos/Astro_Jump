@@ -269,11 +269,23 @@ void SpriteManager::update(Game *game)
 			game->getGSM()->goToGameOver();
 		}
 	}
+	//Update Viewport
+	if (lockScreen)
+	{
+		Viewport *view = game->getGUI()->getViewport();
+		int x = (player.getX()/.02) - (view->getViewportWidth() / 2);
+		if (x < 0)
+			x = 0;
+		int y = (player.getY()/.02) - (view->getViewportHeight() / 2);
+		if (y < 0)
+			y = 0;
+		view->setViewportX(x);
+		view->setViewportY(y);
+	}
 
 }
 void SpriteManager::attachPlayerToAsteriod()
 {
-	//may leak memory
 	vector<AnimatedSprite*>::iterator asteriodIterator;
 	asteriodIterator = asteroids.begin();
 	float radius;

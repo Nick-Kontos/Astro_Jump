@@ -58,7 +58,7 @@ private:
 	int attachedAsteroid=0;
 public:
 
-	
+	bool lockScreen = true;
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
 	~SpriteManager()	{}
