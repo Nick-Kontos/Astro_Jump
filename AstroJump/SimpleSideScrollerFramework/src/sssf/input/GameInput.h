@@ -52,7 +52,11 @@ public:
 	// CHECKS TO SEE IF A KEY WAS RECENTLY PRESSED (FIRED ONCE PER PRESS)
 	bool	isKeyDownForFirstTime(int key)		
 	{	return inputState[key].isFirstPress;			}
-
+	
+	bool wasHeldDown(int key)
+	{
+		return inputState[key].wasHeldDown;
+	}
 	// REGISTERS A KeyHandler 
 	void	registerKeyHandler(KeyEventHandler *initKeyHandler)
 	{	keyHandler = initKeyHandler;					}

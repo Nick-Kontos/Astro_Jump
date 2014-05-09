@@ -7,7 +7,14 @@ class Game;
 class AstroJumpKeyEventHandler : public KeyEventHandler
 {
 public:
-	AstroJumpKeyEventHandler()		{}
+
+	float force;
+	bool jumping;
+	bool space;
+	AstroJumpKeyEventHandler()		{ force = 0;
+	jumping = false;
+	space = false;
+	}
 	~AstroJumpKeyEventHandler()		{}
 	void handleKeyEvents(Game *game);
 };

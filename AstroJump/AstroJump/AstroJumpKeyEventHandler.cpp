@@ -78,11 +78,25 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		{
  			if (!spritemanager->getIsOnAsteriod()){
 				spritemanager->attachPlayerToAsteriod(gsm->getPhysics()->world);
+				jumping = false;
 			}
 			else {
-				game->getEffectsAudio()->start(L"Media\\Jump.wav");
-				spritemanager->jumpOffAsteriod(1500.0f, gsm->getPhysics()->world);
+					force = 20.0f;
+					jumping = true;
 			}
+		}
+		else if (input->wasHeldDown(SPACE_KEY) && jumping == true)
+		{
+			force+=20.0f;
+			jumping = true;
+
+		}
+		if (jumping == true && !(input->isKeyDown(SPACE_KEY)))
+		{
+			jumping = false;
+			game->getEffectsAudio()->start(L"Media\\Jump.wav");
+
+			spritemanager->jumpOffAsteriod(force, gsm->getPhysics()->world);
 		}
 		if (input->isKeyDown(A_KEY)){
 			//rotate player counter-clockwise

@@ -861,6 +861,18 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 	// NOW ADD THE IN-GAME GUI
 	ScreenGUI *inGameGUI = new ScreenGUI();
 
+	unsigned int imageID = guiTextureManager->loadTexture(W_TOP_PANEL_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 1600;
+	imageToAdd->height = 64;
+	imageToAdd->imageID = imageID;
+	imageToAdd->roationInRadians = 0.0f;
+	inGameGUI->addOverlayImage(imageToAdd);
+
 	unsigned int normalTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_PATH);
 	unsigned int mouseOverTextureID = guiTextureManager->loadTexture(W_QUIT_IMAGE_PATH);
 
