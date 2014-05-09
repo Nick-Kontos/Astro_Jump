@@ -486,7 +486,7 @@ void DirectXGraphics::renderWorldRenderList()
 			position.y += viewport->getViewportOffsetY();
 
 			// ADJUST FOR THE GUI OFFSET
-			if ((position.x < viewport->getViewportOffsetX())
+			/*if ((position.x < viewport->getViewportOffsetX())
 				|| (position.y < viewport->getViewportOffsetY()))
 			{
 				IDirect3DSurface9 *surface;
@@ -511,7 +511,7 @@ void DirectXGraphics::renderWorldRenderList()
 					rect->top = yDiff;
 					position.y += yDiff;
 				}
-			}
+			}*/
 
 			// LET'S PUT THE STANDARD ROTATION MATRIX ASIDE
 			// FOR A SECOND. IT WILL BE USED FOR RENDERING THE
