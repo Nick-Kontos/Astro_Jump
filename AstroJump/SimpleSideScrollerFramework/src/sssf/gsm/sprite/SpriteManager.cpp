@@ -204,7 +204,6 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
 	attachedAsteroid = 0;
-	initial = true;
 	won = false;
 
 }
@@ -262,51 +261,76 @@ void SpriteManager::update(Game *game)
 	{
 		game->getGSM()->goToVictory();
 	}
-	if (!isOnAsteriod)
+	if (!isOverAsteriod && !isOnAsteriod)
 	{
 		if (player.getBody()->GetLinearVelocity().x <= .1 && player.getBody()->GetLinearVelocity().y <= .1)
 		{
-			game->getGSM()->goToGameOver();
+			if (!player.getBody()->IsAwake()){
+				game->getGSM()->goToGameOver();
+			}
 		}
 	}
 
 }
-void SpriteManager::attachPlayerToAsteriod()
+void SpriteManager::attachPlayerToAsteriod(b2World *world)
 {
-	vector<AnimatedSprite*>::iterator asteriodIterator;
-	asteriodIterator = asteroids.begin();
-	float radius;
-	int num = 0;
-	while (asteriodIterator != asteroids.end())
-	{
-		AnimatedSprite *asteriod = *asteriodIterator;
-		radius = asteriod->getSpriteType()->getTextureWidth() / 2 * .02f;
-		if (radius >= sqrt((player.getX() - asteriod->getX()) * (player.getX() - asteriod->getX())
-			+ (player.getY() - asteriod->getY()) * (player.getY() - asteriod->getY()))){
-			//player is on top of asteriod -- stick to it
-			//for now hold place with break so we can put a breakpoint here
-			isOnAsteriod = true;
-			initial = false;
-			attachedAsteroid = num;
-			break;
-		}
-		asteriodIterator++;
-		num++;
-	}
-	if (radius >= sqrt((player.getX() - winAsteroid.getX()) * (player.getX() - winAsteroid.getX()) + (player.getY() - winAsteroid.getY()) * (player.getY() - winAsteroid.getY())))
-	{
-		won = true;
+	if (isOverAsteriod){
+		b2RevoluteJointDef jointDef;
+		jointDef.bodyA = player.getBody();
+		jointDef.bodyB = attachedAsteroid->getBody();
+		jointDef.collideConnected = false;
+		jointDef.localAnchorA.Set(0, 0);
+		jointDef.localAnchorB.Set(attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()).x,
+			attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()).y);
+		playerAsteroidJoint = (b2RevoluteJoint*) world->CreateJoint(&jointDef);
+		isOnAsteriod = true;
 	}
 }
-void SpriteManager::jumpOffAsteriod(float jump)
+void SpriteManager::jumpOffAsteriod(float jump, b2World *world)
 {
-	//player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
+	/*player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	(player.getBody())->ApplyLinearImpulse(b2Vec2(jump * cos(player.getRotationInRadians()), jump * sin(player.getRotationInRadians())),
-		player.getBody()->GetWorldCenter(), true);
-	if (!initial)
+		player.getBody()->GetWorldCenter(), true);*/
+	if (isOnAsteriod)
 	{
-		(asteroids[attachedAsteroid]->getBody()->ApplyLinearImpulse(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
-			asteroids[attachedAsteroid]->getBody()->GetWorldCenter(), true));
+		//destroy the joint
+		world->DestroyJoint(playerAsteroidJoint);
+		//now apply the force
+		player.getBody()->ApplyForceToCenter(b2Vec2((jump) * cos(player.getRotationInRadians()), (jump) * sin(player.getRotationInRadians())),
+			 true);
+		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+			attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()), true);
+		isOnAsteriod = false;
+	}	
+}
+
+void SpriteManager::BeginContact(b2Contact* contact){
+	if (getPlayerAndAsteriod(contact)){
+		isOverAsteriod = true;
+		if (contact->GetFixtureA()->IsSensor()){
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
+		}
+		else {
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureA()->GetBody()->GetUserData());
+		}
 	}
-	isOnAsteriod = false;
+}
+
+void SpriteManager::EndContact(b2Contact* contact){
+	if (getPlayerAndAsteriod(contact)){
+		isOverAsteriod = false;
+	}
+}
+
+bool SpriteManager::getPlayerAndAsteriod(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	bool sensorA = fixtureA->IsSensor();
+	bool sensorB = fixtureB->IsSensor();
+	if (!(sensorA ^ sensorB))
+		return false;
+	return true;
 }

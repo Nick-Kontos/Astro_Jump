@@ -20,7 +20,7 @@
 #include "sssf\gsm\sprite\TopDownSprite.h"
 
 
-class SpriteManager
+class SpriteManager : public b2ContactListener
 {
 private:
 	// NOTE THAT MULTIPLE SPRITES MAY SHARE ARTWORK, SO SPRITE TYPES
@@ -40,12 +40,13 @@ private:
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	//****change to animatedsprite
 	TopDownSprite player;
-	//AnimatedSprite background;
 
 	//These sprites will be the health bar and lives displays
 	AnimatedSprite healthbar;
 	AnimatedSprite lives;
 	AnimatedSprite winAsteroid;
+	
+	b2RevoluteJoint* playerAsteroidJoint;
 	
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
@@ -54,11 +55,10 @@ private:
 	bool isOnAsteriod;
 	bool isOverAsteriod;
 	bool won=false;
-	bool initial = true;
-	int attachedAsteroid=0;
 public:
 
-	
+	AnimatedSprite* attachedAsteroid;
+
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
 	~SpriteManager()	{}
@@ -76,6 +76,7 @@ public:
 	bool					getIsOverAsteriod()		{ return isOverAsteriod;	}
 	void					setIsOnAsteriod(bool b)		{ isOnAsteriod = b;		}
 	void					setIsOverAsteriod(bool b)		{ isOverAsteriod = b; }
+	AnimatedSprite*			getLastAsteroid()       { return asteroids.back();  }
 
 	// METHODS DEFINED IN SpriteManager.cpp
 	void                enterYellowState(Game *game);
@@ -92,6 +93,9 @@ public:
 	Bot*				removeBot(Bot *botToRemove);
 	void				unloadSprites(GameStateManager *gsm);
 	void				update(Game *game);
-	void				attachPlayerToAsteriod();
-	void				jumpOffAsteriod(float jumpval);
+	void				attachPlayerToAsteriod(b2World *world);
+	void				jumpOffAsteriod(float jumpval, b2World *world);
+	void				BeginContact(b2Contact* contact);
+	void				EndContact(b2Contact* contact);
+	bool				getPlayerAndAsteriod(b2Contact* contact);
 };

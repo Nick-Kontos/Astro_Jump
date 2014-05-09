@@ -236,6 +236,9 @@ int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 	a->setSpawnVy(vy*.02);
 	Physics *physics = gsm->getPhysics();
 	physics->addPlayer(a, x * .02f, y * .02f);
+	LuaCreateAsteroid(x, y, 0, 0, 0);
+	spriteManager->attachedAsteroid = spriteManager->getLastAsteroid();
+	spriteManager->attachPlayerToAsteriod(gsm->getPhysics()->world);
 	return x;
 }
 int LuaIncAndReturn(float f)

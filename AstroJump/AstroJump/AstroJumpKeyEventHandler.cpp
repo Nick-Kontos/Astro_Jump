@@ -70,14 +70,14 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-		if (input->isKeyDown(SPACE_KEY))
+		if (input->isKeyDownForFirstTime(SPACE_KEY))
 		{
  			if (!spritemanager->getIsOnAsteriod()){
-				spritemanager->attachPlayerToAsteriod();
+				spritemanager->attachPlayerToAsteriod(gsm->getPhysics()->world);
 			}
 			else {
 				game->getEffectsAudio()->start(L"Media\\Jump.wav");
-				spritemanager->jumpOffAsteriod(40.0f);
+				spritemanager->jumpOffAsteriod(1500.0f, gsm->getPhysics()->world);
 			}
 		}
 		if (input->isKeyDown(A_KEY)){

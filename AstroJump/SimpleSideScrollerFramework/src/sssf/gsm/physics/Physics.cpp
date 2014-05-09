@@ -23,7 +23,6 @@
 #include <vector>
 #include <list>
 #include "Box2D\Box2D.h"
-#include "sssf\gsm\physics\MyContactListener.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 
 /*
@@ -59,8 +58,8 @@ void Physics::setGravity(float initGravity)
 void Physics::initContactListener(SpriteManager *sm)
 {
 	//ILLEGAL listener is out of scope
-	MyContactListener listener(sm);
-	world->SetContactListener(&listener);
+	spritemanager = sm;
+	world->SetContactListener(spritemanager);
 }
 
 /*
@@ -75,7 +74,7 @@ void Physics::addSprite(AnimatedSprite *sprite)
 	float y = sprite->getSpawnY();
 	bodyDef.position.Set(x, y);
 	b2Vec2* initforce = new b2Vec2(sprite->getSpawnVx(), sprite->getSpawnVy());	
-	bodyDef.userData = &sprite;
+	bodyDef.userData = sprite;
 	bodyDef.linearDamping = sprite->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 	b2CircleShape c;
@@ -100,7 +99,7 @@ void Physics::addEnemy(AnimatedSprite *player, float x, float y)
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(player->getSpawnX(), player->getSpawnY());
-	bodyDef.userData = &player;
+	bodyDef.userData = player;
 	bodyDef.linearDamping = player->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 
@@ -139,7 +138,7 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(player->getSpawnX(), player->getSpawnY());
-	bodyDef.userData = &player;
+	bodyDef.userData = player;
 	bodyDef.linearDamping = player->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 
@@ -185,7 +184,7 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(x, y);	
-	bodyDef.userData = &asteriod;
+	bodyDef.userData = asteriod;
 	bodyDef.linearDamping = asteriod->getDamping();
 	b2Body* body = world->CreateBody(&bodyDef);
 

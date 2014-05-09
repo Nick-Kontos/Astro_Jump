@@ -32,7 +32,7 @@ public:
 	float gravity;
 	int velocityIt = 8;
 	int positionIt = 4;
-	
+	SpriteManager *spritemanager;
 	b2World *world;
 
 
