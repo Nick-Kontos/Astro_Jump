@@ -173,7 +173,7 @@ int LuaSetGravity(float f)
 	physics->setGravity(f*.02);
 	physics->constructBoundries(gsm->getWorld()->getWorldHeight() * .02f, gsm->getWorld()->getWorldWidth() * .02f);
 	//init the contact listener in physics
-	physics->initContactListener(spriteManager);
+	//physics->initContactListener(spriteManager);
 	return f;
 }
 
@@ -363,7 +363,7 @@ void AstroJumpDataLoader::initVictoryScreen(GameGUI *gui, DirectXTextureManager 
 		200,
 		100,
 		false,
-		W_GO_TO_MM_COMMAND);
+		W_QUIT_MM_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	victoryScreen->addButton(buttonToAdd);
@@ -876,6 +876,27 @@ void AstroJumpDataLoader::initInGameGUI(GameGUI *gui, DirectXTextureManager *gui
 		100,
 		false,
 		W_QUIT_MM_COMMAND);
+	inGameGUI->addButton(buttonToAdd);
+
+
+	buttonToAdd = new Button();
+
+	 normalTextureID = guiTextureManager->loadTexture(W_RESTART_PATH);
+	 mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		250,
+		0,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_RESTART_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
 	inGameGUI->addButton(buttonToAdd);
 
 

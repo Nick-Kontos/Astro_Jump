@@ -56,7 +56,7 @@ private:
 	bool isOverAsteriod;
 	bool won=false;
 public:
-
+	bool lockScreen = true;
 	AnimatedSprite* attachedAsteroid;
 
 	// NOTHING TO INIT OR DESTROY
