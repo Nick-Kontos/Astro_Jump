@@ -204,6 +204,7 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
 	won = false;
+	isOverAsteriod = true;
 
 }
 
