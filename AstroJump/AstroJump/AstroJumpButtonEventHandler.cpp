@@ -27,6 +27,8 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->getGraphics()->getWorldTextureManager()->clear();
+		game->getGraphics()->getWorldTextureManager()->reloadAllTextures();
 		game->getGUI()->getViewport()->setViewportX(0.0f);
 		game->getGUI()->getViewport()->setViewportY(0.0f);
 		game->startGame();
