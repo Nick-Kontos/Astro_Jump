@@ -187,6 +187,7 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	bodyDef.userData = asteriod;
 	bodyDef.linearDamping = asteriod->getDamping();
 	bodyDef.angularDamping = 5.0f;
+	
 	b2Body* body = world->CreateBody(&bodyDef);
 
 	//create the fixture
