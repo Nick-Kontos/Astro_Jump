@@ -130,7 +130,7 @@ void Physics::addEnemy(AnimatedSprite *player, float x, float y)
 void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 {
 	//add some things to the sprite fields
-	player->setRadius(player->getSpriteType()->getTextureWidth() / 2 * .02f);
+	player->setRadius(player->getSpriteType()->getTextureHeight() / 2 * .02f);
 	player->setSpawnX(x);
 	player->setSpawnY(y);
 

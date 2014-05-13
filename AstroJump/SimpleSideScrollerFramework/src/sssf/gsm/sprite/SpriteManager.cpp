@@ -288,6 +288,8 @@ void SpriteManager::update(Game *game)
 void SpriteManager::attachPlayerToAsteriod(b2World *world)
 {
 	if (isOverAsteriod){
+		if (attachedAsteroid == &winAsteroid)
+			won = true;
 		b2RevoluteJointDef jointDef;
 		jointDef.bodyA = player.getBody();
 		jointDef.bodyB = attachedAsteroid->getBody();

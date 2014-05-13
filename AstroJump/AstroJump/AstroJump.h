@@ -56,6 +56,7 @@ static const wstring	W_VICTORY_PATH = L"data/gui/overlays/Astro_Jump_Victory_Scr
 static const wstring	W_DEFEAT_PATH = L"data/gui/overlays/Astro_Jump_Defeat_Screen1.png";
 static const wstring	W_HELP_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Help_Screen1.png";
 static const wstring	W_ABOUT_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_About_Screen1.png";
+static const wstring	W_TOP_PANEL_PATH = L"data/gui/overlays/Top_Panel.png";
 //BUTTONS
 static const wstring	W_LEVEL1_PATH = L"data/gui/buttons/Astro_Jump_Level1_Button.png";
 static const wstring	W_LEVEL2_PATH = L"data/gui/buttons/Astro_Jump_Level2_Button.png";
