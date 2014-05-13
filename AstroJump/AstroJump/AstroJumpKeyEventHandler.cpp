@@ -41,6 +41,9 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 	AnimatedSprite *player = spritemanager->getPlayer();
 	Viewport *viewport = game->getGUI()->getViewport();
 
+	//check various things and set the player's animation state
+
+
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -48,6 +51,8 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
 		player->rotateClockwise(0.0f);
+		//check various things and set the player's animation state
+
 		if (input->isKeyDown(UP_KEY))
 		{
 			spritemanager->lockScreen = false;
@@ -74,37 +79,63 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+		
+		if (input->isKeyDown(A_KEY)){
+			//rotate player counter-clockwise
+			if (player->getCurrentState() != TURN_LEFT || player->getCurrentState() != PULLEDBACK){
+				player->setCurrentState(TURN_LEFT);
+			}
+			player->rotateCClockwise(4.0f);
+		}
+		else if (input->isKeyDown(D_KEY)){
+			//rotate player clockwise
+			if (player->getCurrentState() != TURN_RIGHT || player->getCurrentState() != PULLEDBACK){
+				player->setCurrentState(TURN_RIGHT);
+			}
+			player->rotateClockwise(4.0f);
+		}
+		else if(!jumping && !pullingback && !pulledback){
+			player->setCurrentState(IDLE);
+		}
 		if (input->isKeyDownForFirstTime(SPACE_KEY))
 		{
  			if (!spritemanager->getIsOnAsteriod()){
 				spritemanager->attachPlayerToAsteriod(gsm->getPhysics()->world);
 				jumping = false;
+				jumped = false;
+				player->setCurrentState(IDLE);
 			}
 			else {
-					force = 20.0f;
-					jumping = true;
+					force = 0.0f;
+					pullingback = true;
 			}
 		}
-		else if (input->wasHeldDown(SPACE_KEY) && jumping == true)
+		else if (input->wasHeldDown(SPACE_KEY) && (pullingback == true || pulledback == true))
 		{
-			force+=20.0f;
+			if (force < MAX_JUMP_FORCE){
+				force += 100.0f;
+				if (player->getCurrentState() != PULLBACK){
+					player->setCurrentState(PULLBACK);
+				}
+				pullingback = true;
+				pulledback = false;
+			}
+			else {
+				if (player->getCurrentState() != PULLEDBACK){
+					player->setCurrentState(PULLEDBACK);
+				}
+				pulledback = true;
+				pullingback = false;
+			}		
+		}
+		if ((pullingback == true || pulledback == true) && !(input->isKeyDown(SPACE_KEY)))
+		{
 			jumping = true;
-
-		}
-		if (jumping == true && !(input->isKeyDown(SPACE_KEY)))
-		{
-			jumping = false;
+			pullingback = false;
+			pulledback = false;
 			game->getEffectsAudio()->start(L"Media\\Jump.wav");
-
+			player->setCurrentState(JUMPING);
 			spritemanager->jumpOffAsteriod(force, gsm->getPhysics()->world);
-		}
-		if (input->isKeyDown(A_KEY)){
-			//rotate player counter-clockwise
-			player->rotateCClockwise(4.0f);
-		}
-		if (input->isKeyDown(D_KEY)){
-			//rotate player clockwise
-			player->rotateClockwise(4.0f);
 		}
 		if (input->isKeyDown(SHIFT_KEY))
 		{
