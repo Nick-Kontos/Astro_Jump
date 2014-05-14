@@ -331,9 +331,14 @@ void SpriteManager::update(Game *game)
 		enemy->updateSprite();
 		enemy3Iterator++;
 	}
-	if (won)
+	if (won && (game->getCurrentLevelFileName().compare("level3.lua")))
+	{
+		game->getGSM()->goToGameVictory();
+	}
+	else if (won)
 	{
 		game->getGSM()->goToVictory();
+
 	}
 	if (!isOverAsteriod && !isOnAsteriod)
 	{

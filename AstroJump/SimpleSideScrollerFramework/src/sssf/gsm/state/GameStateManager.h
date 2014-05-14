@@ -84,6 +84,7 @@ public:
 	void			goToLoadLevel();
 	void			goToMainMenu();
 	void            goToVictory();
+	void            goToGameVictory();
 	void            goToGameOver();
 	void            goToHelp();
 	void            goToAbout();

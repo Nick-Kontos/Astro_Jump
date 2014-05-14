@@ -103,6 +103,11 @@ void GameStateManager::goToVictory()
 {
 	currentGameState = GS_VICTORY;
 }
+
+void GameStateManager::goToGameVictory()
+{
+	currentGameState = GS_GAME_VICTORY;
+}
 /*
 	isAtSplashScreen - Used to test if this application is currently
 	at the splash screen. This will dictate what to render, but also
