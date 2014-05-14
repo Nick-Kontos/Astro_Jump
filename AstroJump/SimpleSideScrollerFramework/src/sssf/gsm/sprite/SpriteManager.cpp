@@ -108,6 +108,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			addSpriteToRenderList(asteroid, renderList, viewport);
 			asteroidsIterator++;
 		}
+		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		//add platforms
 		vector<AnimatedSprite*>::iterator platformsIterator;
 		platformsIterator = platforms.begin();
@@ -147,7 +148,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		//addGUISpriteToRenderList(&lives, renderList, viewport);
 
 		// ADD THE PLAYER SPRITE
-		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		addSpriteToRenderList(&player, renderList, viewport);
 	}
 }
