@@ -265,6 +265,8 @@ int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed, 
 	a->setSpriteType(spriteManager->getSpriteType(4));
 	a->setAlpha(255);
 	a->setCurrentState(L"IDLE");
+	a->setSpawnX(x);
+	a->setSpawnY(y);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
 	a->speed = speed;

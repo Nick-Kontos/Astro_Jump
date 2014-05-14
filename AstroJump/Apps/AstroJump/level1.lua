@@ -19,5 +19,5 @@ function levela()
 	addPointToEnemy2(0,500,500)
 	addPointToEnemy2(0,1000,1000)
 	addPointToEnemy2(0,750,750)
-	createEnemy3(1000.0, 400.0,0.0,0,4.0,.5,1000)
+	createEnemy3(1000.0, 400.0,0.0,0,4.0,.5,300)
 end
