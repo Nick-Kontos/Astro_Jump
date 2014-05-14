@@ -27,7 +27,7 @@ function levela()
 	
 	--set up player
 	createPlayer(300,200,0,0)
-	createEnemy(500,500,0,0,4,1)
+	createEnemy(500,500,0,0,1)
 	addPointToEnemy(0,1)
 	addPointToEnemy(0,2)
 	addPointToEnemy(0,4)
@@ -35,10 +35,10 @@ function levela()
 	addPointToEnemy(0,1)
 	addPointToEnemy(0,4)
 	
-	createEnemy2(1000.0,1000.0,0,0,4.0,2)
+	createEnemy2(1000.0,1000.0,0,0,2)
 	addPointToEnemy2(0,1234,432)
 	addPointToEnemy2(0,800,675)
 	addPointToEnemy2(0,356,750)
 	addPointToEnemy2(0,1605,1000)
-	createEnemy3(1000.0, 400.0,0.0,0,4.0,.5,1000)
+	createEnemy3(1000.0, 400.0,0.0,0,.5,1000)
 end
