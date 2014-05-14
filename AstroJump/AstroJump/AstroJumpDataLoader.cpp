@@ -257,7 +257,7 @@ int LuaCreateEnemy2(float x, float y, float vx, float vy, float r, float speed)
 	spriteManager->addEnemy2(a);
 	return x;
 }
-int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed)
+int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed, float distance)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -268,6 +268,7 @@ int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed)
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
 	a->speed = speed;
+	a->distance = distance *.02;
 	Physics *physics = gsm->getPhysics();
 	physics->addEnemy3(a, x * .02f, y * .02f);
 	spriteManager->addEnemy3(a);
@@ -284,7 +285,7 @@ int LuaAddPointToEnemy2(int num, float x, float y)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
-	spriteManager->enemies2[num]->addToList(x,y);
+	spriteManager->enemies2[num]->addToList(x*.02,y*.02);
 	return 1;
 }
 int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
