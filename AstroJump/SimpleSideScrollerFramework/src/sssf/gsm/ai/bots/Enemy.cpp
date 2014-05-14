@@ -7,7 +7,7 @@ void Enemy::think(float x, float y)
 	float d = (sqrt(((x - x1)*(x - x1)) + ((y - y1)*(y - y1))));
 	if (d <= .2)
 	{
-		targetAsteroid++;
+		nextAsteroid();
 	}
 	else
 	{
@@ -19,6 +19,12 @@ void Enemy::think(float x, float y)
 		else
 			currentState = L"RUNNING";
 		float vy = (y - y1) / d;
-		body->SetLinearVelocity(b2Vec2(5*vx, 5*vy));
+		body->SetLinearVelocity(b2Vec2(5*vx*speed, 5*vy*speed));
 	}
+}
+void Enemy::nextAsteroid()
+{
+	targetAsteroid++;
+	if (targetAsteroid >= asteroidList.size())
+		targetAsteroid = 0;
 }

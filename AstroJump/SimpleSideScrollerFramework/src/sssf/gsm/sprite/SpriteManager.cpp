@@ -118,13 +118,29 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			platformsIterator++;
 		}
 		// NOW ADD THE REST OF THE SPRITES
-		list<Enemy*>::iterator enemyIterator;
+		vector<Enemy*>::iterator enemyIterator;
 		enemyIterator = enemies.begin();
 		while (enemyIterator != enemies.end())
 		{			
 			Enemy *enemy = (*enemyIterator);
 			addSpriteToRenderList(enemy, renderList, viewport);
 			enemyIterator++;
+		}
+		vector<Enemy2*>::iterator enemy2Iterator;
+		enemy2Iterator = enemies2.begin();
+		while (enemy2Iterator != enemies2.end())
+		{
+			Enemy2 *enemy = (*enemy2Iterator);
+			addSpriteToRenderList(enemy, renderList, viewport);
+			enemy2Iterator++;
+		}
+		vector<Enemy3*>::iterator enemy3Iterator;
+		enemy3Iterator = enemies3.begin();
+		while (enemy3Iterator != enemies3.end())
+		{
+			Enemy3 *enemy = (*enemy3Iterator);
+			addSpriteToRenderList(enemy, renderList, viewport);
+			enemy3Iterator++;
 		}
 		//add GUI sprites
 		//addGUISpriteToRenderList(&healthbar, renderList, viewport);
@@ -148,6 +164,14 @@ void SpriteManager::addBot(Bot *botToAdd)
 void SpriteManager::addEnemy(Enemy *enemyToAdd)
 {
 	enemies.push_back(enemyToAdd);
+}
+void SpriteManager::addEnemy2(Enemy2 *enemyToAdd)
+{
+	enemies2.push_back(enemyToAdd);
+}
+void SpriteManager::addEnemy3(Enemy3 *enemyToAdd)
+{
+	enemies3.push_back(enemyToAdd);
 }
 
 void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
@@ -214,6 +238,18 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		physic->removeSprite(enemy);
 		enemies.pop_back();
 	}
+	while (enemies2.size() >= 1)
+	{
+		AnimatedSprite *enemy = enemies2.back();
+		physic->removeSprite(enemy);
+		enemies2.pop_back();
+	}
+	while (enemies3.size() >= 1)
+	{
+		AnimatedSprite *enemy = enemies3.back();
+		physic->removeSprite(enemy);
+		enemies3.pop_back();
+	}
 	physic->removeSprite(&player);
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
@@ -253,7 +289,7 @@ void SpriteManager::update(Game *game)
 	player.updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES
-	list<Enemy*>::iterator enemyIterator;
+	vector<Enemy*>::iterator enemyIterator;
 	enemyIterator = enemies.begin();
 	while (enemyIterator != enemies.end())
 	{
@@ -270,6 +306,24 @@ void SpriteManager::update(Game *game)
 		enemy->think(x,y);
 		enemy->updateSprite();
 		enemyIterator++;
+	}
+	vector<Enemy2*>::iterator enemy2Iterator;
+	enemy2Iterator = enemies2.begin();
+	while (enemy2Iterator != enemies2.end())
+	{
+		Enemy2 *enemy = (*enemy2Iterator);
+		enemy->think();
+		enemy->updateSprite();
+		enemy2Iterator++;
+	}
+	vector<Enemy3*>::iterator enemy3Iterator;
+	enemy3Iterator = enemies3.begin();
+	while (enemy3Iterator != enemies3.end())
+	{
+		Enemy3 *enemy = (*enemy3Iterator);
+		enemy->think(player.getX(),player.getY());
+		enemy->updateSprite();
+		enemy3Iterator++;
 	}
 	if (won)
 	{

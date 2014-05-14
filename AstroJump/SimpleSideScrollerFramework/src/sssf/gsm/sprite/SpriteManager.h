@@ -14,6 +14,8 @@
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\ai\Bot.h"
 #include "sssf\gsm\ai\bots\Enemy.h"
+#include "sssf\gsm\ai\bots\Enemy2.h"
+#include "sssf\gsm\ai\bots\Enemy3.h"
 #include "sssf\gsm\ai\BotRecycler.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
@@ -35,8 +37,6 @@ private:
 	vector<AnimatedSprite*> asteroids;
 	vector<AnimatedSprite*> platforms;
 
-	//These are the bots
-	list<Enemy*> enemies;
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	//****change to animatedsprite
@@ -59,6 +59,10 @@ private:
 public:
 	bool lockScreen = true;
 	AnimatedSprite* attachedAsteroid;
+	//These are the bots
+	vector<Enemy*> enemies;
+	vector<Enemy2*> enemies2;
+	vector<Enemy3*> enemies3;
 
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
@@ -83,6 +87,8 @@ public:
 	void                enterYellowState(Game *game);
 	void				addBot(Bot *botToAdd);
 	void				addEnemy(Enemy *enemyToAdd);
+	void				addEnemy2(Enemy2 *enemyToAdd);
+	void				addEnemy3(Enemy3 *enemyToAdd);
 	void				addAsteriod(AnimatedSprite *asteriodToAdd);
 	void				addPlatform(AnimatedSprite *platformToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
