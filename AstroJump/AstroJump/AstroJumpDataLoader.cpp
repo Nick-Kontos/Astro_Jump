@@ -209,7 +209,7 @@ int LuaCreateWinAsteroid(float x, float y, float vx, float vy, float r)
 	return x;
 
 }
-int LuaCreateBot(float x, float y, float vx, float vy, float r)
+int LuaCreateEnemy(float x, float y, float vx, float vy, float r, float speed)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -219,11 +219,57 @@ int LuaCreateBot(float x, float y, float vx, float vy, float r)
 	a->setCurrentState(L"RUNNING");
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
+	a->speed = speed;
 	Physics *physics = gsm->getPhysics();
 	physics->addEnemy(a, x * .02f, y * .02f);
 	spriteManager->addEnemy(a);
 	return x;
-
+}
+int LuaCreateEnemy2(float x, float y, float vx, float vy, float r, float speed)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	Enemy2 *a = new Enemy2();
+	a->setSpriteType(spriteManager->getSpriteType(3));
+	a->setAlpha(255);
+	a->setCurrentState(L"RUNNING");
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	a->speed = speed;
+	Physics *physics = gsm->getPhysics();
+	physics->addEnemy2(a, x * .02f, y * .02f);
+	spriteManager->addEnemy2(a);
+	return x;
+}
+int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	Enemy3 *a = new Enemy3();
+	a->setSpriteType(spriteManager->getSpriteType(4));
+	a->setAlpha(255);
+	a->setCurrentState(L"IDLE");
+	a->setSpawnVx(vx*.02);
+	a->setSpawnVy(vy*.02);
+	a->speed = speed;
+	Physics *physics = gsm->getPhysics();
+	physics->addEnemy3(a, x * .02f, y * .02f);
+	spriteManager->addEnemy3(a);
+	return x;
+}
+int LuaAddPointToEnemy(int num, int num1)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	spriteManager->enemies[num]->addToList(num1);
+	return 0;
+}
+int LuaAddPointToEnemy2(int num, float x, float y)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	spriteManager->enemies2[num]->addToList(x,y);
+	return 0;
 }
 int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 {
@@ -278,7 +324,11 @@ void AstroJumpDataLoader::loadWorld(Game *game, string levelInitFile)
 	lua_state->GetGlobals().RegisterDirect("createAsteroid", LuaCreateAsteroid);
 	lua_state->GetGlobals().RegisterDirect("createWinAsteroid", LuaCreateWinAsteroid);
 	lua_state->GetGlobals().RegisterDirect("setGravity", LuaSetGravity);
-	lua_state->GetGlobals().RegisterDirect("createEnemy", LuaCreateBot);
+	lua_state->GetGlobals().RegisterDirect("createEnemy", LuaCreateEnemy);
+	lua_state->GetGlobals().RegisterDirect("createEnemy2", LuaCreateEnemy2);
+	lua_state->GetGlobals().RegisterDirect("createEnemy3", LuaCreateEnemy3);
+	lua_state->GetGlobals().RegisterDirect("addPointToEnemy", LuaAddPointToEnemy);
+	lua_state->GetGlobals().RegisterDirect("addPointToEnemy2", LuaAddPointToEnemy2);
 
 	LuaFunction<void> la = lua_state->GetGlobal("levela");
 	la();

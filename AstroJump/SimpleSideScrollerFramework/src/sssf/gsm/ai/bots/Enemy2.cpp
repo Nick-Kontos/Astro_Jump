@@ -1,7 +1,9 @@
-#include "sssf\gsm\ai\bots\Enemy.h"
+#include "sssf\gsm\ai\bots\Enemy2.h"
 
-void Enemy::think(float x, float y)
+void Enemy2::think()
 {
+	float x = Xlist[targetAsteroid];
+	float y = Ylist[targetAsteroid];
 	float x1 = getX();
 	float y1 = getY();
 	float d = (sqrt(((x - x1)*(x - x1)) + ((y - y1)*(y - y1))));
@@ -19,12 +21,12 @@ void Enemy::think(float x, float y)
 		else
 			currentState = L"RUNNING";
 		float vy = (y - y1) / d;
-		body->SetLinearVelocity(b2Vec2(5*vx*speed, 5*vy*speed));
+		body->SetLinearVelocity(b2Vec2(5 * vx*speed, 5 * vy*speed));
 	}
 }
-void Enemy::nextAsteroid()
+void Enemy2::nextAsteroid()
 {
 	targetAsteroid++;
-	if (targetAsteroid >= asteroidList.size())
+	if (targetAsteroid >= Xlist.size())
 		targetAsteroid = 0;
 }

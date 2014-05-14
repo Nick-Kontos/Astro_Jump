@@ -50,6 +50,8 @@ public:
 	void addSprite(AnimatedSprite *sprite);
 	void addPlayer(AnimatedSprite *player, float x, float y);
 	void addEnemy(AnimatedSprite *enemy, float x, float y);
+	void addEnemy2(AnimatedSprite *enemy, float x, float y);
+	void addEnemy3(AnimatedSprite *enemy, float x, float y);
 	void addAsteriod(AnimatedSprite *asteriod, float x, float y);
 	void removeSprite(AnimatedSprite *sprite);
 	void initContactListener(SpriteManager *sm);
