@@ -105,7 +105,7 @@ static const wstring	PULLBACK(L"PULLBACK");
 static const wstring	PULLEDBACK(L"PULLEDBACK");
 static const wstring	TURN_RIGHT(L"TURN_RIGHT");
 static const wstring	TURN_LEFT(L"TURN_LEFT");
-static const float		MAX_JUMP_FORCE = 1000.0f;
+static const float		MAX_JUMP_FORCE = 1500.0f;
 
 // USED FOR MOVEMENT
 const unsigned int W_KEY = (unsigned int)'W';

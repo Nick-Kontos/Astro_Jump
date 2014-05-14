@@ -176,7 +176,7 @@ int LuaSetGravity(float f)
 	physics->initContactListener(spriteManager);
 	return f;
 }
-int LuaCreatePlatform(float x, float y, float vx, float vy, float r)
+int LuaCreatePlatform(float x, float y, float vx, float vy)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -193,7 +193,7 @@ int LuaCreatePlatform(float x, float y, float vx, float vy, float r)
 	return x;
 
 }
-int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
+int LuaCreateAsteroid(float x, float y, float vx, float vy)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -210,7 +210,7 @@ int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 	return x;
 
 }
-int LuaCreateWinAsteroid(float x, float y, float vx, float vy, float r)
+int LuaCreateWinAsteroid(float x, float y, float vx, float vy)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -225,7 +225,7 @@ int LuaCreateWinAsteroid(float x, float y, float vx, float vy, float r)
 	return x;
 
 }
-int LuaCreateEnemy(float x, float y, float vx, float vy, float r, float speed)
+int LuaCreateEnemy(float x, float y, float vx, float vy, float speed)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -241,7 +241,7 @@ int LuaCreateEnemy(float x, float y, float vx, float vy, float r, float speed)
 	spriteManager->addEnemy(a);
 	return x;
 }
-int LuaCreateEnemy2(float x, float y, float vx, float vy, float r, float speed)
+int LuaCreateEnemy2(float x, float y, float vx, float vy, float speed)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -257,7 +257,7 @@ int LuaCreateEnemy2(float x, float y, float vx, float vy, float r, float speed)
 	spriteManager->addEnemy2(a);
 	return x;
 }
-int LuaCreateEnemy3(float x, float y, float vx, float vy, float r, float speed, float distance)
+int LuaCreateEnemy3(float x, float y, float vx, float vy, float speed, float distance)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -288,7 +288,7 @@ int LuaAddPointToEnemy2(int num, float x, float y)
 	spriteManager->enemies2[num]->addToList(x*.02,y*.02);
 	return 1;
 }
-int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
+int LuaCreatePlayer(float x, float y, float vx, float vy)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
@@ -300,7 +300,7 @@ int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 	a->setSpawnVy(vy*.02);
 	Physics *physics = gsm->getPhysics();
 	physics->addPlayer(a, x * .02f, y * .02f);
-	LuaCreateAsteroid(x, y, 0, 0, 0);
+	LuaCreateAsteroid(x, y, 0, 0);
 	spriteManager->attachedAsteroid = spriteManager->getLastAsteroid();
 	spriteManager->attachPlayerToAsteriod(gsm->getPhysics()->world);
 	return x;
