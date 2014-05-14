@@ -49,6 +49,7 @@ static const wstring	W_ABOUT_COMMAND = L"About";
 static const wstring	W_GREEN_CURSOR_PATH = L"data/gui/cursor/green_cursor.png";
 static const wstring	W_RED_CURSOR_PATH = L"data/gui/cursor/red_cursor.png";
 //SCREENS
+static const wstring	W_GAME_WIN_PATH = L"data/gui/overlays/Astro_Jump_WIN_GAME_Screen.png";
 static const wstring	W_SPLASH_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Splash_Screen1.png";
 static const wstring	W_MAIN_MENU_PATH = L"data/gui/overlays/Astro_Jump_Main_Menu_Screen1.png";
 static const wstring	W_SELECT_LEVEL_SCREEN_PATH = L"data/gui/overlays/Astro_Jump_Select_Level_Screen1.png";
