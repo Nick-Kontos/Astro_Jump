@@ -418,6 +418,14 @@ void SpriteManager::BeginContact(b2Contact* contact){
 				300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
 		}
 	}
+	if (getPlayerAndEnemy(contact)){
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
+			((Enemy*)contact->GetFixtureB()->GetBody()->GetUserData())->nextAsteroid();
+		}
+		else{
+			((Enemy*)contact->GetFixtureA()->GetBody()->GetUserData())->nextAsteroid();
+		}
+	}
 }
 
 void SpriteManager::EndContact(b2Contact* contact){
