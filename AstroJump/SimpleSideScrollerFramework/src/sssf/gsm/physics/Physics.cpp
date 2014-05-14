@@ -176,7 +176,7 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 {
 	//add some things to the sprite fields
-	asteriod->setRadius(asteriod->getSpriteType()->getTextureWidth() / 2 * .02f);
+	asteriod->setRadius((asteriod->getSpriteType()->getTextureWidth() / 2) * .02f);
 	asteriod->setSpawnX(x);
 	asteriod->setSpawnY(y);
 
@@ -186,7 +186,7 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	bodyDef.position.Set(x, y);	
 	bodyDef.userData = asteriod;
 	bodyDef.linearDamping = asteriod->getDamping();
-	bodyDef.angularDamping = 5.0f;
+	bodyDef.angularDamping = 0.5f;
 	
 	b2Body* body = world->CreateBody(&bodyDef);
 

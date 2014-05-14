@@ -46,7 +46,7 @@ protected:
 	float spawnVx;
 	float density;
 	float friction;
-	int radius;
+	float radius;
 	float rotationInRadians;
 	float damping;
 
@@ -54,7 +54,7 @@ public:
 	// INLINED ACCESSOR METHODS
 	float				getDensity()		{ return density; }
 	float				getFriction()		{ return friction; }
-	int					getRadius()			{ return radius; }
+	float				getRadius()			{ return radius; }
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
@@ -113,7 +113,7 @@ public:
 	{
 		spawnVy = Vy;
 	}
-	void setRadius(int r)
+	void setRadius(float r)
 	{
 		radius = r;
 	}

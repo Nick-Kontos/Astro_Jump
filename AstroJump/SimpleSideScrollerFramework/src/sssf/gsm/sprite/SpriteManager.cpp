@@ -45,8 +45,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		int y = (int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureHeight() / 2;
 
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-			(int)floor(((sprite->getX() / .02f) - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth()/2,
-			(int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureWidth() / 2,
+			(int)floor(((sprite->getX() / .02f) - viewport->getViewportX())) - spriteType->getTextureWidth()/2,
+			(int)floor(((sprite->getY() / .02f) - viewport->getViewportY())) - spriteType->getTextureHeight() / 2,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
@@ -313,7 +313,7 @@ void SpriteManager::jumpOffAsteriod(float jump, b2World *world)
 		//now apply the force
 		player.getBody()->ApplyForceToCenter(b2Vec2((jump) * cos(player.getRotationInRadians()), (jump) * sin(player.getRotationInRadians())),
 			 true);
-		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()) * 3.0f, -jump * sin(player.getRotationInRadians())* 3.0f),
 			attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()), true);
 		isOnAsteriod = false;
 	}	
