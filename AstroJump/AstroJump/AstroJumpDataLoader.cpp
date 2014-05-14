@@ -367,6 +367,7 @@ void AstroJumpDataLoader::hardCodedLoadGUIExample(Game *game)
 	// SETUP THE CURSOR VIA OUR HELPER METHOD
 	initCursor(gui, guiTextureManager);
 	initSplashScreen(game, gui, guiTextureManager);
+	initGameWinScreen(game, gui, guiTextureManager);
 	initMainMenu(gui, guiTextureManager);
 	initInGameGUI(gui, guiTextureManager);
 	
@@ -698,6 +699,33 @@ void AstroJumpDataLoader::initSplashScreen(Game *game, GameGUI *gui, DirectXText
 
 	// AND REGISTER IT WITH THE GUI
 	gui->addScreenGUI(GS_SPLASH_SCREEN, splashScreenGUI);
+}
+
+void AstroJumpDataLoader::initGameWinScreen(Game *game, GameGUI *gui, DirectXTextureManager *guiTextureManager)
+{
+	// NOW, FIRST LET'S ADD A SPLASH SCREEN GUI
+	ScreenGUI *gameWinScreenGUI = new ScreenGUI();
+
+	// WE'LL ONLY HAVE ONE IMAGE FOR OUR GIANT BUTTON
+	unsigned int normalTextureID = guiTextureManager->loadTexture(W_GAME_WIN_PATH);
+	unsigned int mouseOverTextureID = normalTextureID;
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		0,
+		0,
+		0,
+		255,
+		game->getGraphics()->getScreenWidth(),
+		game->getGraphics()->getScreenHeight(),
+		false,
+		W_QUIT_MM_COMMAND);
+	gameWinScreenGUI->addButton(buttonToAdd);
+
+	// AND REGISTER IT WITH THE GUI
+	gui->addScreenGUI(GS_GAME_VICTORY, gameWinScreenGUI);
 }
 
 void AstroJumpDataLoader::initLevelSelectScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager)
