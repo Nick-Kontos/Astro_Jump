@@ -158,13 +158,6 @@ void Physics::addPlayer(AnimatedSprite *player, float x, float y)
 	//set restitution values
 	fixtureDef.restitution = 0.7f;
 	body->CreateFixture(&fixtureDef);
-	//now create a sensor fixture for detecting collision with asteriods
-	b2FixtureDef sensor;
-	sensor.shape = &c;
-	sensor.density = 0;
-	sensor.isSensor = true;
-	sensor.filter.maskBits = 2;
-	body->CreateFixture(&sensor);
 
 	player->setBody(body);
 
@@ -186,7 +179,7 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	bodyDef.position.Set(x, y);	
 	bodyDef.userData = asteriod;
 	bodyDef.linearDamping = asteriod->getDamping();
-	bodyDef.angularDamping = 0.5f;
+	bodyDef.angularDamping = 0.1f;
 	
 	b2Body* body = world->CreateBody(&bodyDef);
 
@@ -206,6 +199,19 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	//set resitution values
 	fixtureDef.restitution = 0.5f;
 	body->CreateFixture(&fixtureDef);
+
+	//now create a sensor fixture for detecting collision with the player
+	b2FixtureDef sensor;
+	b2CircleShape sc;
+	sc.m_p.Set(0, 0);
+	//64 is the texture width of the player temporary hardcoded
+	sc.m_radius = asteriod->getRadius() - ((64 / 2) * .02);
+	sensor.shape = &sc;
+	sensor.density = 0;
+	sensor.isSensor = true;
+	sensor.filter.maskBits = 4;
+	body->CreateFixture(&sensor);
+
 	asteriod->setBody(body);
 
 	//add an initial velocity

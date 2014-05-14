@@ -187,7 +187,7 @@ int LuaCreateAsteroid(float x, float y, float vx, float vy, float r)
 	a->setCurrentState(IDLE);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
-	a->setDensity(0.5f);
+	a->setDensity(0.2f);
 	Physics *physics = gsm->getPhysics();
 	physics->addAsteriod(a, x * .02f, y * .02f);
 	spriteManager->addAsteriod(a);

@@ -97,5 +97,8 @@ public:
 	void				jumpOffAsteriod(float jumpval, b2World *world);
 	void				BeginContact(b2Contact* contact);
 	void				EndContact(b2Contact* contact);
-	bool				getPlayerAndAsteriod(b2Contact* contact);
+	bool				getPlayerAndAsteroid(b2Contact* contact);
+	bool				getPlayerAndEnemy(b2Contact* contact);
+	bool				getPlayerAndEnemy2(b2Contact* contact);
+	bool				getPlayerAndEnemy3(b2Contact* contact);
 };

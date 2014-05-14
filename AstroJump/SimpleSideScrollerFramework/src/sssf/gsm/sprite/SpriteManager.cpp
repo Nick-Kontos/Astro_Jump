@@ -313,39 +313,90 @@ void SpriteManager::jumpOffAsteriod(float jump, b2World *world)
 		//now apply the force
 		player.getBody()->ApplyForceToCenter(b2Vec2((jump) * cos(player.getRotationInRadians()), (jump) * sin(player.getRotationInRadians())),
 			 true);
-		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()) * 3.0f, -jump * sin(player.getRotationInRadians())* 3.0f),
-			attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()), true);
+		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
+			player.getBody()->GetPosition(), true);
 		isOnAsteriod = false;
 	}	
 }
 
 void SpriteManager::BeginContact(b2Contact* contact){
-	if (getPlayerAndAsteriod(contact)){
+	if (getPlayerAndAsteroid(contact)){
 		isOverAsteriod = true;
 		if (contact->GetFixtureA()->IsSensor()){
-			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureA()->GetBody()->GetUserData());
 		}
 		else {
-			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureA()->GetBody()->GetUserData());
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
 		}
 	}
 }
 
 void SpriteManager::EndContact(b2Contact* contact){
-	if (getPlayerAndAsteriod(contact)){
+	if (getPlayerAndAsteroid(contact)){
 		isOverAsteriod = false;
 	}
 }
 
-bool SpriteManager::getPlayerAndAsteriod(b2Contact* contact)
+bool SpriteManager::getPlayerAndAsteroid(b2Contact* contact)
 {
 	b2Fixture* fixtureA = contact->GetFixtureA();
 	b2Fixture* fixtureB = contact->GetFixtureB();
 
 	//make sure only one of the fixtures was a sensor
-	bool sensorA = fixtureA->IsSensor();
-	bool sensorB = fixtureB->IsSensor();
-	if (!(sensorA ^ sensorB))
-		return false;
-	return true;
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 1)
+			|| (A->getSpriteType()->getSpriteTypeID() == 1 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 2)
+			|| (A->getSpriteType()->getSpriteTypeID() == 2 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy2(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 3)
+			|| (A->getSpriteType()->getSpriteTypeID() == 3 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy3(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 4)
+			|| (A->getSpriteType()->getSpriteTypeID() == 4 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
 }
