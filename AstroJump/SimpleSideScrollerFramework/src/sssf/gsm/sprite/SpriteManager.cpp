@@ -108,6 +108,15 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			addSpriteToRenderList(asteroid, renderList, viewport);
 			asteroidsIterator++;
 		}
+		//add platforms
+		vector<AnimatedSprite*>::iterator platformsIterator;
+		platformsIterator = platforms.begin();
+		while (platformsIterator != platforms.end())
+		{
+			AnimatedSprite *platform = (*platformsIterator);
+			addSpriteToRenderList(platform, renderList, viewport);
+			platformsIterator++;
+		}
 		// NOW ADD THE REST OF THE SPRITES
 		list<Enemy*>::iterator enemyIterator;
 		enemyIterator = enemies.begin();
@@ -144,6 +153,11 @@ void SpriteManager::addEnemy(Enemy *enemyToAdd)
 void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
 {
 	asteroids.push_back(asteriodToAdd);
+}
+
+void SpriteManager::addPlatform(AnimatedSprite *platformToAdd)
+{
+	platforms.push_back(platformToAdd);
 }
 /*
 	addSpriteType - This method is for adding a new sprite
