@@ -212,6 +212,47 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	asteriod->getBody()->ApplyForceToCenter(b2Vec2(asteriod->getSpawnVx(), asteriod->getSpawnVy()), true);
 }
 
+void Physics::addPlatform(AnimatedSprite *plat, float x, float y)
+{
+	//add some things to the sprite fields
+	plat->setRadius((plat->getSpriteType()->getTextureWidth() / 2) * .02f);
+	plat->setSpawnX(x);
+	plat->setSpawnY(y);
+
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(x, y);
+	bodyDef.userData = plat;
+	bodyDef.linearDamping = plat->getDamping();
+	bodyDef.angularDamping = 0.5f;
+
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2PolygonShape r;
+	r.SetAsBox((plat->getSpriteType()->getTextureWidth() / 2) * .02f, (plat->getSpriteType()->getTextureHeight() / 2) * .02f);
+	//b2CircleShape c;
+	//c.m_p.Set(0, 0);
+	//c.m_radius = plat->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &r;
+	fixtureDef.density = plat->getDensity();
+	fixtureDef.friction = plat->getFriction();
+	//add collision filtering
+	//asteriods are 2 bit
+	fixtureDef.filter.categoryBits = 1;
+	//they collide with walls and other asteriods
+	//fixtureDef.filter.maskBits = 3;
+	//set resitution values
+	fixtureDef.restitution = 0.5f;
+	body->CreateFixture(&fixtureDef);
+	plat->setBody(body);
+
+	//add an initial velocity
+	plat->getBody()->ApplyForceToCenter(b2Vec2(plat->getSpawnVx(), plat->getSpawnVy()), true);
+}
+
 void Physics::constructBoundries(int height, int width)
 {
 	b2BodyDef myBodyDef;

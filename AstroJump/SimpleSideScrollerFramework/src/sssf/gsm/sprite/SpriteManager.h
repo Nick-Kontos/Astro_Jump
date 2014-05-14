@@ -33,6 +33,7 @@ private:
 	
 	//These are the asteroids
 	vector<AnimatedSprite*> asteroids;
+	vector<AnimatedSprite*> platforms;
 
 	//These are the bots
 	list<Enemy*> enemies;
@@ -83,6 +84,7 @@ public:
 	void				addBot(Bot *botToAdd);
 	void				addEnemy(Enemy *enemyToAdd);
 	void				addAsteriod(AnimatedSprite *asteriodToAdd);
+	void				addPlatform(AnimatedSprite *platformToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
 	unsigned int		addSpriteType(AnimatedSpriteType *spriteTypeToAdd);
 	//void				addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport);
