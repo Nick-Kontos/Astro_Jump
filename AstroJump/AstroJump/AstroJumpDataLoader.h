@@ -57,6 +57,7 @@ public:
 	// AND SOME HELPER METHODS FOR LOADING THE GUI
 	void initCursor(GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initSplashScreen(Game *game, GameGUI *gui, DirectXTextureManager *guiTextureManager);
+	void initGameWinScreen(Game *game, GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initMainMenu(GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initInGameGUI(GameGUI *gui, DirectXTextureManager *guiTextureManager);
 	void initVictoryScreen(GameGUI *gui, DirectXTextureManager *guiTextureManager);

@@ -331,7 +331,7 @@ void SpriteManager::update(Game *game)
 		enemy->updateSprite();
 		enemy3Iterator++;
 	}
-	if (won && (game->getCurrentLevelFileName().compare("level3.lua")))
+	if (won && !(game->getCurrentLevelFileName().compare("level3.lua")))
 	{
 		game->getGSM()->goToGameVictory();
 	}
