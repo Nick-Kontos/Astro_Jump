@@ -256,8 +256,8 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(x, y);	
 	bodyDef.userData = asteriod;
-	bodyDef.linearDamping = asteriod->getDamping();
-	bodyDef.angularDamping = 0.1f;
+	bodyDef.linearDamping = 0.0f;
+	bodyDef.angularDamping = 0.01f;
 	
 	b2Body* body = world->CreateBody(&bodyDef);
 

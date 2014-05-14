@@ -399,10 +399,12 @@ void SpriteManager::BeginContact(b2Contact* contact){
 	}
 	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
 		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
-			player.getBody()->ApplyForceToCenter( 4.0 * contact->GetFixtureB()->GetBody()->GetLinearVelocity(), true);
+			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x, 
+				300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
 		}
 		else {
-			player.getBody()->ApplyForceToCenter(4.0 * contact->GetFixtureA()->GetBody()->GetLinearVelocity(), true);
+			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
+				300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
 		}
 	}
 }
