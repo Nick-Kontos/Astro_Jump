@@ -53,6 +53,7 @@ public:
 	void addEnemy2(AnimatedSprite *enemy, float x, float y);
 	void addEnemy3(AnimatedSprite *enemy, float x, float y);
 	void addAsteriod(AnimatedSprite *asteriod, float x, float y);
+	void addPlatform(AnimatedSprite *asteriod, float x, float y);
 	void removeSprite(AnimatedSprite *sprite);
 	void initContactListener(SpriteManager *sm);
 	void update(Game *game);

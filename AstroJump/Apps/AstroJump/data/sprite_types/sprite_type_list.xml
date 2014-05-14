@@ -3,4 +3,7 @@
   <sprite_type>player</sprite_type>
   <sprite_type>asteroids</sprite_type>
   <sprite_type>enemy</sprite_type>
+  <sprite_type>enemy_2</sprite_type>
+  <sprite_type>enemy_3</sprite_type>
+  <sprite_type>platform</sprite_type>
 </sprite_type_list>

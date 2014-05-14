@@ -100,6 +100,12 @@ static const int		FPS_INC = 1;
 static const wstring	ATTACKING_RIGHT(L"ATTACKING_RIGHT");
 static const wstring	ATTACKING_LEFT(L"ATTACKING_LEFT");
 static const wstring	IDLE(L"IDLE");
+static const wstring	JUMPED(L"JUMPED");
+static const wstring	PULLBACK(L"PULLBACK");
+static const wstring	PULLEDBACK(L"PULLEDBACK");
+static const wstring	TURN_RIGHT(L"TURN_RIGHT");
+static const wstring	TURN_LEFT(L"TURN_LEFT");
+static const float		MAX_JUMP_FORCE = 1000.0f;
 
 // USED FOR MOVEMENT
 const unsigned int W_KEY = (unsigned int)'W';

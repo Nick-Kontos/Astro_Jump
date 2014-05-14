@@ -10,9 +10,15 @@ public:
 
 	float force;
 	bool jumping;
+	bool jumped;
+	bool pullingback;
+	bool pulledback;
 	bool space;
 	AstroJumpKeyEventHandler()		{ force = 0;
 	jumping = false;
+	jumped = false;
+	pullingback = false;
+	pulledback = false;
 	space = false;
 	}
 	~AstroJumpKeyEventHandler()		{}

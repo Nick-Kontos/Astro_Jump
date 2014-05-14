@@ -45,8 +45,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		int y = (int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureHeight() / 2;
 
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-			(int)floor(((sprite->getX() / .02f) - viewport->getViewportX()) + 0.5f) - spriteType->getTextureWidth()/2,
-			(int)floor(((sprite->getY() / .02f) - viewport->getViewportY()) + 0.5f) - spriteType->getTextureWidth() / 2,
+			(int)floor(((sprite->getX() / .02f) - viewport->getViewportX())) - spriteType->getTextureWidth()/2,
+			(int)floor(((sprite->getY() / .02f) - viewport->getViewportY())) - spriteType->getTextureHeight() / 2,
 									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
@@ -108,6 +108,15 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			addSpriteToRenderList(asteroid, renderList, viewport);
 			asteroidsIterator++;
 		}
+		//add platforms
+		vector<AnimatedSprite*>::iterator platformsIterator;
+		platformsIterator = platforms.begin();
+		while (platformsIterator != platforms.end())
+		{
+			AnimatedSprite *platform = (*platformsIterator);
+			addSpriteToRenderList(platform, renderList, viewport);
+			platformsIterator++;
+		}
 		// NOW ADD THE REST OF THE SPRITES
 		vector<Enemy*>::iterator enemyIterator;
 		enemyIterator = enemies.begin();
@@ -168,6 +177,11 @@ void SpriteManager::addEnemy3(Enemy3 *enemyToAdd)
 void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
 {
 	asteroids.push_back(asteriodToAdd);
+}
+
+void SpriteManager::addPlatform(AnimatedSprite *platformToAdd)
+{
+	platforms.push_back(platformToAdd);
 }
 /*
 	addSpriteType - This method is for adding a new sprite
@@ -356,38 +370,89 @@ void SpriteManager::jumpOffAsteriod(float jump, b2World *world)
 		player.getBody()->ApplyForceToCenter(b2Vec2((jump) * cos(player.getRotationInRadians()), (jump) * sin(player.getRotationInRadians())),
 			 true);
 		attachedAsteroid->getBody()->ApplyForce(b2Vec2(-jump * cos(player.getRotationInRadians()), -jump * sin(player.getRotationInRadians())),
-			attachedAsteroid->getBody()->GetLocalPoint(player.getBody()->GetPosition()), true);
+			player.getBody()->GetPosition(), true);
 		isOnAsteriod = false;
 	}	
 }
 
 void SpriteManager::BeginContact(b2Contact* contact){
-	if (getPlayerAndAsteriod(contact)){
+	if (getPlayerAndAsteroid(contact)){
 		isOverAsteriod = true;
 		if (contact->GetFixtureA()->IsSensor()){
-			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureA()->GetBody()->GetUserData());
 		}
 		else {
-			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureA()->GetBody()->GetUserData());
+			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
 		}
 	}
 }
 
 void SpriteManager::EndContact(b2Contact* contact){
-	if (getPlayerAndAsteriod(contact)){
+	if (getPlayerAndAsteroid(contact)){
 		isOverAsteriod = false;
 	}
 }
 
-bool SpriteManager::getPlayerAndAsteriod(b2Contact* contact)
+bool SpriteManager::getPlayerAndAsteroid(b2Contact* contact)
 {
 	b2Fixture* fixtureA = contact->GetFixtureA();
 	b2Fixture* fixtureB = contact->GetFixtureB();
 
 	//make sure only one of the fixtures was a sensor
-	bool sensorA = fixtureA->IsSensor();
-	bool sensorB = fixtureB->IsSensor();
-	if (!(sensorA ^ sensorB))
-		return false;
-	return true;
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 1)
+			|| (A->getSpriteType()->getSpriteTypeID() == 1 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 2)
+			|| (A->getSpriteType()->getSpriteTypeID() == 2 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy2(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 3)
+			|| (A->getSpriteType()->getSpriteTypeID() == 3 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+
+bool SpriteManager::getPlayerAndEnemy3(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 4)
+			|| (A->getSpriteType()->getSpriteTypeID() == 4 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
 }

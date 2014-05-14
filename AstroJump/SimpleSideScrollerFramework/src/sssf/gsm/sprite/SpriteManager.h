@@ -35,6 +35,7 @@ private:
 	
 	//These are the asteroids
 	vector<AnimatedSprite*> asteroids;
+	vector<AnimatedSprite*> platforms;
 
 
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
@@ -89,6 +90,7 @@ public:
 	void				addEnemy2(Enemy2 *enemyToAdd);
 	void				addEnemy3(Enemy3 *enemyToAdd);
 	void				addAsteriod(AnimatedSprite *asteriodToAdd);
+	void				addPlatform(AnimatedSprite *platformToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
 	unsigned int		addSpriteType(AnimatedSpriteType *spriteTypeToAdd);
 	//void				addBackgroundToRender(AnimatedSprite *backgroundsprite, RenderList *renderList, Viewport *viewport);
@@ -103,5 +105,8 @@ public:
 	void				jumpOffAsteriod(float jumpval, b2World *world);
 	void				BeginContact(b2Contact* contact);
 	void				EndContact(b2Contact* contact);
-	bool				getPlayerAndAsteriod(b2Contact* contact);
+	bool				getPlayerAndAsteroid(b2Contact* contact);
+	bool				getPlayerAndEnemy(b2Contact* contact);
+	bool				getPlayerAndEnemy2(b2Contact* contact);
+	bool				getPlayerAndEnemy3(b2Contact* contact);
 };
