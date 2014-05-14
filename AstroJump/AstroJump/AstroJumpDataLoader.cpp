@@ -186,7 +186,7 @@ int LuaCreatePlatform(float x, float y, float vx, float vy, float r)
 	a->setCurrentState(IDLE);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
-	a->setDensity(0.5f);
+	a->setDensity(0.1f);
 	Physics *physics = gsm->getPhysics();
 	physics->addPlatform(a, x * .02f, y * .02f);
 	spriteManager->addPlatform(a);

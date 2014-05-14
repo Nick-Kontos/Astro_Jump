@@ -343,6 +343,14 @@ void SpriteManager::BeginContact(b2Contact* contact){
 			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
 		}
 	}
+	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
+			player.getBody()->ApplyForceToCenter( 4.0 * contact->GetFixtureB()->GetBody()->GetLinearVelocity(), true);
+		}
+		else {
+			player.getBody()->ApplyForceToCenter(4.0 * contact->GetFixtureA()->GetBody()->GetLinearVelocity(), true);
+		}
+	}
 }
 
 void SpriteManager::EndContact(b2Contact* contact){
