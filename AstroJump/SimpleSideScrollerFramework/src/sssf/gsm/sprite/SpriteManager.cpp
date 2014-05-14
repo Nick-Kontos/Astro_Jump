@@ -250,6 +250,12 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		physic->removeSprite(enemy);
 		enemies3.pop_back();
 	}
+	while (platforms.size() >= 1)
+	{
+		AnimatedSprite *platform = platforms.back();
+		physic->removeSprite(platform);
+		platforms.pop_back();
+	}
 	physic->removeSprite(&player);
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
@@ -399,10 +405,12 @@ void SpriteManager::BeginContact(b2Contact* contact){
 	}
 	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
 		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
-			player.getBody()->ApplyForceToCenter( 4.0 * contact->GetFixtureB()->GetBody()->GetLinearVelocity(), true);
+			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x, 
+				300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
 		}
 		else {
-			player.getBody()->ApplyForceToCenter(4.0 * contact->GetFixtureA()->GetBody()->GetLinearVelocity(), true);
+			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
+				300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
 		}
 	}
 }
