@@ -113,6 +113,7 @@ void Game::runGameLoop()
 {
 	// FIRST PROFILE?
 	bool firstTimeThroughLoop = true;
+	bool runningMono = false;
 
 	// LET'S START THE TIMER FROM SCRATCH
 	timer->resetTimer();
@@ -132,7 +133,22 @@ void Game::runGameLoop()
 		// OF THE APP, SO WE NEED TO CHECK AGAIN
 		if (gsm->isAppActive())
 		{
-			audio->start(L"Media\\Wavs\\MusicMono.wav");
+			if (gsm->getCurrentGameState() != GS_GAME_VICTORY&&gsm->getCurrentGameState() != GS_SPLASH_SCREEN)
+			{
+				if (runningMono == false)
+				{
+					audio->stopVoice();
+				}
+				audio->start(L"Media\\Wavs\\MusicMono.wav");
+				runningMono = true;
+			}
+			else
+			{
+				if (gsm->getCurrentGameState()!=GS_SPLASH_SCREEN)
+					audio->stopVoice();
+				audio->start(L"Media\\Wavs\\spacejam.wav");
+				runningMono = false;
+			}
 			// USE THE INPUT TO UPDATE THE GAME
 			processGameData();
 

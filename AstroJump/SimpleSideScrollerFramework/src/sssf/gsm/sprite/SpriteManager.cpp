@@ -333,6 +333,7 @@ void SpriteManager::update(Game *game)
 	}
 	if (won && !(game->getCurrentLevelFileName().compare("level3.lua")))
 	{
+//		game->getAudio()->start(L"Media\\Wavs\\spacejam.wav");
 		game->getGSM()->goToGameVictory();
 	}
 	else if (won)

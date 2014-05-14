@@ -77,13 +77,15 @@ XAudio2BasicSound::~XAudio2BasicSound()
 //--------------------------------------------------------------------------------------
 int XAudio2BasicSound::start(LPCWSTR file)
 {
+	if (!ifDestroyed)
+	{
 		if (pSourceVoice != NULL)
 		{
-			    XAUDIO2_VOICE_STATE state;
-			    pSourceVoice->GetState( &state );
-			    isRunning = ( state.BuffersQueued > 0 ) != 0;
+			XAUDIO2_VOICE_STATE state;
+			pSourceVoice->GetState(&state);
+			isRunning = (state.BuffersQueued > 0) != 0;
 		}
-		
+	}
    
 		if (!isRunning)
 		{
@@ -98,6 +100,7 @@ int XAudio2BasicSound::start(LPCWSTR file)
 				CoUninitialize();
 				return 0;
 			}
+			ifDestroyed = false;
 		}
    
 
@@ -113,7 +116,6 @@ int XAudio2BasicSound::start(LPCWSTR file)
         return 0;
     }*/
 
-  
 	return 0;
 }
 
@@ -129,6 +131,18 @@ int XAudio2BasicSound::start(LPCWSTR file)
 
 		SAFE_RELEASE(pXAudio2);
 		CoUninitialize();
+
+	}
+
+	void XAudio2BasicSound::stopVoice()
+	{
+		//
+		// Cleanup XAudio2
+		//
+		pSourceVoice->DestroyVoice();
+		ifDestroyed = true;
+		isRunning = false;
+	//	pSourceVoice->Stop();
 
 	}
 	
