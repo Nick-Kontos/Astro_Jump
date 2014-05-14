@@ -250,6 +250,12 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		physic->removeSprite(enemy);
 		enemies3.pop_back();
 	}
+	while (platforms.size() >= 1)
+	{
+		AnimatedSprite *platform = platforms.back();
+		physic->removeSprite(platform);
+		platforms.pop_back();
+	}
 	physic->removeSprite(&player);
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
