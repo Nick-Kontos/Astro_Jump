@@ -108,6 +108,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			addSpriteToRenderList(asteroid, renderList, viewport);
 			asteroidsIterator++;
 		}
+		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		//add platforms
 		vector<AnimatedSprite*>::iterator platformsIterator;
 		platformsIterator = platforms.begin();
@@ -147,7 +148,6 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		//addGUISpriteToRenderList(&lives, renderList, viewport);
 
 		// ADD THE PLAYER SPRITE
-		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		addSpriteToRenderList(&player, renderList, viewport);
 	}
 }
@@ -412,11 +412,11 @@ void SpriteManager::BeginContact(b2Contact* contact){
 	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
 		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
 			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x, 
-				300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
+				10.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
 		}
 		else {
 			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
-				300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
+				10.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
 		}
 	}
 	if (getPlayerAndEnemy(contact)){

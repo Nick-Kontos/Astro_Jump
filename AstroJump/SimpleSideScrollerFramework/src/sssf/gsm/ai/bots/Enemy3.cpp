@@ -12,7 +12,7 @@ void Enemy3::think(float x, float y)
 		d = (sqrt(((x - x1)*(x - x1)) + ((y - y1)*(y - y1))));
 		float vx = (x-x1) / d;
 		float vy = (y - y1) / d;
-		body->SetLinearVelocity(b2Vec2(5 * vx, 5 * vy));
+		body->SetLinearVelocity(b2Vec2(5 * vx*speed, 5 * vy*speed));
 	}
 	else
 	{
@@ -25,7 +25,7 @@ void Enemy3::think(float x, float y)
 		{
 			float vx = (x2 - x1) / d;
 			float vy = (y2 - y1) / d;
-			body->SetLinearVelocity(b2Vec2(5 * vx, 5 * vy));
+			body->SetLinearVelocity(b2Vec2(5 * vx*speed, 5 * vy*speed));
 		}
 		else
 			body->SetLinearVelocity(b2Vec2(0, 0));
