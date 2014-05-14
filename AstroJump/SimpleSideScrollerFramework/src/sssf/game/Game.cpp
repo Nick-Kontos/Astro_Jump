@@ -133,7 +133,7 @@ void Game::runGameLoop()
 		// OF THE APP, SO WE NEED TO CHECK AGAIN
 		if (gsm->isAppActive())
 		{
-			if (gsm->getCurrentGameState() != GS_GAME_VICTORY&&gsm->getCurrentGameState() != GS_SPLASH_SCREEN)
+			if (gsm->getCurrentGameState() == GS_GAME_IN_PROGRESS || gsm->getCurrentGameState()==GS_VICTORY)
 			{
 				if (runningMono == false)
 				{
@@ -144,7 +144,7 @@ void Game::runGameLoop()
 			}
 			else
 			{
-				if (gsm->getCurrentGameState()!=GS_SPLASH_SCREEN)
+				if (runningMono)
 					audio->stopVoice();
 				audio->start(L"Media\\Wavs\\spacejam.wav");
 				runningMono = false;

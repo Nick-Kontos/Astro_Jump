@@ -536,7 +536,7 @@ void AstroJumpDataLoader::initHelpScreen(GameGUI *gui, DirectXTextureManager *gu
 	// - INIT THE EXIT BUTTON
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
-		412,
+		1012,
 		600,
 		0,
 		255,

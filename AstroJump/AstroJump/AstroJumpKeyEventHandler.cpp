@@ -77,9 +77,55 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
+		if (input->isKeyDown(CTRL_KEY) && input->isKeyDown(ONE_KEY))
+		{
+			gsm->unloadCurrentLevel();
+			game->cheat = false;
+			game->getGUI()->getViewport()->setViewportX(0.0f);
+			game->getGUI()->getViewport()->setViewportY(0.0f);
+			game->setCurrentLevelFileName("level1.lua");
+			game->startGame();
+		}
+		if (input->isKeyDown(CTRL_KEY) && input->isKeyDown(TWO_KEY))
+		{
+			gsm->unloadCurrentLevel();
+			game->cheat = false;
+			game->getGUI()->getViewport()->setViewportX(0.0f);
+			game->getGUI()->getViewport()->setViewportY(0.0f);
+			game->setCurrentLevelFileName("level2.lua");
+			game->startGame();
+		}
+		if (input->isKeyDown(CTRL_KEY) && input->isKeyDown(THREE_KEY))
+		{
+			gsm->unloadCurrentLevel();
+			game->cheat = false;
+			game->getGUI()->getViewport()->setViewportX(0.0f);
+			game->getGUI()->getViewport()->setViewportY(0.0f);
+			game->setCurrentLevelFileName("level3.lua");
+			game->startGame();
+		}
+		if (input->isKeyDownForFirstTime(D_KEY) && input->isKeyDownForFirstTime(K_KEY) && input->isKeyDownForFirstTime(N_KEY))
+		{
+			game->cheat = !(game->cheat);
+		}
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-		
+		if (input->isKeyDown(K_KEY) && game->cheat)
+		{
+			player->getBody()->SetLinearVelocity(b2Vec2(0, 5));
+		}
+		if (input->isKeyDown(I_KEY) && game->cheat)
+		{
+			player->getBody()->SetLinearVelocity(b2Vec2(0, -5));
+		}
+		if (input->isKeyDown(J_KEY) && game->cheat)
+		{
+			player->getBody()->SetLinearVelocity(b2Vec2(-5, 0));
+		}
+		if (input->isKeyDown(L_KEY) && game->cheat)
+		{
+			player->getBody()->SetLinearVelocity(b2Vec2(5, 0));
+		}
 		if (input->isKeyDown(A_KEY)){
 			//rotate player counter-clockwise
 			if (player->getCurrentState() != TURN_LEFT || player->getCurrentState() != PULLEDBACK){

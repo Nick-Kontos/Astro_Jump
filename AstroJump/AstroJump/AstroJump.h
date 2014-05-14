@@ -109,6 +109,9 @@ static const wstring	TURN_LEFT(L"TURN_LEFT");
 static const float		MAX_JUMP_FORCE = 1500.0f;
 
 // USED FOR MOVEMENT
+const unsigned int ONE_KEY = (unsigned int)'1';
+const unsigned int TWO_KEY = (unsigned int)'2';
+const unsigned int THREE_KEY = (unsigned int)'3';
 const unsigned int W_KEY = (unsigned int)'W';
 const unsigned int A_KEY = (unsigned int)'A';
 const unsigned int S_KEY = (unsigned int)'S';
@@ -117,12 +120,17 @@ const unsigned int P_KEY = (unsigned int)'P';
 const unsigned int T_KEY = (unsigned int)'T';
 const unsigned int L_KEY = (unsigned int)'L';
 const unsigned int F_KEY = (unsigned int)'F';
+const unsigned int K_KEY = (unsigned int)'K';
+const unsigned int N_KEY = (unsigned int)'N';
+const unsigned int I_KEY = (unsigned int)'I';
+const unsigned int J_KEY = (unsigned int)'J';
 const unsigned int SHIFT_KEY = VK_SHIFT;
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;
 const unsigned int RIGHT_KEY = VK_RIGHT;
 const unsigned int SPACE_KEY = VK_SPACE;
+const unsigned int CTRL_KEY = VK_CONTROL;
 
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';

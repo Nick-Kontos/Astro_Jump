@@ -19,6 +19,7 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->cheat = false;
 		game->getGUI()->getViewport()->setViewportX(0.0f);
 		game->getGUI()->getViewport()->setViewportY(0.0f);
 		gsm->goToMainMenu();
@@ -27,6 +28,7 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->cheat = false;
 		//game->getGraphics()->getWorldTextureManager()->clear();
 		//game->getGraphics()->getWorldTextureManager()->reloadAllTextures();
 		game->getGUI()->getViewport()->setViewportX(0.0f);
@@ -37,6 +39,7 @@ void AstroJumpButtonEventHandler::handleButtonEvents(Game *game,
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->unloadCurrentLevel();
+		game->cheat = false;
 		game->getGUI()->getViewport()->setViewportX(0.0f);
 		game->getGUI()->getViewport()->setViewportY(0.0f);
 		if (game->getCurrentLevelFileName().compare("level1.lua")==0)

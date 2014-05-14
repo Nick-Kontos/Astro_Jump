@@ -77,6 +77,7 @@ private:
 
 public:
 	// INLINED ACCESSOR METHODS - THE REAL THINGS
+	bool cheat = false;
 	GameStateManager*	getGSM()				{ return gsm;								}
 	GameGUI*			getGUI()				{ return gui;								}
 	GameText*			getText()				{ return text; }
