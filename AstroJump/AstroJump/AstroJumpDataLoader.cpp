@@ -278,14 +278,14 @@ int LuaAddPointToEnemy(int num, int num1)
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	spriteManager->enemies[num]->addToList(num1);
-	return 0;
+	return 1;
 }
 int LuaAddPointToEnemy2(int num, float x, float y)
 {
 	GameStateManager* gsm = lua::gsm;
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	spriteManager->enemies2[num]->addToList(x,y);
-	return 0;
+	return 1;
 }
 int LuaCreatePlayer(float x, float y, float vx, float vy, float r)
 {
