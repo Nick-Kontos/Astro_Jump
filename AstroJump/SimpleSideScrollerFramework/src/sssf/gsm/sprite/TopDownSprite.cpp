@@ -4,6 +4,12 @@
 void TopDownSprite::updateSprite()
 {
 	// CALL THE PARENT METHOD TO UPDATE ANIMATION
+	frameCount++;
+	if (frameCount >= 30)
+	{
+		frameCount = 0;
+		oxygen--;
+	}
 	AnimatedSprite::updateSprite();
 
 }

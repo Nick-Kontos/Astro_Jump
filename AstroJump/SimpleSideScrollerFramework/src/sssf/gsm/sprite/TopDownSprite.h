@@ -9,6 +9,7 @@ class TopDownSprite : public AnimatedSprite
 protected:
 	// USED TO RENDER A ROTATED SPRITE, NOT INVOLVED IN PHYSICS
 	float rotationInRadians;
+	int frameCount = 0;
 
 public:
     

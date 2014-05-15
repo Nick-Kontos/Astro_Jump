@@ -300,6 +300,7 @@ int LuaCreatePlayer(float x, float y, float vx, float vy)
 	a->setCurrentState(IDLE);
 	a->setSpawnVx(vx*.02);
 	a->setSpawnVy(vy*.02);
+	a->oxygen = 100;
 	Physics *physics = gsm->getPhysics();
 	physics->addPlayer(a, x * .02f, y * .02f);
 	LuaCreateAsteroid(x, y, 0, 0);

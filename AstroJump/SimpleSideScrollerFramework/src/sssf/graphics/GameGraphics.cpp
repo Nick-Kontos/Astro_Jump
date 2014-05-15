@@ -95,7 +95,7 @@ void GameGraphics::renderText(GameText *text)
 {
 	// FOR NOW WE ONLY USE TEXT RENDERING FOR DEBUG TEXT, BUT
 	// IT COULD ALSO BE USED FOR GAME TEXT LIKE HEALTH STATS
-	if (debugTextShouldBeRendered)
+	if (game->getGSM()->getCurrentGameState()==GS_GAME_IN_PROGRESS)
 	{
 		int numTextObjects = text->getNumTextObjectsToDraw();
 		for (int i = 0; i < numTextObjects; i++)

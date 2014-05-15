@@ -44,6 +44,8 @@ Game::Game()
 	gsm = new GameStateManager();
 	gui = new GameGUI();
 	text = new GameText();
+	wstring *oxy = gsm->getSpriteManager()->getPlayer()->getOxygen();
+	text->addText(oxy,1000,40,500,500);
 }
 
 /*

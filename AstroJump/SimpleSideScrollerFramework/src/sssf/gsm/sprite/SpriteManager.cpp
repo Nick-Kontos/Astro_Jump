@@ -341,14 +341,9 @@ void SpriteManager::update(Game *game)
 		game->getGSM()->goToVictory();
 
 	}
-	if (!isOverAsteriod && !isOnAsteriod)
+	if (player.oxygen <= 0)
 	{
-		if (player.getBody()->GetLinearVelocity().x <= .1 && player.getBody()->GetLinearVelocity().y <= .1)
-		{
-			if (!player.getBody()->IsAwake()){
-				game->getGSM()->goToGameOver();
-			}
-		}
+		game->getGSM()->goToGameOver();
 	}
 	//Update Viewport
 	if (lockScreen)
@@ -410,13 +405,17 @@ void SpriteManager::BeginContact(b2Contact* contact){
 		}
 	}
 	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
-		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0){
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
+		{
 			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x, 
 				10.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
+			player.oxygen -= 10;
 		}
-		else {
+		else 
+		{
 			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
 				10.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
+			player.oxygen -= 10;
 		}
 	}
 	if (getPlayerAndEnemy(contact)){

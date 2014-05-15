@@ -29,6 +29,7 @@ AnimatedSprite::AnimatedSprite()
 	density = 1.0f;
 	friction = .3f;
 	damping = 1.0f;
+	oxy = L"OXYGEN LEVEL: " + to_wstring(oxygen);
 }
 AnimatedSprite::AnimatedSprite(float x, float y, int r)  
 {
@@ -110,6 +111,7 @@ void AnimatedSprite::updateSprite()
 {
 	unsigned int duration = spriteType->getDuration(currentState, frameIndex);
 	animationCounter++;
+	oxy = L"OXYGEN LEVEL: " + to_wstring(oxygen);
 
 	// WE ONLY CHANGE THE ANIMATION FRAME INDEX WHEN THE
 	// ANIMATION COUNTER HAS REACHED THE DURATION

@@ -51,12 +51,15 @@ protected:
 	float damping;
 
 public:
+	int oxygen = 100;
+	wstring oxy;
 	// INLINED ACCESSOR METHODS
 	float				getDensity()		{ return density; }
 	float				getFriction()		{ return friction; }
 	float				getRadius()			{ return radius; }
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
+	wstring*				getOxygen()			{ return &oxy; }
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
 	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
 	b2Body*				getBody()			{ return body; }
