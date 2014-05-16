@@ -427,7 +427,7 @@ void SpriteManager::update(Game *game)
 			float d = (sqrt(((x - x1)*(x - x1)) + ((y - y1)*(y - y1))));
 			if (d < .1)
 			{
-				player.oxygen = 0;
+				player.oxygen -= 1;
 			}
 			float vx = (x - x1) / d;
 			float vy = (y - y1) / d;
