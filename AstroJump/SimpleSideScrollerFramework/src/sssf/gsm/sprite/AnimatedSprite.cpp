@@ -111,7 +111,10 @@ void AnimatedSprite::updateSprite()
 {
 	unsigned int duration = spriteType->getDuration(currentState, frameIndex);
 	animationCounter++;
-	oxy = L"OXYGEN LEVEL: " + to_wstring(oxygen);
+	if (oxygen >= 0)
+		oxy = L"OXYGEN LEVEL: " + to_wstring(oxygen);
+	else
+		oxy = L"OXYGEN LEVEL: 0";
 
 	// WE ONLY CHANGE THE ANIMATION FRAME INDEX WHEN THE
 	// ANIMATION COUNTER HAS REACHED THE DURATION
