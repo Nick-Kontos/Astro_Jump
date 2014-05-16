@@ -57,7 +57,6 @@ private:
 
 	bool isOnAsteriod;
 	bool isOverAsteriod;
-	bool won=false;
 public:
 	bool lockScreen = true;
 	AnimatedSprite* attachedAsteroid;
@@ -71,10 +70,12 @@ public:
 	bool overPortal = false;
 	int portalOver;
 	bool invincible=false;
+	bool won = false;
 	int inviTimer;
+	int vicTimer = 0;
 
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
+	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; vicTimer = 0; won = false; invincible = false; }
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS

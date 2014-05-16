@@ -316,6 +316,10 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 	physic->removeSprite(&winAsteroid);
 	won = false;
 	isOverAsteriod = true;
+	inviTimer = 0;
+	vicTimer = 0;
+	invincible = false;
+	overPortal = false;
 
 }
 
@@ -449,17 +453,20 @@ void SpriteManager::update(Game *game)
 			player.setCurrentState(L"INVINCIBLE");
 		}
 	}
-	if (won && !(game->getCurrentLevelFileName().compare("level4.lua")))
+	if (won)
 	{
-//		game->getAudio()->start(L"Media\\Wavs\\spacejam.wav");
-		game->getGSM()->goToGameVictory();
-	}
-	else if (won)
-	{
-		game->getGSM()->goToVictory();
+		player.setCurrentState(L"VICTORY");
+		vicTimer++;
+		if (vicTimer / 33 > 5)
+		{
+			if (!(game->getCurrentLevelFileName().compare("level4.lua")))
+				game->getGSM()->goToGameVictory();
+			else
+				game->getGSM()->goToVictory();
+		}
 
 	}
-	if (player.oxygen <= 0)
+	if (player.oxygen <= 0 && !won)
 	{
 		player.setCurrentState(L"DEAD");
 		if (player.oxygen == -200)
