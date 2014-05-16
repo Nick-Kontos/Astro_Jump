@@ -128,13 +128,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		}
 		addSpriteToRenderList(&winAsteroid, renderList, viewport);
 		vector<PowerUp*>::iterator PowerUpIterator;
-		PowerUpIterator = powerUps.begin();
-		while (PowerUpIterator != powerUps.end())
-		{
-			AnimatedSprite *power = (*PowerUpIterator);
-			addSpriteToRenderList(power, renderList, viewport);
-			PowerUpIterator++;
-		}
+
 		vector<PowerUp*>::iterator portalsIterator;
 		portalsIterator = portals.begin();
 		while (portalsIterator != portals.end())
@@ -142,6 +136,13 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			AnimatedSprite *power = (*portalsIterator);
 			addSpriteToRenderList(power, renderList, viewport);
 			portalsIterator++;
+		}
+		PowerUpIterator = powerUps.begin();
+		while (PowerUpIterator != powerUps.end())
+		{
+			AnimatedSprite *power = (*PowerUpIterator);
+			addSpriteToRenderList(power, renderList, viewport);
+			PowerUpIterator++;
 		}
 		// NOW ADD THE REST OF THE SPRITES
 		vector<Enemy*>::iterator enemyIterator;
@@ -361,6 +362,14 @@ void SpriteManager::update(Game *game)
 		else
 			PowerUpIterator++;
 	}
+	vector<PowerUp*>::iterator portalIterator;
+	portalIterator = portals.begin();
+	while (portalIterator != portals.end())
+	{
+		PowerUp *portal = (*portalIterator);
+		portal->updateSprite();
+		portalIterator++;
+	}
 	// NOW UPDATE THE REST OF THE SPRITES
 	vector<Enemy*>::iterator enemyIterator;
 	enemyIterator = enemies.begin();
@@ -455,13 +464,13 @@ void SpriteManager::update(Game *game)
 		int x = (player.getX()/.02) - (view->getViewportWidth() / 2);
 		if (x < 0)
 			x = 0;
-		else if (x>3200)
-			x = 3200;
+		else if (x>3200-1367)
+			x = 3200-1367;
 		int y = (player.getY()/.02) - (view->getViewportHeight() / 2);
 		if (y < 0)
 			y = 0;
-		else if (y>1920)
-			y = 1920;
+		else if (y>1920-768)
+			y = 1920-768;
 		view->setViewportX(x);
 		view->setViewportY(y);
 	}

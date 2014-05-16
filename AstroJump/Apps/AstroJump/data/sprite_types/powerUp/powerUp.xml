@@ -26,7 +26,7 @@
   <animation_state>
    <state>PORTAL</state>
    <animation_sequence>
-    <pose image_id="6" duration="4"/>
+    <pose image_id="6" duration="1"/>
     <pose image_id="3" duration="2"/>
     <pose image_id="4" duration="2"/>
     <pose image_id="5" duration="3"/>
