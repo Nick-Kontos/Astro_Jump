@@ -135,7 +135,7 @@ void Game::runGameLoop()
 		// OF THE APP, SO WE NEED TO CHECK AGAIN
 		if (gsm->isAppActive())
 		{
-			if (gsm->getCurrentGameState() == GS_GAME_IN_PROGRESS || gsm->getCurrentGameState()==GS_VICTORY)
+			if (gsm->getCurrentGameState() == GS_GAME_IN_PROGRESS || gsm->getCurrentGameState()==GS_VICTORY|| gsm->getCurrentGameState()==GS_GAME_OVER)
 			{
 				if (runningMono == false)
 				{

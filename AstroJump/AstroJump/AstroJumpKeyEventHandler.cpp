@@ -52,7 +52,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		float viewportVy = 0.0f;
 		player->rotateClockwise(0.0f);
 		//check various things and set the player's animation state
-		if (spritemanager->overPortal)
+		if (spritemanager->overPortal&& !(spritemanager->getIsOnAsteriod()))
 		{
 			if (input->isKeyDownForFirstTime(E_KEY))
 			{
