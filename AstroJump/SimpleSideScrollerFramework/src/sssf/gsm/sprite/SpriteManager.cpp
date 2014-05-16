@@ -434,7 +434,7 @@ void SpriteManager::update(Game *game)
 			player.setCurrentState(L"INVINCIBLE");
 		}
 	}
-	if (won && !(game->getCurrentLevelFileName().compare("level3.lua")))
+	if (won && !(game->getCurrentLevelFileName().compare("level4.lua")))
 	{
 //		game->getAudio()->start(L"Media\\Wavs\\spacejam.wav");
 		game->getGSM()->goToGameVictory();

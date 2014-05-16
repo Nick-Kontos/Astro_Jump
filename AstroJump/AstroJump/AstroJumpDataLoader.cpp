@@ -849,6 +849,28 @@ void AstroJumpDataLoader::initLevelSelectScreen(GameGUI *gui, DirectXTextureMana
 	// AND NOW LOAD IT INTO A ScreenGUI
 	levelSelectGUI->addButton(buttonToAdd);
 
+	// AND LET'S ADD Level 4 BUTTON
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	normalTextureID = guiTextureManager->loadTexture(W_LEVEL4_PATH);
+	mouseOverTextureID = normalTextureID;//guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE EXIT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		412,
+		600,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_LEVEL4_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	levelSelectGUI->addButton(buttonToAdd);
+
 	// AND LET'S ADD A START BUTTON
 	buttonToAdd = new Button();
 

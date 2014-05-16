@@ -119,6 +119,15 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 			game->setCurrentLevelFileName("level3.lua");
 			game->startGame();
 		}
+		if (input->isKeyDown(CTRL_KEY) && input->isKeyDown(FOUR_KEY))
+		{
+			gsm->unloadCurrentLevel();
+			game->cheat = false;
+			game->getGUI()->getViewport()->setViewportX(0.0f);
+			game->getGUI()->getViewport()->setViewportY(0.0f);
+			game->setCurrentLevelFileName("level4.lua");
+			game->startGame();
+		}
 		if (input->isKeyDownForFirstTime(D_KEY) && input->isKeyDownForFirstTime(K_KEY) && input->isKeyDownForFirstTime(N_KEY))
 		{
 			game->cheat = !(game->cheat);
