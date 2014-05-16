@@ -423,7 +423,7 @@ void SpriteManager::update(Game *game)
 	if (invincible)
 	{
 		inviTimer++;
-		if (inviTimer / 33 > 5)
+		if (inviTimer / 33 > 25)
 		{
 			player.setCurrentState(L"IDLE");
 			invincible = false;
@@ -455,9 +455,13 @@ void SpriteManager::update(Game *game)
 		int x = (player.getX()/.02) - (view->getViewportWidth() / 2);
 		if (x < 0)
 			x = 0;
+		else if (x>3200)
+			x = 3200;
 		int y = (player.getY()/.02) - (view->getViewportHeight() / 2);
 		if (y < 0)
 			y = 0;
+		else if (y>1920)
+			y = 1920;
 		view->setViewportX(x);
 		view->setViewportY(y);
 	}

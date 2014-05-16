@@ -58,9 +58,20 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 			{
 				int x;
 				if (spritemanager->portalOver == 0)
+				{
 					x = 1;
+					spritemanager->portalOver = 1;
+				}
+				else if (spritemanager->portalOver == 2)
+				{
+					x = 1;
+					spritemanager->portalOver = 1;
+				}
 				else
+				{
 					x = 0;
+					spritemanager->portalOver = 0;
+				}
 				int nx = spritemanager->portals[x]->getX();
 				int yx = spritemanager->portals[x]->getY();
 				float angle = spritemanager->portals[x]->getBody()->GetAngle();

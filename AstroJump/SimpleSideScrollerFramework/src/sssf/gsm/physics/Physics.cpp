@@ -328,7 +328,7 @@ void Physics::addBlackHole(AnimatedSprite *asteriod, float x, float y)
 	b2CircleShape sc;
 	sc.m_p.Set(0, 0);
 	//64 is the texture width of the player temporary hardcoded
-	sc.m_radius = (1000*.02);
+	sc.m_radius = (200*.02);
 	sensor.shape = &sc;
 	sensor.density = 0;
 	sensor.isSensor = true;
