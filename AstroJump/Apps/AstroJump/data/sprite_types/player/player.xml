@@ -19,6 +19,7 @@
   <image_file id="14"  file_name="player_TURN_RIGHT_2.png"/>
   <image_file id="15"  file_name="player_TURN_LEFT_1.png"/>
   <image_file id="16"  file_name="player_TURN_LEFT_2.png"/>
+  <image_file id= "17" file_name="player_INVINCIBLE.png"/>
  </images_list>
  <animations_list>
   <animation_state>
@@ -70,6 +71,12 @@
    <animation_sequence>
     <pose image_id="13" duration="4"/>
     <pose image_id="14" duration="4"/>
+   </animation_sequence>
+  </animation_state>
+  <animation_state>
+   <state>INVINCIBLE</state>
+   <animation_sequence>
+    <pose image_id="17" duration="4"/>
    </animation_sequence>
   </animation_state>
  </animations_list>  

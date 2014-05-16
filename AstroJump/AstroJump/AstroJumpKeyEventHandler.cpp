@@ -52,6 +52,21 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		float viewportVy = 0.0f;
 		player->rotateClockwise(0.0f);
 		//check various things and set the player's animation state
+		if (spritemanager->overPortal)
+		{
+			if (input->isKeyDown(E_KEY))
+			{
+				int x;
+				if (spritemanager->portalOver == 0)
+					x = 1;
+				else
+					x = 0;
+				int nx = spritemanager->portals[x]->getX();
+				int yx = spritemanager->portals[x]->getY();
+				float angle = spritemanager->portals[x]->getBody()->GetAngle();
+				player->getBody()->SetTransform(b2Vec2(nx, yx), angle);
+			}
+		}
 
 		if (input->isKeyDown(UP_KEY))
 		{

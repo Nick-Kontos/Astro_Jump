@@ -52,8 +52,10 @@ public:
 	void addEnemy(AnimatedSprite *enemy, float x, float y);
 	void addEnemy2(AnimatedSprite *enemy, float x, float y);
 	void addEnemy3(AnimatedSprite *enemy, float x, float y);
+	void addBlackHole(AnimatedSprite *bH, float x, float y);
 	void addAsteriod(AnimatedSprite *asteriod, float x, float y);
 	void addPlatform(AnimatedSprite *asteriod, float x, float y);
+	void addPowerUp(AnimatedSprite *asteroid, float x, float y);
 	void removeSprite(AnimatedSprite *sprite);
 	void initContactListener(SpriteManager *sm);
 	void update(Game *game);

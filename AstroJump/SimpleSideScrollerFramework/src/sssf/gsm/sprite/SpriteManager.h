@@ -16,7 +16,9 @@
 #include "sssf\gsm\ai\bots\Enemy.h"
 #include "sssf\gsm\ai\bots\Enemy2.h"
 #include "sssf\gsm\ai\bots\Enemy3.h"
+#include "sssf\gsm\ai\BlackHole.h"
 #include "sssf\gsm\ai\BotRecycler.h"
+#include "sssf\gsm\ai\PowerUp.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\sprite\TopDownSprite.h"
@@ -63,6 +65,13 @@ public:
 	vector<Enemy*> enemies;
 	vector<Enemy2*> enemies2;
 	vector<Enemy3*> enemies3;
+	vector<BlackHole*> bH;
+	vector<PowerUp*> powerUps;
+	vector<PowerUp*> portals;
+	bool overPortal = false;
+	int portalOver;
+	bool invincible=false;
+	int inviTimer;
 
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager()		{ isOnAsteriod = true; bool isOverAsteriod = false; }
@@ -89,6 +98,8 @@ public:
 	void				addEnemy(Enemy *enemyToAdd);
 	void				addEnemy2(Enemy2 *enemyToAdd);
 	void				addEnemy3(Enemy3 *enemyToAdd);
+	void				addBlackHole(BlackHole *bhToAdd);
+	void				addPowerUp(PowerUp *pToAdd);
 	void				addAsteriod(AnimatedSprite *asteriodToAdd);
 	void				addPlatform(AnimatedSprite *platformToAdd);
 	void				addSpriteItemsToRenderList(Game *game);
@@ -109,4 +120,6 @@ public:
 	bool				getPlayerAndEnemy(b2Contact* contact);
 	bool				getPlayerAndEnemy2(b2Contact* contact);
 	bool				getPlayerAndEnemy3(b2Contact* contact);
+	bool				getPlayerAndBlackHole(b2Contact* contact);
+	bool				getPlayerAndPowerUp(b2Contact* contact);
 };

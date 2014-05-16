@@ -11,6 +11,7 @@
 #pragma once
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\ai\Bot.h"
+#include "sssf\gsm\ai\BlackHole.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
@@ -98,7 +99,24 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
 		//add background image
-
+		//add platforms
+		vector<AnimatedSprite*>::iterator platformsIterator;
+		platformsIterator = platforms.begin();
+		while (platformsIterator != platforms.end())
+		{
+			AnimatedSprite *platform = (*platformsIterator);
+			addSpriteToRenderList(platform, renderList, viewport);
+			platformsIterator++;
+		}
+		//add BlackHoles
+		vector<BlackHole*>::iterator BlackHoleIterator;
+		BlackHoleIterator = bH.begin();
+		while (BlackHoleIterator != bH.end())
+		{
+			AnimatedSprite *platform = (*BlackHoleIterator);
+			addSpriteToRenderList(platform, renderList, viewport);
+			BlackHoleIterator++;
+		}
 		//add asteroids
 		vector<AnimatedSprite*>::iterator asteroidsIterator;
 		asteroidsIterator = asteroids.begin();
@@ -109,14 +127,21 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 			asteroidsIterator++;
 		}
 		addSpriteToRenderList(&winAsteroid, renderList, viewport);
-		//add platforms
-		vector<AnimatedSprite*>::iterator platformsIterator;
-		platformsIterator = platforms.begin();
-		while (platformsIterator != platforms.end())
+		vector<PowerUp*>::iterator PowerUpIterator;
+		PowerUpIterator = powerUps.begin();
+		while (PowerUpIterator != powerUps.end())
 		{
-			AnimatedSprite *platform = (*platformsIterator);
-			addSpriteToRenderList(platform, renderList, viewport);
-			platformsIterator++;
+			AnimatedSprite *power = (*PowerUpIterator);
+			addSpriteToRenderList(power, renderList, viewport);
+			PowerUpIterator++;
+		}
+		vector<PowerUp*>::iterator portalsIterator;
+		portalsIterator = portals.begin();
+		while (portalsIterator != portals.end())
+		{
+			AnimatedSprite *power = (*portalsIterator);
+			addSpriteToRenderList(power, renderList, viewport);
+			portalsIterator++;
 		}
 		// NOW ADD THE REST OF THE SPRITES
 		vector<Enemy*>::iterator enemyIterator;
@@ -182,6 +207,17 @@ void SpriteManager::addAsteriod(AnimatedSprite *asteriodToAdd)
 void SpriteManager::addPlatform(AnimatedSprite *platformToAdd)
 {
 	platforms.push_back(platformToAdd);
+}
+void SpriteManager::addBlackHole(BlackHole *bhToAdd)
+{
+	bH.push_back(bhToAdd);
+}
+void SpriteManager::addPowerUp(PowerUp *p)
+{
+	if (p->type < 3)
+		powerUps.push_back(p);
+	else
+		portals.push_back(p);
 }
 /*
 	addSpriteType - This method is for adding a new sprite
@@ -256,6 +292,24 @@ void SpriteManager::unloadSprites(GameStateManager *gsm)
 		physic->removeSprite(platform);
 		platforms.pop_back();
 	}
+	while (bH.size() >= 1)
+	{
+		AnimatedSprite *blackHole = bH.back();
+		physic->removeSprite(blackHole);
+		bH.pop_back();
+	}
+	while (powerUps.size() >= 1)
+	{
+		AnimatedSprite *p = powerUps.back();
+		physic->removeSprite(p);
+		powerUps.pop_back();
+	}
+	while (portals.size() >= 1)
+	{
+		AnimatedSprite *p = portals.back();
+		physic->removeSprite(p);
+		portals.pop_back();
+	}
 	physic->removeSprite(&player);
 	isOnAsteriod = true;
 	physic->removeSprite(&winAsteroid);
@@ -294,6 +348,19 @@ void SpriteManager::update(Game *game)
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
+	vector<PowerUp*>::iterator PowerUpIterator;
+	PowerUpIterator = powerUps.begin();
+	while (PowerUpIterator != powerUps.end())
+	{
+		PowerUp *power = (*PowerUpIterator);
+		if (power->remove)
+		{
+			game->getGSM()->getPhysics()->removeSprite(power);
+			PowerUpIterator = powerUps.erase(PowerUpIterator);
+		}
+		else
+			PowerUpIterator++;
+	}
 	// NOW UPDATE THE REST OF THE SPRITES
 	vector<Enemy*>::iterator enemyIterator;
 	enemyIterator = enemies.begin();
@@ -330,6 +397,42 @@ void SpriteManager::update(Game *game)
 		enemy->think(player.getX(),player.getY());
 		enemy->updateSprite();
 		enemy3Iterator++;
+	}
+	vector<BlackHole*>::iterator BlackHoleIterator;
+	BlackHoleIterator = bH.begin();
+	while (BlackHoleIterator != bH.end())
+	{
+		BlackHole *b = (*BlackHoleIterator);
+		if (b->over)
+		{
+			float x = b->getX();
+			float y = b->getY();
+			float x1 = player.getX();
+			float y1= player.getY();
+			float d = (sqrt(((x - x1)*(x - x1)) + ((y - y1)*(y - y1))));
+			if (d < .1)
+			{
+				player.oxygen = 0;
+			}
+			float vx = (x - x1) / d;
+			float vy = (y - y1) / d;
+			player.getBody()->SetLinearVelocity(b2Vec2(vx,vy));
+		}
+		BlackHoleIterator++;
+	}
+	if (invincible)
+	{
+		inviTimer++;
+		if (inviTimer / 33 > 5)
+		{
+			player.setCurrentState(L"IDLE");
+			invincible = false;
+			inviTimer = 0;
+		}
+		else
+		{
+			player.setCurrentState(L"INVINCIBLE");
+		}
 	}
 	if (won && !(game->getCurrentLevelFileName().compare("level3.lua")))
 	{
@@ -404,18 +507,34 @@ void SpriteManager::BeginContact(b2Contact* contact){
 			attachedAsteroid = (AnimatedSprite*)(contact->GetFixtureB()->GetBody()->GetUserData());
 		}
 	}
-	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)){
+	if (getPlayerAndEnemy(contact) || getPlayerAndEnemy2(contact) || getPlayerAndEnemy3(contact)) {
 		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
 		{
-			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x, 
-				10.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
-			player.oxygen -= 10;
+			if (!invincible)
+			{
+				player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x,
+					10.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
+				player.oxygen -= 10;
+			}
+			else
+			{
+				contact->GetFixtureB()->GetBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
+					10.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
+			}
 		}
 		else 
 		{
-			player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
-				10.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
-			player.oxygen -= 10;
+			if (!invincible)
+			{
+				player.getBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().x,
+					10.0f * contact->GetFixtureA()->GetBody()->GetLinearVelocity().y), true);
+				player.oxygen -= 10;
+			}
+			else
+			{
+				contact->GetFixtureA()->GetBody()->ApplyForceToCenter(b2Vec2(300.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().x,
+					10.0f * contact->GetFixtureB()->GetBody()->GetLinearVelocity().y), true);
+			}
 		}
 	}
 	if (getPlayerAndEnemy(contact)){
@@ -426,11 +545,80 @@ void SpriteManager::BeginContact(b2Contact* contact){
 			((Enemy*)contact->GetFixtureA()->GetBody()->GetUserData())->nextAsteroid();
 		}
 	}
+	if (getPlayerAndBlackHole(contact))
+	{
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
+		{
+			((BlackHole*)contact->GetFixtureB()->GetBody()->GetUserData())->over = true;
+		}
+		else
+		{
+			((BlackHole*)contact->GetFixtureA()->GetBody()->GetUserData())->over = true;
+		}
+	}
+	if (getPlayerAndPowerUp(contact))
+	{
+		int i;
+		int x;
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
+		{
+			i =((PowerUp*)contact->GetFixtureB()->GetBody()->GetUserData())->type;
+			x = ((PowerUp*)contact->GetFixtureB()->GetBody()->GetUserData())->portalnum;
+		}
+		else
+		{
+			i = ((PowerUp*)contact->GetFixtureA()->GetBody()->GetUserData())->type;
+			x = ((PowerUp*)contact->GetFixtureB()->GetBody()->GetUserData())->portalnum;
+		}
+		if (i == 1)
+		{
+			player.oxygen += 30;
+		}
+		else if (i==2)
+		{
+			invincible = true;
+			inviTimer = 0;
+		}
+		else
+		{
+			overPortal = true;
+			portalOver = x;
+		}
+	}
 }
 
 void SpriteManager::EndContact(b2Contact* contact){
-	if (getPlayerAndAsteroid(contact)){
+	if (getPlayerAndAsteroid(contact))
+	{
 		isOverAsteriod = false;
+	}
+	if (getPlayerAndBlackHole(contact))
+	{
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
+		{
+			((BlackHole*)contact->GetFixtureB()->GetBody()->GetUserData())->over = false;
+		}
+		else
+		{
+			((BlackHole*)contact->GetFixtureA()->GetBody()->GetUserData())->over = false;
+		}
+	}
+	if (getPlayerAndPowerUp(contact))
+	{
+		PowerUp *p;
+		if (((AnimatedSprite*)contact->GetFixtureA()->GetBody()->GetUserData())->getSpriteType()->getSpriteTypeID() == 0)
+		{
+			p = ((PowerUp*)contact->GetFixtureB()->GetBody()->GetUserData());
+			
+		}
+		else
+		{
+			p = ((PowerUp*)contact->GetFixtureA()->GetBody()->GetUserData());
+		}
+		if (p->type != 3)
+			p->remove = true;
+		else
+			overPortal = false;
 	}
 }
 
@@ -445,6 +633,36 @@ bool SpriteManager::getPlayerAndAsteroid(b2Contact* contact)
 	if (A && B){
 		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 1)
 			|| (A->getSpriteType()->getSpriteTypeID() == 1 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+bool SpriteManager::getPlayerAndBlackHole(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 6)
+			|| (A->getSpriteType()->getSpriteTypeID() == 6 && B->getSpriteType()->getSpriteTypeID() == 0))
+			return true;
+	}
+	return false;
+}
+bool SpriteManager::getPlayerAndPowerUp(b2Contact* contact)
+{
+	b2Fixture* fixtureA = contact->GetFixtureA();
+	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//make sure only one of the fixtures was a sensor
+	AnimatedSprite* A = (AnimatedSprite*)fixtureA->GetBody()->GetUserData();
+	AnimatedSprite* B = (AnimatedSprite*)fixtureB->GetBody()->GetUserData();
+	if (A && B){
+		if ((A->getSpriteType()->getSpriteTypeID() == 0 && B->getSpriteType()->getSpriteTypeID() == 7)
+			|| (A->getSpriteType()->getSpriteTypeID() == 7 && B->getSpriteType()->getSpriteTypeID() == 0))
 			return true;
 	}
 	return false;

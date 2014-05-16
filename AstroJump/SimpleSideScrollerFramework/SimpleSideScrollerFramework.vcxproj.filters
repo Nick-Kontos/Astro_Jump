@@ -180,6 +180,9 @@
     <ClCompile Include="src\sssf\gsm\ai\bots\Enemy3.cpp">
       <Filter>src\sssf\gsm\ai\bots</Filter>
     </ClCompile>
+    <ClCompile Include="src\sssf\gsm\ai\bots\BlackHole.cpp">
+      <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\stdafx.h">
@@ -328,6 +331,12 @@
     </ClInclude>
     <ClInclude Include="src\sssf\gsm\ai\bots\Enemy3.h">
       <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\gsm\ai\BlackHole.h">
+      <Filter>src\sssf\gsm\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\gsm\ai\PowerUp.h">
+      <Filter>src\sssf\gsm\ai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

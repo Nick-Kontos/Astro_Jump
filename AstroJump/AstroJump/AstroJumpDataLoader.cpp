@@ -12,6 +12,7 @@ using namespace lua;
 #include "sssf\game\Game.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\ai\bots\RandomJumpingBot.h"
+#include "sssf\gsm\ai\BlackHole.h"
 #include "sssf\gsm\sprite\TopDownSprite.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\world\TiledLayer.h"
@@ -308,6 +309,40 @@ int LuaCreatePlayer(float x, float y, float vx, float vy)
 	spriteManager->attachPlayerToAsteriod(gsm->getPhysics()->world);
 	return x;
 }
+int LuaCreateBlackHole(float x, float y, float s)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	BlackHole *a = new BlackHole();
+	a->setSpriteType(spriteManager->getSpriteType(6));
+	a->setAlpha(255);
+	a->setCurrentState(IDLE);
+	a->speed = s;
+	Physics *physics = gsm->getPhysics();
+	physics->addBlackHole(a, x * .02f, y * .02f);
+	spriteManager->addBlackHole(a);
+	return x;
+}
+int LuaCreatePowerUp(float x, float y, int type, int num)
+{
+	GameStateManager* gsm = lua::gsm;
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+	PowerUp *a = new PowerUp();
+	a->setSpriteType(spriteManager->getSpriteType(7));
+	a->setAlpha(255);
+	a->portalnum = num;
+	if (type == 1)
+		a->setCurrentState(L"HEALTH");
+	else if (type == 2)
+		a->setCurrentState(L"INVINCIBLE");
+	else
+		a->setCurrentState(L"PORTAL");
+	a->type = type;
+	Physics *physics = gsm->getPhysics();
+	physics->addPowerUp(a, x * .02f, y * .02f);
+	spriteManager->addPowerUp(a);
+	return x;
+}
 int LuaIncAndReturn(float f)
 {
 	GameStateManager* gsm = lua::gsm;
@@ -350,6 +385,8 @@ void AstroJumpDataLoader::loadWorld(Game *game, string levelInitFile)
 	lua_state->GetGlobals().RegisterDirect("addPointToEnemy", LuaAddPointToEnemy);
 	lua_state->GetGlobals().RegisterDirect("addPointToEnemy2", LuaAddPointToEnemy2);
 	lua_state->GetGlobals().RegisterDirect("createPlatform", LuaCreatePlatform);
+	lua_state->GetGlobals().RegisterDirect("createBlackHole", LuaCreateBlackHole);
+	lua_state->GetGlobals().RegisterDirect("createPowerUp", LuaCreatePowerUp);
 	LuaFunction<void> la = lua_state->GetGlobal("levela");
 	la();
 }

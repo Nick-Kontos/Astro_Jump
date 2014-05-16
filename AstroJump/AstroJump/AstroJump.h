@@ -124,6 +124,7 @@ const unsigned int K_KEY = (unsigned int)'K';
 const unsigned int N_KEY = (unsigned int)'N';
 const unsigned int I_KEY = (unsigned int)'I';
 const unsigned int J_KEY = (unsigned int)'J';
+const unsigned int E_KEY = (unsigned int)'E';
 const unsigned int SHIFT_KEY = VK_SHIFT;
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;

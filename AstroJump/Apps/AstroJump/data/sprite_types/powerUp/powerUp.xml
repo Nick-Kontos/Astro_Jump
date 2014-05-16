@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+ <width>120</width>
+ <height>120</height>
+ <images_list>
+  <image_file id="1"  file_name="airBubble.png"/>
+  <image_file id="2"  file_name="star.png"/>
+  <image_file id="3"  file_name="Portal_1.png"/>
+  <image_file id="4"  file_name="Portal_2.png"/>
+  <image_file id="5"  file_name="Portal_3.png"/>
+  <image_file id="6"  file_name="Portal_4.png"/>
+ </images_list>
+ <animations_list>
+  <animation_state>
+   <state>HEALTH</state>
+   <animation_sequence>
+    <pose image_id="1" duration="1"/>
+   </animation_sequence>
+  </animation_state>
+  <animation_state>
+   <state>INVINCIBLE</state>
+   <animation_sequence>
+    <pose image_id="2" duration="1"/>
+   </animation_sequence>
+  </animation_state>
+  <animation_state>
+   <state>PORTAL</state>
+   <animation_sequence>
+    <pose image_id="6" duration="4"/>
+    <pose image_id="3" duration="2"/>
+    <pose image_id="4" duration="2"/>
+    <pose image_id="5" duration="3"/>
+    <pose image_id="4" duration="2"/>
+    <pose image_id="3" duration="2"/>
+   </animation_sequence>
+  </animation_state>
+ </animations_list>  
+</sprite_type>

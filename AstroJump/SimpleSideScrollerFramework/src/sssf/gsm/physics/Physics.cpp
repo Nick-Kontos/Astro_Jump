@@ -295,6 +295,90 @@ void Physics::addAsteriod(AnimatedSprite *asteriod, float x, float y)
 	//add an initial velocity
 	asteriod->getBody()->ApplyForceToCenter(b2Vec2(asteriod->getSpawnVx(), asteriod->getSpawnVy()), true);
 }
+void Physics::addBlackHole(AnimatedSprite *asteriod, float x, float y)
+{
+	//add some things to the sprite fields
+	asteriod->setRadius((asteriod->getSpriteType()->getTextureWidth() / 2) * .02f);
+	asteriod->setSpawnX(x);
+	asteriod->setSpawnY(y);
+
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(x, y);
+	bodyDef.userData = asteriod;
+
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = asteriod->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	//add collision filtering
+	//asteriods are 2 bit
+	fixtureDef.filter.categoryBits = 2;
+	//they collide nothing
+	fixtureDef.filter.maskBits = 0;
+	body->CreateFixture(&fixtureDef);
+
+	//now create a sensor fixture for detecting collision with the player
+	b2FixtureDef sensor;
+	b2CircleShape sc;
+	sc.m_p.Set(0, 0);
+	//64 is the texture width of the player temporary hardcoded
+	sc.m_radius = (285*.02) - ((64 / 2) * .02);
+	sensor.shape = &sc;
+	sensor.density = 0;
+	sensor.isSensor = true;
+	sensor.filter.maskBits = 4;
+	body->CreateFixture(&sensor);
+
+	asteriod->setBody(body);
+}
+void Physics::addPowerUp(AnimatedSprite *asteriod, float x, float y)
+{
+	//add some things to the sprite fields
+	asteriod->setRadius((60) * .02f);
+	asteriod->setSpawnX(x);
+	asteriod->setSpawnY(y);
+
+	//create body
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(x, y);
+	bodyDef.userData = asteriod;
+
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	//create the fixture
+	b2CircleShape c;
+	c.m_p.Set(0, 0);
+	c.m_radius = asteriod->getRadius();
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	//add collision filtering
+	//asteriods are 2 bit
+	fixtureDef.filter.categoryBits = 2;
+	//they collide nothing
+	fixtureDef.filter.maskBits = 0;
+	body->CreateFixture(&fixtureDef);
+
+	//now create a sensor fixture for detecting collision with the player
+	b2FixtureDef sensor;
+	b2CircleShape sc;
+	sc.m_p.Set(0, 0);
+	//64 is the texture width of the player temporary hardcoded
+	sc.m_radius = (60 * .02) - ((64 / 2) * .02);
+	sensor.shape = &sc;
+	sensor.density = 0;
+	sensor.isSensor = true;
+	sensor.filter.maskBits = 4;
+	body->CreateFixture(&sensor);
+
+	asteriod->setBody(body);
+}
 
 void Physics::addPlatform(AnimatedSprite *plat, float x, float y)
 {

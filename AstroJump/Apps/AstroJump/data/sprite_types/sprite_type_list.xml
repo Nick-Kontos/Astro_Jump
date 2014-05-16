@@ -6,4 +6,6 @@
   <sprite_type>enemy_2</sprite_type>
   <sprite_type>enemy_3</sprite_type>
   <sprite_type>platform</sprite_type>
+  <sprite_type>blackHole</sprite_type>
+  <sprite_type>powerUp</sprite_type>
 </sprite_type_list>
