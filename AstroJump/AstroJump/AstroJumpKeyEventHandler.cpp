@@ -54,7 +54,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 		//check various things and set the player's animation state
 		if (spritemanager->overPortal)
 		{
-			if (input->isKeyDown(E_KEY))
+			if (input->isKeyDownForFirstTime(E_KEY))
 			{
 				int x;
 				if (spritemanager->portalOver == 0)
