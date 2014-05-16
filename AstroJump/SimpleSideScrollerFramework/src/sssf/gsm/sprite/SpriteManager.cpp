@@ -348,6 +348,12 @@ void SpriteManager::update(Game *game)
 {
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
+	if (player.oxygen <= 0 && isOnAsteriod){
+		isOnAsteriod = false;
+	}
+	if (player.getBody()->GetLinearVelocity().x == 0 && player.getBody()->GetLinearVelocity().y == 0 && !isOnAsteriod){
+		player.oxygen -= 1;
+	}
 
 	vector<PowerUp*>::iterator PowerUpIterator;
 	PowerUpIterator = powerUps.begin();
@@ -455,7 +461,9 @@ void SpriteManager::update(Game *game)
 	}
 	if (player.oxygen <= 0)
 	{
-		game->getGSM()->goToGameOver();
+		player.setCurrentState(L"DEAD");
+		if (player.oxygen == -200)
+			game->getGSM()->goToGameOver();
 	}
 	//Update Viewport
 	if (lockScreen)

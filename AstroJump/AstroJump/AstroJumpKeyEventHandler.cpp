@@ -45,7 +45,7 @@ void AstroJumpKeyEventHandler::handleKeyEvents(Game *game)
 
 
 	// IF THE GAME IS IN PROGRESS
-	if (gsm->isGameInProgress())
+	if (gsm->isGameInProgress() && player->oxygen >= 0)
 	{
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;

@@ -20,8 +20,15 @@
   <image_file id="15"  file_name="player_TURN_LEFT_1.png"/>
   <image_file id="16"  file_name="player_TURN_LEFT_2.png"/>
   <image_file id= "17" file_name="player_INVINCIBLE.png"/>
+  <image_file id= "18" file_name="player_DEAD.png"/>  
  </images_list>
  <animations_list>
+  <animation_state>
+   <state>DEAD</state>
+   <animation_sequence>
+    <pose image_id="18" duration="1"/>
+   </animation_sequence>
+  </animation_state>
   <animation_state>
    <state>IDLE</state>
    <animation_sequence>
